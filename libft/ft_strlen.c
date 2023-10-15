@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 21:00:44 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/13 21:00:45 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:13:46 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned long ft_strlen(const char *s)
+size_t ft_strlen(const char *s)
 {
 	int	len;
 
