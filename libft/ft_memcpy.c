@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:26:09 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/15 16:52:35 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/15 16:54:30 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/15 18:32:33 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)s)[i] = 0;
+		((char *)dst)[i] = ((char *)src)[i];
 		i++;
 	}
-	return;
+	return (dst);
 }
 /*
 #include <stdio.h>
 
 int	main(void)
 {
-	unsigned char str[42] = {"00000000000000000000"};
+	char dst[42] = {"veryverykindperson"};
+	char src[42] = "apple";
 
-	printf("%s\n", str);
-	ft_bzero(str + 3, 10);
-	printf("%s\n", str);
-	return (0);
+	printf("dst:%s\n", dst);
+	printf("src:%s\n", src);
+	ft_memcpy(dst, src, 3);
+	printf("dst:%s\n", dst);
 }
 */

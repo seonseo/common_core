@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:26:09 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/15 16:52:35 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/15 18:32:53 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/15 18:37:32 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (i < n)
+	while (i < len)
 	{
-		((unsigned char *)s)[i] = 0;
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
 		i++;
 	}
-	return;
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	unsigned char str[42] = {"00000000000000000000"};
-
-	printf("%s\n", str);
-	ft_bzero(str + 3, 10);
-	printf("%s\n", str);
-	return (0);
-}
-*/
