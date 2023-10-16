@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:27:56 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/16 21:05:09 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/16 21:17:27 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	}
 	return (dstlen + srclen);
 }
-
+/*
 #include <string.h>
 #include <stdio.h>
 
@@ -51,7 +51,7 @@ int	main(void)
 	printf("%s %zu\n", dest, len);
 	return 0;
 }
-
+*/
 /*
 int	main(void)
 {
