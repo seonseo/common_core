@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:46:46 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/16 17:01:32 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/16 16:27:56 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/16 17:30:32 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	if (32 <= c && c <= 126)
-		return (1);
-	return (0);
+	size_t	dstlen;
+	size_t	srclen;
+	size_t	i;
+	size_t	j;
+
+	dstlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
+	i = dstlen;
+	j = 0;
+	while (i < dstsize - 1)
+	{
+		dst[i] = src[j];
+		i++;
+		j++;
+	}
+	dst[i] = '\0';
+	return ();
 }
