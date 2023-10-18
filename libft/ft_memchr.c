@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/18 10:41:29 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/17 19:24:37 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/17 19:46:57 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <stddef.h>
 
-# include <stddef.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t	i;
 
-int		ft_isalpha(int c);
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)s)[i] == c)
+			return ((void *)s + i);
+		i++;
+	}
+	return (NULL);
+}
+/*
+#include <stdio.h>
 
-#endif
+int	main(void)
+{
+	char	s[42] = "42seoul";
+
+	printf("%s\n", (char *)ft_memchr(s, 'a', 4));
+}
+*/

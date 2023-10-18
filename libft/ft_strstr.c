@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/18 10:41:29 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/18 13:13:55 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/18 15:10:04 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <stddef.h>
 
-# include <stddef.h>
+char	*ft_strstr(const char *haystack, const char *needle)
+{ 
+	size_t	i;
+	size_t	j;
 
-int		ft_isalpha(int c);
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-#endif
+	if (needle[0] == '\0')
+		return (haystack);
+	i = 0;
+	while (haystack[i])
+	{
+		if (haystack[i] == needle[0])
+		{
+			j = 0;
+			while (haystack[i + j] && haystack[i + j] == needle[j])
+				j++;
+			if (needle[j] == '\0')
+				return (haystack + i);
+		}
+		i++;
+	}
+	return (NULL);
+}

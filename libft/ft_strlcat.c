@@ -6,35 +6,31 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:27:56 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/16 21:17:27 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/18 10:50:40 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static size_t	ft_strnlen(char *dst, size_t dstsize)
+{
+	size_t	len;
+
+	len = 0;
+	while (dst[len] && len < dstsize)
+		len++;
+	return (len);
+}
+
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	dstlen;
 	size_t	srclen;
-	size_t	i;
-	size_t	j;
 
-	dstlen = ft_strlen(dst);
+	dstlen = ft_strnlen(dst, dstsize);
 	srclen = ft_strlen(src);
-	if (dstsize <= dstlen)
-		return (dstsize + srclen);
-	else if (dstlen < dstsize - 1)
-	{
-		i = dstlen;
-		j = 0;
-		while (src[j] && i < dstsize - 1)
-		{
-			dst[i] = src[j];
-			i++;
-			j++;
-		}
-		dst[i] = '\0';
-	}
+	if (dstlen < dstsize - 1)
+		ft_strlcpy(dst + dstlen, src, dstsize - dstlen);
 	return (dstlen + srclen);
 }
 /*
@@ -47,7 +43,7 @@ int	main(void)
 	char			src[] = "pie";
 	size_t			len;
 	
-	len = ft_strlcat(dest, src, 42);
+	len = ft_strlcat(dest, src, 7);
 	printf("%s %zu\n", dest, len);
 	return 0;
 }
