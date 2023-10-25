@@ -1,38 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 21:04:37 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:16 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/16 15:31:57 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/22 14:47:36 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < len)
+	if (0 < dstsize)
 	{
-		((unsigned char *)b)[i] = c;
-		i++;
+		while (*src && 1 < dstsize--)
+			*dst++ = *src++;
+		*dst = '\0';
 	}
-	return (b);
+	return (ft_strlen(src));
 }
 /*
 #include <stdio.h>
+#include <string.h>
 
 int	main(void)
 {
-	char str[42] = {"00000000000000000000"};
+	char	dst[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	char	str[] = "0123456789abcdef";
+	size_t	dst_len = 10;
 
-	printf("%s\n", str);
-	ft_memset(str + 3, 'a', 3);
-	printf("%s\n", str);
+	ft_strlcpy(dst, str, 5);
+	printf("%s\n", dst);
+
+	for (size_t i = 0; i < dst_len; i++)
+	{
+		printf("%d", dst[i]);
+		if (i + 1 < dst_len)
+			printf(", ");
+	}
 }
 */

@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:19:24 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/18 10:52:38 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/20 11:41:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

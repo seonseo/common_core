@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memmove_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:32:53 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:06 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/22 10:44:31 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,19 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
+	void	*original_dst;
 
-	i = 0;
+	original_dst = dst;
 	if (dst <= src)
-	{
-		while (i < len)
-		{
-			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-			i++;
-		}
-	}
+		while (len--)
+			*(unsigned char *)dst++ = *(unsigned char *)src++;
 	else
-	{
-		while (i < len)
-		{
-			((unsigned char *)dst)[len - 1 - i] \
-			= ((unsigned char *)src)[len - 1 - i];
-			i++;
-		}
-	}
-	return (dst);
+		while (len--)
+			*(unsigned char *)(dst + len)\
+			= *(unsigned char *)(src + len);
+	return (original_dst);
 }
-/*
+
 #include <string.h>
 #include <stdio.h>
 
@@ -46,11 +36,11 @@ int	main(void)
 	unsigned char	*dst = board;
 	unsigned char	*src = board + 3;
 
-	printf("case 1: dst <= src\n");
 	printf("dst: %s\n", dst);
 	printf("src: %s\n", src);
-	printf("length : 6\n");
+	printf("length : 6\n\n");
 
+	printf("case 1: dst <= src\n");
 	printf("memmove\n");
 	memmove(dst, src, 6);
 	printf("dst: %s\n", dst);
@@ -63,12 +53,9 @@ int	main(void)
 	printf("src: %s\n", src);
 
 	strcpy((char *)board, "0123456789abcde");
-	printf("\ncase 2: src > dst\n");
+	printf("\ncase 2: src < dst\n");
 	dst = board + 3;
 	src = board;
-	printf("dst: %s\n", dst);
-	printf("src: %s\n", src);
-	printf("length : 6\n");
 
 	printf("memmove\n");
 	memmove(dst, src, 6);
@@ -81,4 +68,4 @@ int	main(void)
 	printf("dst: %s\n", dst);
 	printf("src: %s\n", src);
 }
-*/
+

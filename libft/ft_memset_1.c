@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memset_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 21:00:44 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:46 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/13 21:04:37 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/22 10:35:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t	len;
+	void	*original_b;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	original_b = b;
+	while (len--)
+		*(unsigned char *)b++ = c;
+	return (original_b);
 }
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char str[42] = {"00000000000000000000"};
+
+	printf("%s\n", str);
+	ft_memset(str + 3, 'a', 3);
+	printf("%s\n", str);
+}
+*/

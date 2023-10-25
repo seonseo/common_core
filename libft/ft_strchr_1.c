@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:19:24 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/17 15:53:26 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/20 11:41:20 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -31,7 +31,7 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
+/*
 #include <stdio.h>
 
 int	main(void)
@@ -40,3 +40,4 @@ int	main(void)
 
 	printf("%p\n%p\n%s\n", str, ft_strchr(str, '\0'), ft_strchr(str, '\0'));
 }
+*/

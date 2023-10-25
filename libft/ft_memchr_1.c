@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memchr_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 21:00:44 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:46 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/17 19:24:37 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/22 10:11:00 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	while (n--)
+		if (*(unsigned char *)s++ == c)
+			return ((void *)s);
+	return (NULL);
 }
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	s[42] = "42seoul";
+
+	printf("%s\n", (char *)ft_memchr(s, 'a', 4));
+}
+*/

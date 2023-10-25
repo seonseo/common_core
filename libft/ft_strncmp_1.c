@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 21:00:44 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:46 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/17 15:55:49 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/22 14:46:33 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	if (n == 0)
+		return (0);
+	while (*s1 == *s2 && *s1 && 1 < n)
+	{
+		n--;
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	s1[] = "apple";
+	char	s2[] = "aofle";
+
+	printf("%d\n", ft_strncmp(s1, s2, 2));
+}
+*/

@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 21:00:44 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:46 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/22 20:44:09 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/24 16:43:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	void	*mem;
+	
+	mem = malloc(count * size);
+	if (mem == NULL)
+	{
+		errno = ENOMEM;
+		return (NULL);
+	}
+	ft_memset(mem, '\0', count * size);
+	return (mem);
 }
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	char	str[] = "I will be pirate king";
+	char	*ptr;
+
+	ptr = (char *)calloc(22, 1);
+	ft_strlcpy(ptr, str, 22);
+	printf("%s\n", ptr);
+}
+*/

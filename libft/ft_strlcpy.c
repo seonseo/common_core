@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:31:57 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/16 16:27:43 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/22 14:46:53 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	if (0 < dstsize)
 	{
-		while (src[i] && i < dstsize - 1)
+		while (src[i] && i + 1 < dstsize)
 		{
 			dst[i] = src[i];
 			i++;
@@ -28,7 +28,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	return (ft_strlen(src));
 }
-
 /*
 #include <stdio.h>
 #include <string.h>

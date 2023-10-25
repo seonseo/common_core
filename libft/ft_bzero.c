@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:26:09 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/16 17:04:31 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/20 11:39:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:27:56 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/18 10:50:40 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/22 14:48:32 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 	dstlen = ft_strnlen(dst, dstsize);
 	srclen = ft_strlen(src);
-	if (dstlen < dstsize - 1)
+	if (dstlen + 1 < dstsize)
 		ft_strlcpy(dst + dstlen, src, dstsize - dstlen);
 	return (dstlen + srclen);
 }
