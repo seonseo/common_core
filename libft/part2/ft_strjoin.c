@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 20:44:09 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/31 15:01:05 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/27 08:42:23 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/27 11:28:20 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	void	*mem;
-	
-	mem = malloc(count * size);
-	if (mem == NULL)
+	char	*str;
+	size_t	size;
+
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	str = (char *)malloc(sizeof(char) * size);
+	if (str == NULL)
 		return (NULL);
-	if (count * size == 0)
-		ft_bzero(mem, 1);
-	else
-		ft_bzero(mem, count * size);
-	return (mem);
+	ft_strlcat(str, s1, size);
+	ft_strlcat(str, s2, size);
+	return (str);
 }
 /*
 #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
-	char	str[] = "I will be pirate king";
-	char	*ptr;
+	char	s1[] = "happy happy ";
+	char	s2[] = "";
+	char	*str;
 
-	ptr = (char *)calloc(22, 1);
-	ft_strlcpy(ptr, str, 22);
-	printf("%s\n", ptr);
+	str = ft_strjoin(s1, s2);
+	if (str == NULL)
+		return (1);
+	printf("%s\n", str);
+	printf("%zu\n", ft_strlen(str));
 }
 */

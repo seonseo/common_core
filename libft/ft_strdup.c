@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:44:02 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/24 17:06:51 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:39:57 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	*ft_strdup(const char *s1)
 	size = ft_strlen(s1) + 1;
 	str_dup = (char *)malloc(sizeof(char) * size);
 	if (str_dup == NULL)
-	{
-		errno = ENOMEM;
 		return (NULL);
-	}
 	ft_strlcpy(str_dup, s1, size);
 	return (str_dup);
 }

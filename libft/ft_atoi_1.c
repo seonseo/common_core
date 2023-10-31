@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/24 19:08:55 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/10/26 11:25:57 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,26 @@ static int	ft_isspace(int c)
 
 int	ft_atoi(const char *str)
 {
-	int		i;
 	int		sign;
 	long	number;
+	long	max_long = (1L << (sizeof(long) * 8 - 1)) - 1;
 
 	number = 0;
 	sign = 1;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
 	{
-		if (str[i] == '-')
+		if (*str == '-')
 			sign *= -1;
-		i++;
+		str++;
 	}
-	while (ft_isdigit(str[i]))
+	while (ft_isdigit(*str))
 	{
-		if (number == 922337203685477580 && '8' <= str[i] && str[i] <= '9')
-		{
-			if (sign == -1)
-				return ((int)(LONG_MIN));
-			else
-				return ((int)(LONG_MAX));
-		}
-		if (9223372036854775800 <= number && number <= 9223372036854775807 && ft_isdigit(str[i]))
-		{
-			if (sign == -1)
-				return ((int)(LONG_MIN));
-			else
-				return ((int)(LONG_MAX));
-		}
-		number = number * 10 + str[i] - '0';
-		i++;
+		if (number > max_long / 10 || (number == max_long / 10 && *str >= 8))
+			return (-(sign == 1));
+		number = number * 10 + *str - '0';
+		str++;
 	}
 	return (number * sign);
 }
@@ -63,8 +50,11 @@ int	ft_atoi(const char *str)
 
 int	main(void)
 {
-	char	str[] = "-92233720368547758089";
+	char	str[] = "92233720368547758091";
+	// long	n;
 
+	// n = 9223372036854775807 * 10;
+	// printf("%ld\n", n);
 	printf("%d\n", atoi(str));
 	printf("%d\n", ft_atoi(str));
 }
