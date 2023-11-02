@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 11:31:46 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/02 15:35:11 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 
 # define LONG_MAX 9223372036854775807L
-# define BOOL _Bool
 # define TRUE 1
 # define FALSE 0
 

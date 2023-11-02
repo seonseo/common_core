@@ -6,13 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 11:31:08 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/02 14:04:06 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static BOOL	ft_isspace(int c)
+static int	ft_isspace(int c)
 {
 	if ((9 <= c && c <= 13) || (c == 32))
 		return (TRUE);

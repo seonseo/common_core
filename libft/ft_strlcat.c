@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:27:56 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/22 14:48:32 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/02 18:36:53 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static size_t	ft_strnlen(char *dst, size_t dstsize)
 {
-	size_t	len;
+	size_t	dstlen;
 
-	len = 0;
-	while (dst[len] && len < dstsize)
-		len++;
-	return (len);
+	dstlen = 0;
+	while (dst[dstlen] && dstlen < dstsize)
+		dstlen++;
+	return (dstlen);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
@@ -48,35 +48,36 @@ int	main(void)
 	return 0;
 }
 */
-/*
-int	main(void)
-{
-	char arr[50];
 
-	for (int i = 0; i < 50; ++i)
-		arr[i] = '#';
-	arr[0] = '\0';
-	int len = ft_strlcat(arr, "", 50);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "Hello ", 50);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "World!", 50);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "", 50);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "42", 0);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "42", 3);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "\nHello World!", 20);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "World!", 20);
-	printf("%s %d\n", arr, len);
-	len = ft_strlcat(arr, "\nHello World!", 42);
-	printf("%s %d\n", arr, len);
-	for (int i = 31; i < 42; ++i)
-		printf("%d ", arr[i]);
-	printf("\n");
-	return 0;
-}
-*/
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	char arr[50];
+
+// 	for (int i = 0; i < 50; ++i)
+// 		arr[i] = '#';
+// 	arr[0] = '\0';
+// 	int len = ft_strlcat(arr, "", 50);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "Hello ", 50);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "World!", 50);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "", 50);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "42", 0);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "42", 3);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "\nHello World!", 20);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "World!", 20);
+// 	printf("%s %d\n", arr, len);
+// 	len = ft_strlcat(arr, "\nHello World!", 42);
+// 	printf("%s %d\n", arr, len);
+// 	for (int i = 31; i < 42; ++i)
+// 		printf("%d ", arr[i]);
+// 	printf("\n");
+// 	return 0;
+// }
