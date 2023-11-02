@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strlen_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:46:51 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 11:30:57 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/13 21:00:44 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/22 08:45:17 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
-	if (0 <= c && c <= 127)
-		return (1);
-	return (0);
+	size_t	len;
+
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
 }

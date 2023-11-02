@@ -1,41 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 21:30:29 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 11:29:41 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/16 15:31:57 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/22 14:47:36 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-	char	*lastchr;
-
-	lastchr = NULL;
-	i = 0;
-	while (s[i])
+	if (0 < dstsize)
 	{
-		if (s[i] == c)
-			lastchr = (char *)s + i;
-		i++;
+		while (*src && 1 < dstsize--)
+			*dst++ = *src++;
+		*dst = '\0';
 	}
-	if ('\0' == c)
-		return ((char *)s + i);
-	return (lastchr);
+	return (ft_strlen(src));
 }
 /*
 #include <stdio.h>
+#include <string.h>
 
 int	main(void)
 {
-	char	str[] = "ontopoftheworld";
+	char	dst[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	char	str[] = "0123456789abcdef";
+	size_t	dst_len = 10;
 
-	printf("%s\n", ft_strrchr(str, 'p'));
+	ft_strlcpy(dst, str, 5);
+	printf("%s\n", dst);
+
+	for (size_t i = 0; i < dst_len; i++)
+	{
+		printf("%d", dst[i]);
+		if (i + 1 < dst_len)
+			printf(", ");
+	}
 }
 */

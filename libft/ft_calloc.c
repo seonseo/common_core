@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:44:09 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/31 15:01:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/02 09:20:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*mem;
-	
+
 	mem = malloc(count * size);
 	if (mem == NULL)
 		return (NULL);

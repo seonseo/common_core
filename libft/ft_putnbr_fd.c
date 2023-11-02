@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:46:51 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 11:30:57 by seonseo          ###   ########.fr       */
+/*   Created: 2023/11/02 09:03:15 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/02 09:10:19 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (0 <= c && c <= 127)
-		return (1);
-	return (0);
+	char	*numstr;
+
+	numstr = ft_itoa(n);
+	write(fd, numstr, ft_strlen(numstr));
 }

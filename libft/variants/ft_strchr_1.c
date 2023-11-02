@@ -1,18 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strchr_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:46:51 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 11:30:57 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/16 21:19:24 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/02 09:13:38 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
 {
-	if (0 <= c && c <= 127)
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	if ('\0' == c)
+	{
+		while (s[i])
+			i++;
+		return ((char *)s + i);
+	}
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
 }
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	str[] = "ontorld";
+
+	printf("%p\n%p\n%s\n", str, ft_strchr(str, '\0'), ft_strchr(str, '\0'));
+}
+*/
