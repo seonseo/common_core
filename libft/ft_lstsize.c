@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_3.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 21:19:24 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:26 by seonseo          ###   ########.fr       */
+/*   Created: 2023/11/03 08:56:43 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/03 09:00:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int ft_lstsize(t_list *lst)
 {
-	if ('\0' == c)
+	size_t	size;
+
+	size = 0;
+	while (*lst)
 	{
-		while (*s++);
-		return ((char *)s);	
+		lst = lst->next;
+		size++;
 	}
-	while (*s)
-		if (*s++ == c)
-			return ((char *)s);
-	return (NULL);
+	return (size);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	char	str[] = "ontorld";
-
-	printf("%p\n%p\n%p\n", str, ft_strchr(str, 'a'), ft_strchr(str, '\0'));
-}
-*/

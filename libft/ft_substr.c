@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:12:14 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 18:37:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/02 20:18:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str_sub = (char *)malloc(sizeof(char) * size);
 	if (str_sub == NULL)
 		return (NULL);
-	ft_strlcpy(str_sub, s + start, size);
+	ft_strlcpy(str_sub, &s[start], size);
 	return (str_sub);
 }
 
@@ -36,10 +36,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 // int	main(void)
 // {
-// 	char	str[] = "findsd sdfsdfsdfsd sdfsdf";
+// 	char	str[] = "";
 // 	char	*str_sub;
 
-// 	str_sub = ft_substr(str, 1, 5);
+// 	str_sub = ft_substr("", 1, 1);
 // 	printf("%s\n", str_sub);
 // 	for (int i = 0; i < 10; i++)
 // 	{

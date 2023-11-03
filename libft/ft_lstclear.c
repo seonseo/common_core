@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr_1.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 19:24:37 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/22 10:11:00 by seonseo          ###   ########.fr       */
+/*   Created: 2023/11/03 09:26:46 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/03 10:13:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	while (n--)
-		if (*(unsigned char *)s++ == c)
-			return ((void *)s);
-	return (NULL);
-}
-/*
-#include <stdio.h>
+	t_list	*prev;
 
-int	main(void)
-{
-	char	s[42] = "42seoul";
-
-	printf("%s\n", (char *)ft_memchr(s, 'a', 4));
+	while (*lst)
+	{
+		prev = *lst;
+		*lst = (*lst)->next;
+		ft_lstdelone(prev);
+	}
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 17:33:39 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/01 11:25:17 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/02 18:44:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_nbrlen(int n)
 	int	len;
 
 	if (n == -2147483648)
-		return (10);
+		return (11);
 	len = 1;
 	if (n < 0)
 	{
@@ -71,5 +71,5 @@ char	*ft_itoa(int n)
 
 // int	main(void)
 // {
-// 	printf("\"%s\"\n", ft_itoa(-21479));
+// 	printf("\"%s\"\n", ft_itoa(-2147483648LL));
 // }

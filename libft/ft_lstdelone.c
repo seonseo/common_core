@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr_1.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 21:30:29 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/22 15:53:46 by seonseo          ###   ########.fr       */
+/*   Created: 2023/11/03 09:24:14 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/03 14:33:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+strict del
+
+void ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	char	*lastchr;
-
-	lastchr = NULL;
-	while (*s)
-	{
-		if (*s == c)
-			lastchr = (char *)s;
-		s++;
-	}
-	if ('\0' == c)
-		return ((char *)s);
-	return (lastchr);
+	del(lst->content);
+	free(lst);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	char	str[] = "ontopoftheworld";
-
-	printf("%s\n", ft_strrchr(str, 'p'));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:54:30 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:39:56 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:59:08 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
+	if (dst == NULL || src == NULL)
+		return (dst);
 	i = 0;
 	while (i < n)
 	{
@@ -24,17 +26,16 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
-/*
+
 #include <stdio.h>
 
 int	main(void)
 {
-	char dst[42] = {"veryverykindperson"};
-	char src[42] = "apple";
+	char dst[] = "veryverykindperson";
+	char src[] = "apple";
 
 	printf("dst:%s\n", dst);
 	printf("src:%s\n", src);
-	ft_memcpy(dst, src, 3);
+	ft_memcpy(NULL, NULL, 3);
 	printf("dst:%s\n", dst);
 }
-*/
