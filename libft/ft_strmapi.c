@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 12:12:17 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/01 18:57:15 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/04 18:01:54 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	slen;
 	char			*s1;
 
+	if (s == NULL)
+		return (ft_strdup(""));
+	if (f == NULL)
+		return (ft_strdup(s));
 	slen = ft_strlen(s);
 	s1 = (char *)malloc(sizeof(char) * (slen + 1));
+	if (s1 == NULL)
+		return (NULL);
 	i = 0;
 	while (i < slen)
 	{

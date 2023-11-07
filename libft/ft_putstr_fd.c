@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 19:21:36 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 08:56:58 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/04 16:58:37 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	write (fd, s, ft_strlen(s));
+	write(fd, s, ft_strlen(s));
 }

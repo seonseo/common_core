@@ -6,44 +6,40 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:12:14 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 20:18:44 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/06 19:05:13 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str_sub;
+	char	*substr;
 	size_t	size;
 
-	if (start < ft_strlen(s))
+	if (s == NULL || start >= ft_strlen(s))
+		return (ft_strdup(""));
+	else
 	{
 		size = ft_strlen(s + start) + 1;
-		if (size > len + 1)
+		if (size - 1 > len)
 			size = len + 1;
 	}
-	else
-		size = 1;
-	str_sub = (char *)malloc(sizeof(char) * size);
-	if (str_sub == NULL)
+	substr = (char *)malloc(sizeof(char) * size);
+	if (substr == NULL)
 		return (NULL);
-	ft_strlcpy(str_sub, &s[start], size);
-	return (str_sub);
+	ft_strlcpy(substr, &s[start], size);
+	return (substr);
 }
 
 // #include <stdio.h>
 
 // int	main(void)
 // {
-// 	char	str[] = "";
-// 	char	*str_sub;
+// 	char	*substr;
 
-// 	str_sub = ft_substr("", 1, 1);
-// 	printf("%s\n", str_sub);
-// 	for (int i = 0; i < 10; i++)
-// 	{
-// 		printf("%d ", str_sub[i]);
-// 	}
-// 	printf("\n%s\n", str_sub);
+// 	substr = ft_substr("", 1, 1);
+// 	printf("\"%s\"\n", substr);
 // }
+

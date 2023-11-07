@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 08:42:23 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/02 18:36:21 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:01:18 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 	size_t	size;
 
+	if (s1 == NULL && s2 == NULL)
+		return (ft_strdup(""));
+	if (s1 == NULL)
+		return (ft_strdup(s2));
+	if (s2 == NULL)
+		return (ft_strdup(s1));
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *)malloc(size * sizeof(char));
+	str = (char *)malloc(sizeof(char) * size);
 	if (str == NULL)
 		return (NULL);
 	ft_strlcpy(str, s1, size);
@@ -30,11 +36,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 // int	main(void)
 // {
-// 	char	s1[] = "happy happy ";
-// 	char	s2[] = "";
+// 	// char	s1[] = "happy happy";
+// 	// char	s2[] = "";
 // 	char	*str;
 
-// 	str = ft_strjoin(s1, s2);
+// 	str = ft_strjoin(NULL, NULL);
 // 	if (str == NULL)
 // 		return (1);
 // 	printf("%s\n", str);

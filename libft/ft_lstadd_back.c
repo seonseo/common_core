@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 09:05:20 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/03 09:15:38 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/04 18:04:14 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	ft_lstlast(*lst)->next = new;
 }
