@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:19:24 by seonseo           #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:30 by seonseo          ###   ########.fr       */
+/*   Updated: 2023/11/07 18:40:13 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == (char)c)
 			return ((char *)s + i);
 		i++;
 	}
-	if ('\0' == c)
+	if ('\0' == (char)c)
 		return ((char *)s + i);
 	return (NULL);
 }

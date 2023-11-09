@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 19:24:37 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/07 15:53:48 by seonseo          ###   ########.fr       */
+/*   Created: 2023/11/03 07:53:35 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/04 18:04:56 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
+	t_list	*newnode;
 
-	i = 0;
-	while (i < n)
-	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-			return ((void *)s + i);
-		i++;
-	}
-	return (NULL);
+	newnode = (t_list *)malloc(sizeof(t_list));
+	if (newnode == NULL)
+		return (NULL);
+	newnode->content = content;
+	newnode->next = NULL;
+	return (newnode);
 }
-
-	// #include <stdio.h>
-	// #include <string.h>
-
-	// int	main(void)
-	// {
-	// 	int tab[7] = {-49, 49, 1, -1, 0, -2, 2};
-
-	// 	printf("%s\n", (char *)ft_memchr(tab, -1, 7));
-	// 	printf("%s\n", (char *)memchr(tab, -1, 7));
-	// }
