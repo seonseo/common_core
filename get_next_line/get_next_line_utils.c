@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:31 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/02 14:29:39 by macbookair       ###   ########.fr       */
+/*   Updated: 2024/01/02 16:11:24 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 	size_t	size;
 
-	if (s == NULL || start >= ft_strlen(s))
-		return (ft_strdup(""));
+	if (s == NULL)
+		return (NULL);
+	if (start >= ft_strlen(s))
+	{
+		substr = (char *)malloc(sizeof(char) * 1);
+		if (substr == NULL)
+			return (NULL);
+		substr[0] = '\0';
+		return (substr);
+	}
 	size = ft_strlen(s + start) + 1;
 	if (size - 1 > len)
 		size = len + 1;

@@ -3,76 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/02 14:31:43 by macbookair       ###   ########.fr       */
+/*   Updated: 2024/01/02 16:18:13 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char    *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    static char *save;
-    char        buf[BUFFER_SIZE + 1];
-    char        *join;
-    char        *newline;
-    ssize_t     readbyte;
+	static char	*save;
+	char		buf[BUFFER_SIZE + 1];
+	char		*join;
+	char		*newline;
+	ssize_t		readbyte;
 
-    newline = NULL;
-    while (1)
-    {
-        if ((newline = ft_strchr(save, '\n')) != 0)
-            break;
-        if ((readbyte = read(fd, buf, BUFFER_SIZE)) == -1)
-            return (ft_free(&save));
-        if (readbyte == 0)
-            break;
-        buf[readbyte] = '\0';
-        if((join = ft_strjoin(save, buf)) == NULL)
-            return (ft_free(&save));
-        free(save);
-        save = join;
-    }
-    return (ft_get_line(&save, newline));
+	newline = NULL;
+	while (1)
+	{
+		newline = ft_strchr(save, '\n');
+		if (newline != 0)
+			break ;
+		readbyte = read(fd, buf, BUFFER_SIZE);
+		if (readbyte == -1)
+			return (ft_free(&save));
+		if (readbyte == 0)
+			break ;
+		buf[readbyte] = '\0';
+		join = ft_strjoin(save, buf);
+		if (join == NULL)
+			return (ft_free(&save));
+		free(save);
+		save = join;
+	}
+	return (ft_get_line(&save, newline));
 }
 
-
-char    *ft_get_line(char **save, char *newline)
+char	*ft_get_line(char **save, char *newline)
 {
-    char    *line;
-    char    *left;
+	char	*line;
+	char	*left;
 
-    if (newline == NULL)
-    {
-        if (*save == NULL)
-            line = NULL;
-        else
-            line = ft_strdup(*save);
-        ft_free(save);
-        return (line);
-    }
-    line = ft_substr(*save, 0, newline + 1 - *save);
-    if (line == NULL)
-        return (ft_free(save));
-    left = ft_strdup(newline + 1);
-    if (left == NULL)
-    {
-        free(line);
-        line = NULL;
-        return (ft_free(save));
-    }
-    free(*save);
-    *save = left;
-    return (line);
+	if (newline == NULL)
+	{
+		if (*save == NULL || **save == '\0')
+			line = NULL;
+		else
+			line = ft_strdup(*save);
+		ft_free(save);
+		return (line);
+	}
+	line = ft_substr(*save, 0, newline + 1 - *save);
+	if (line == NULL)
+		return (ft_free(save));
+	left = ft_strdup(newline + 1);
+	if (left == NULL)
+	{
+		free(line);
+		line = NULL;
+		return (ft_free(save));
+	}
+	free(*save);
+	*save = left;
+	return (line);
 }
 
-void    *ft_free(char **s)
+void	*ft_free(char **s)
 {
-    free(*s);
-    *s = NULL;
-    return (NULL);
+	free(*s);
+	*s = NULL;
+	return (NULL);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -95,20 +97,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int main(void)
-{
-    int fd;
-    int i;
-    
-    fd = open("text", O_RDONLY);
-    i = 0;
-    while (i < 6)
-    {
-        printf("%s", get_next_line(fd));
-        i++;
-    }
-    close(fd);
-    return (0);
-}
+// int main(void)
+// {
+// 	int fd;
+// 	int i;
+
+//     fd = open("text", O_RDONLY);
+//     i = 0;
+//     while (i < 6)
+//     {
+//         printf("%s", get_next_line(fd));
+//         i++;
+//     }
+//     close(fd);
+//     return (0);
+// }
