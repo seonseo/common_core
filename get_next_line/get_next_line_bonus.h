@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:28 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/02 15:23:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/03 21:38:11 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ typedef struct s_fdlist
 
 char		*get_next_line(int fd);
 char		*ft_get_line(t_fdlist **head, t_fdlist *fdnode, char *newline);
+int			ft_get_left(t_fdlist **head, t_fdlist *fdnode, char *newline);
+t_fdlist	*ft_set_fdnode(t_fdlist **head, int fd);
 void		*ft_free_fdnode(t_fdlist **head, t_fdlist *fdnode);
 int			ft_bufjoin(t_fdlist *fdnode, char *buf);
 char		*ft_strchr(const char *s, int c);
-char		*ft_strdup(const char *s1);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlen(const char *s);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-t_fdlist	*ft_set_fdnode(t_fdlist **head, int fd);
 
 #endif

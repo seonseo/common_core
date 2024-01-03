@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/03 16:39:13 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/03 22:00:00 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*get_next_line(int fd)
 char	*ft_get_line(t_fdlist **head, t_fdlist *fdnode, char *newline)
 {
 	char	*line;
-	char	*left;
 
 	if (newline == NULL)
 	{
@@ -55,22 +54,31 @@ char	*ft_get_line(t_fdlist **head, t_fdlist *fdnode, char *newline)
 	line = ft_substr(fdnode->save, 0, newline + 1 - fdnode->save);
 	if (line == NULL)
 		return (ft_free_fdnode(head, fdnode));
+	if ((ft_get_left(head, fdnode, newline)) == -1)
+	{
+		free(line);
+		return (ft_free_fdnode(head, fdnode));
+	}
+	return (line);
+}
+
+int	ft_get_left(t_fdlist **head, t_fdlist *fdnode, char *newline)
+{
+	char	*left;
+
 	fdnode->save_len = ft_strlen(newline + 1);
 	fdnode->save_size = fdnode->save_len + 1;
 	if (fdnode->save_len != 0)
 	{
 		left = ft_substr(newline + 1, 0, fdnode->save_len);
 		if (left == NULL)
-		{
-			free(line);
-			return (ft_free_fdnode(head, fdnode));
-		}
+			return (-1);
+		free(fdnode->save);
+		fdnode->save = left;
 	}
 	else
-		left = NULL;
-	free(fdnode->save);
-	fdnode->save = left;
-	return (line);
+		ft_free_fdnode(head, fdnode);
+	return (0);
 }
 
 t_fdlist	*ft_set_fdnode(t_fdlist **head, int fd)
@@ -127,29 +135,6 @@ void	*ft_free_fdnode(t_fdlist **head, t_fdlist *fdnode)
 	return (NULL);
 }
 
-int	ft_bufjoin(t_fdlist *fdnode, char *buf)
-{
-	char	*joinstr;
-	size_t	joinlen;
-
-	joinlen = fdnode->save_len + ft_strlen(buf);
-	if (fdnode->save_size < joinlen + 1)
-	{
-		if (fdnode->save_size == 0)
-			fdnode->save_size = joinlen + 1;
-		while (fdnode->save_size < joinlen + 1)
-			fdnode->save_size *= 2;
-		joinstr = (char *)malloc(sizeof(char) * fdnode->save_size);
-		if (joinstr == NULL)
-			return (-1);
-		ft_strlcpy(joinstr, fdnode->save, fdnode->save_size);
-		free(fdnode->save);
-		fdnode->save = joinstr;
-	}
-	ft_strlcpy(fdnode->save + fdnode->save_len, buf, fdnode->save_size);
-	fdnode->save_len = joinlen;
-	return (0);
-}
 
 // #include <stdio.h>
 // #include <string.h>
