@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/02 17:42:30 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:39:13 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,17 @@ char	*ft_get_line(t_fdlist **head, t_fdlist *fdnode, char *newline)
 		return (ft_free_fdnode(head, fdnode));
 	fdnode->save_len = ft_strlen(newline + 1);
 	fdnode->save_size = fdnode->save_len + 1;
-	left = ft_substr(newline + 1, 0, fdnode->save_len);
-	if (left == NULL)
+	if (fdnode->save_len != 0)
 	{
-		free(line);
-		return (ft_free_fdnode(head, fdnode));
+		left = ft_substr(newline + 1, 0, fdnode->save_len);
+		if (left == NULL)
+		{
+			free(line);
+			return (ft_free_fdnode(head, fdnode));
+		}
 	}
+	else
+		left = NULL;
 	free(fdnode->save);
 	fdnode->save = left;
 	return (line);
@@ -87,6 +92,7 @@ t_fdlist	*ft_set_fdnode(t_fdlist **head, int fd)
 		curr->save = NULL;
 		curr->save_len = 0;
 		curr->save_size = 0;
+		curr->next = NULL;
 		if (*head != NULL)
 			prev->next = curr;
 		else
