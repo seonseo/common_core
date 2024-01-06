@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:31 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/03 21:38:58 by macbookair       ###   ########.fr       */
+/*   Updated: 2024/01/06 14:09:52 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	ft_strlcpy(substr, &s[start], size);
 	return (substr);
-}
-
-int	ft_bufjoin(t_fdlist *fdnode, char *buf)
-{
-	char	*joinstr;
-	size_t	joinlen;
-
-	joinlen = fdnode->save_len + ft_strlen(buf);
-	if (fdnode->save_size < joinlen + 1)
-	{
-		if (fdnode->save_size == 0)
-			fdnode->save_size = joinlen + 1;
-		while (fdnode->save_size < joinlen + 1)
-			fdnode->save_size *= 2;
-		joinstr = (char *)malloc(sizeof(char) * fdnode->save_size);
-		if (joinstr == NULL)
-			return (-1);
-		ft_strlcpy(joinstr, fdnode->save, fdnode->save_size);
-		free(fdnode->save);
-		fdnode->save = joinstr;
-	}
-	ft_strlcpy(fdnode->save + fdnode->save_len, buf, fdnode->save_size);
-	fdnode->save_len = joinlen;
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/03 23:21:45 by macbookair       ###   ########.fr       */
+/*   Updated: 2024/01/06 14:39:25 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_next_line(int fd)
 	ssize_t			readbyte;
 
 	fdnode = ft_set_fdnode(&head, fd);
+	if (NULL == fdnode)
+		return (NULL);
 	newline = NULL;
 	while (1)
 	{
@@ -83,11 +85,10 @@ t_fdlist	*ft_set_fdnode(t_fdlist **head, int fd)
 	if (curr == NULL)
 	{
 		curr = (t_fdlist *)malloc(sizeof(t_fdlist));
+		if (NULL == curr)
+			return (NULL);
+		*curr = (t_fdlist){};
 		curr->fd = fd;
-		curr->save = NULL;
-		curr->save_len = 0;
-		curr->save_size = 0;
-		curr->next = NULL;
 		if (*head != NULL)
 			prev->next = curr;
 		else
