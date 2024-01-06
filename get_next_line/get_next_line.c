@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/06 14:48:46 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/06 18:24:56 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 	while (1)
 	{
 		newline = ft_strchr(save, '\n');
-		if (newline != 0)
+		if (newline != NULL)
 			break ;
 		readbyte = read(fd, buf, BUFFER_SIZE);
 		if (readbyte == -1)

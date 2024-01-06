@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/06 14:39:25 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/06 18:24:29 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,36 +150,24 @@ int	ft_bufjoin(t_fdlist *fdnode, char *buf)
 // #include <stdio.h>
 // #include <string.h>
 
-// int	gnl(int fd, char const * expectedReturn)
-// {
-// 	char *  gnlReturn = get_next_line(fd);
-// 	int		result;
-
-// 	if (expectedReturn == NULL)
-// 	{
-// 		if (gnlReturn == NULL)
-// 			result = 0;
-// 		else
-// 			result = 1;
-// 	}
-// 	else
-// 	{
-// 		if (!strcmp(gnlReturn, expectedReturn))
-// 			result = 0;
-// 		else
-// 			result = 1;
-// 	}
-// 	free(gnlReturn);
-// 	return (result);
-// }
-
 // int main(void)
 // {
-// 	int fd;
+// 	int fd[2];
 
-// 	fd = open("files/empty", O_RDWR);
-// 	printf("%d\n", gnl(fd, NULL));
-// 	printf("%d\n", gnl(fd, NULL));
-// 	close(fd);
+// 	fd[0] = open("text1", O_RDWR);
+// 	printf("%s", get_next_line(fd[0]));
+// 	fd[1] = open("text2", O_RDWR);
+// 	printf("%s", get_next_line(fd[1]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[1]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	close(fd[0]);
+// 	printf("%s", get_next_line(fd[1]));
+// 	printf("%s", get_next_line(fd[1]));
+// 	printf("%s", get_next_line(fd[1]));
+
+// 	close(fd[1]);
 // 	return (0);
 // }
