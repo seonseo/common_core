@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/06 18:24:56 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/06 18:27:49 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 //     fd = open("text", O_RDONLY);
 //     i = 0;
-//     while (i < 6)
+//     while (1)
 //     {
-//         printf("%s", get_next_line(fd));
-//         i++;
+// 		char *res = get_next_line(fd);
+// 		printf("%s", res);
+// 		if (res == NULL)
+// 			break;
 //     }
 //     close(fd);
 //     return (0);
