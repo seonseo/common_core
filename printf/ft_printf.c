@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/05 20:49:27 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/07 17:18:05 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_print_format_string(const char *format, va_list args, size_t *i, size_t *
 	else if ('d' == format[*i])
 		errorflag = ft_print_d(va_arg(args, long long), printbyte);
 	else if ('i' == format[*i])
-		errorflag = ft_print_i(va_arg(args, long long), printbyte);
+		errorflag = ft_print_d(va_arg(args, long long), printbyte);
 	else if ('u' == format[*i])
 		errorflag = ft_print_u(va_arg(args, unsigned long long), printbyte);
 	else if ('x' == format[*i])
