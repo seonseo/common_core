@@ -13,11 +13,11 @@ OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER)
+$(NAME): $(OBJS)
 	ar rc $@ $^
 	ranlib $@
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -1,6 +1,7 @@
 NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+HEADER = libft.h
 SRCS =\
 ft_isalpha.c    ft_memchr.c     ft_putchar_fd.c ft_strchr.c     ft_strlcpy.c    ft_strrchr.c\
 ft_atoi.c       ft_isascii.c    ft_memcmp.c     ft_putendl_fd.c ft_strdup.c     ft_strlen.c     ft_strtrim.c\
@@ -16,7 +17,7 @@ $(NAME): $(OBJS)
 	ar rc $@ $^
 	ranlib $@
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

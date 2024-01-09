@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/07 17:18:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/10 01:36:02 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int ft_printf(const char *format, ...)
 	while (format[i] && 0 == errorflag)
 	{
 		if ('%' == format[i])
-			errorflag = ft_print_format_string(format, args, &(++i), &printbyte);
+		{
+			i++;
+			errorflag = ft_print_format_string(format, args, &i, &printbyte);
+		}
 		else
 			errorflag = ft_print_plain_string(format, &i, &printbyte);
 	}
@@ -44,11 +47,11 @@ int	ft_print_format_string(const char *format, va_list args, size_t *i, size_t *
 
 	errorflag = 0;
 	if ('c' == format[*i])
-		errorflag = ft_print_c(va_arg(args, char), printbyte);
+		errorflag = ft_print_c(va_arg(args, int), printbyte);
 	else if ('s' == format[*i])
 		errorflag = ft_print_s(va_arg(args, char *), printbyte);
 	else if ('p' == format[*i])
-		errorflag = ft_print_p(va_arg(args, void *), printbyte);
+		errorflag = ft_print_hex(va_arg(args, void *), "0123456789abcdef", TRUE, printbyte);
 	else if ('d' == format[*i])
 		errorflag = ft_print_d(va_arg(args, long long), printbyte);
 	else if ('i' == format[*i])
@@ -56,15 +59,13 @@ int	ft_print_format_string(const char *format, va_list args, size_t *i, size_t *
 	else if ('u' == format[*i])
 		errorflag = ft_print_u(va_arg(args, unsigned long long), printbyte);
 	else if ('x' == format[*i])
-		errorflag = ft_print_x(va_arg(args, long long), printbyte);
+		errorflag = ft_print_hex(va_arg(args, void *), "0123456789abcdef", FALSE, printbyte);
 	else if ('X' == format[*i])
-		errorflag = ft_print_xx(va_arg(args, long long), printbyte);
+		errorflag = ft_print_hex(va_arg(args, void *), "0123456789ABCDEF", FALSE, printbyte);
 	else if ('%' == format[*i])
-		errorflag = ft_print_percent(printbyte);
+		errorflag = ft_print_c('%', printbyte);
 	(*i)++;
-	if (-1 == errorflag)
-		return (-1);
-	return (0);
+	return (errorflag);
 }
 
 int	ft_print_plain_string(const char *format, size_t *i, size_t *printbyte)
@@ -92,14 +93,16 @@ size_t	ft_printf_strlen(const char *s)
 }
 
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
-	int	a;
+	unsigned long long	a;
 	int	printbyte;
 
-	a = 3;
-	printbyte = ft_printf("nice%dxperiment\n", a);
-	printf("%d\n", printbyte);
+	a = 12;
+	printbyte = ft_printf("%u\n", a);
+	printf("\npb:%d\n", printbyte);
+	printf("%llu\n", a);
 	return (0);
 }

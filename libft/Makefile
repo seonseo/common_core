@@ -18,14 +18,14 @@ OBJS_BONUS = $(patsubst %.c, %.o, $(SRCS_BONUS))
 
 all: $(NAME)
 
-bonus: $(OBJS) $(OBJS_BONUS) $(HEADER)
+bonus: $(OBJS) $(OBJS_BONUS)
 	ar rcs $(NAME) $^
 	touch $@
 
-$(NAME): $(OBJS) $(HEADER)
+$(NAME): $(OBJS)
 	ar rcs $@ $^
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
