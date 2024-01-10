@@ -2,8 +2,6 @@
 
 int	main(void)
 {
-	int	a;
-
-	printf("%p", &a);
+	printf("%d", (-123 % 10));
 	return (0);
 }

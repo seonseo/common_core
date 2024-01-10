@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_printer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/10 01:29:38 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/10 19:32:58 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int		ft_print_c(char c, size_t *printbyte)
+int	ft_print_c(char c, size_t *printbyte)
 {
-	if (-1 == write(1, &c, 1))
-		return (-1);
 	(*printbyte)++;
-	return (0);
+	return (write(1, &c, 1));
 }
 
-int		ft_print_s(char *s, size_t *printbyte)
+int	ft_print_s(char *s, size_t *printbyte)
 {
 	size_t	len;
 
+	if (NULL == s)
+	{
+		*printbyte += 6;
+		return (write(1, "(null)", 6));
+	}
 	len = ft_strlen(s);
-	if (-1 == write(1, s, len))
-		return (-1);
 	*printbyte += len;
-	return (0);
+	return (write(1, s, len));
 }
 
-int		ft_print_hex(void *p, char *base, t_bool is_p, size_t *printbyte)
+int	ft_print_hex(void *p, char *base, t_bool is_p, size_t *printbyte)
 {
 	unsigned long long	p_llu;
 	char				p_str[18];
@@ -47,7 +49,7 @@ int		ft_print_hex(void *p, char *base, t_bool is_p, size_t *printbyte)
 		p_llu /= 16;
 		len++;
 		if (0 == p_llu)
-			break;
+			break ;
 	}
 	if (TRUE == is_p)
 	{
@@ -56,20 +58,22 @@ int		ft_print_hex(void *p, char *base, t_bool is_p, size_t *printbyte)
 		len += 2;
 	}
 	*printbyte += len;
-	if (-1 == write(1, &p_str[++i], len))
-		return (-1);
-	return (len);
+	return (write(1, &p_str[++i], len));
 }
 
-#include <limits.h>
-
-int		ft_print_d(long long lld, size_t *printbyte)
+int	ft_print_d(long long lld, size_t *printbyte)
 {
 	long long	lld_cpy;
 	char		lld_str[20];
 	int			i;
 	int			len;
 
+	printf("entered d\n");
+	lld_cpy = lld;
+	printf("lld_cpy:%lld\n", lld_cpy);
+	if (lld < 0)
+		lld_cpy *= -1;
+	printf("lld_cpy:%lld\n", lld_cpy);
 	len = 0;
 	i = 19;
 	while (1)
@@ -78,19 +82,18 @@ int		ft_print_d(long long lld, size_t *printbyte)
 		lld_cpy /= 10;
 		len++;
 		if (0 == lld_cpy)
-			break;
+			break ;
 	}
 	if (lld < 0)
 	{
 		lld_str[i--] = '-';
 		len++;
 	}
-	if (-1 == write(1, &lld_str[++i], len))
-		return (-1);
-	return (len);
+	*printbyte += len;
+	return (write(1, &lld_str[++i], len));
 }
 
-int		ft_print_u(unsigned long long llu, size_t *printbyte)
+int	ft_print_u(unsigned long long llu, size_t *printbyte)
 {
 	char		llu_str[19];
 	int			i;
@@ -104,9 +107,8 @@ int		ft_print_u(unsigned long long llu, size_t *printbyte)
 		llu /= 10;
 		len++;
 		if (0 == llu)
-			break;
+			break ;
 	}
-	if (-1 == write(1, &llu_str[++i], len))
-		return (-1);
-	return (len);
+	*printbyte += len;
+	return (write(1, &llu_str[++i], len));
 }
