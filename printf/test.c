@@ -2,6 +2,10 @@
 
 int	main(void)
 {
-	printf("%d", (-123 % 10));
+	int	a;
+
+	a = -10;
+	printf("%lld", (long long)a);
 	return (0);
 }
+

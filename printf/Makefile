@@ -9,24 +9,25 @@ LIBFT_MAKEFILE = $(LIBFT_DIR)makefile
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_printf.c ft_printf_printer.c
+SRCS = ft_printf.c ft_printf_printer1.c ft_printf_printer2.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) 
-	ar rcs $(LIBFT) $(OBJS)
-	mv $(LIBFT) libftprintf.a
+$(NAME): $(OBJS) $(LIBFT)
+	cp $(LIBFT) $(NAME)
+	ar rcs $(NAME) $(OBJS)
 
 $(LIBFT): $(LIBFT_SRCS) $(LIBFT_HEADER) $(LIBFT_MAKEFILE)
 	make -C $(LIBFT_DIR)
-	make clean -C $(LIBFT_DIR)
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
+	make clean -C $(LIBFT_DIR)
+	rm -f $(LIBFT)
 
 fclean: clean
 	rm -f $(NAME)

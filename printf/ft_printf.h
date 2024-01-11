@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:14:21 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/10 19:13:00 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:15:25 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ size_t	ft_printf_strlen(const char *s);
 
 int		ft_print_c(char c, size_t *printbyte);
 int		ft_print_s(char *s, size_t *printbyte);
-int		ft_print_hex(void *p, char *base, t_bool is_p, size_t *printbyte);
-int		ft_print_d(long long lld, size_t *printbyte);
-int		ft_print_u(unsigned long long llu, size_t *printbyte);
+int		ft_print_p(void *p, size_t *printbyte);
+int		ft_print_x(unsigned int u, char *base, size_t *printbyte);
+int		ft_print_d(int d, size_t *printbyte);
+void	ft_print_d_add_minus(char *lld_str, int	*i, int *len);
+int		ft_print_u(unsigned int u, size_t *printbyte);
 
 size_t	ft_strlen(const char *s);
 #endif

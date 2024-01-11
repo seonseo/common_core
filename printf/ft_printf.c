@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/10 19:12:52 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:20:41 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,17 @@ va_list args, size_t *i, size_t *printbyte)
 	else if ('s' == format[*i])
 		error = ft_print_s(va_arg(args, char *), printbyte);
 	else if ('p' == format[*i])
-		error = ft_print_hex(va_arg(args, void *), \
-		"0123456789abcdef", TRUE, printbyte);
+		error = ft_print_p(va_arg(args, void *), printbyte);
 	else if ('d' == format[*i] || 'i' == format[*i])
-		error = ft_print_d(va_arg(args, long long), printbyte);
+		error = ft_print_d(va_arg(args, int), printbyte);
 	else if ('u' == format[*i])
-		error = ft_print_u(va_arg(args, unsigned long long), printbyte);
+		error = ft_print_u(va_arg(args, unsigned int), printbyte);
 	else if ('x' == format[*i])
-		error = ft_print_hex(va_arg(args, void *), \
-		"0123456789abcdef", FALSE, printbyte);
+		error = ft_print_x(va_arg(args, unsigned int), \
+		"0123456789abcdef", printbyte);
 	else if ('X' == format[*i])
-		error = ft_print_hex(va_arg(args, void *), \
-		"0123456789ABCDEF", FALSE, printbyte);
+		error = ft_print_x(va_arg(args, unsigned int), \
+		"0123456789ABCDEF", printbyte);
 	else if ('%' == format[*i])
 		error = ft_print_c('%', printbyte);
 	(*i)++;
