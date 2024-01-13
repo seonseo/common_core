@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:14:21 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/11 21:15:25 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/13 00:54:43 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,22 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-# define TRUE 1
-# define FALSE 0
+# define FLAG_MINUS	0b00000001
+# define FLAG_PLUS	0b00000010
+# define FLAG_BLANK	0b00000100
+# define FLAG_SHARP	0b00001000
+# define FLAG_ZERO	0b00010000
 
-typedef int	t_bool;
+typedef struct s_format
+{
+	char		flags;
+	size_t		width;
+	long long	precision;
+	char		type;
+	char		*str;
+	size_t		str_len;
+	size_t		mem_size;
+}	t_format;
 
 int		ft_printf(const char *format, ...);
 int		ft_print_format_string(const char *format, \
@@ -37,4 +49,5 @@ void	ft_print_d_add_minus(char *lld_str, int	*i, int *len);
 int		ft_print_u(unsigned int u, size_t *printbyte);
 
 size_t	ft_strlen(const char *s);
+int		ft_isdigit(int c);
 #endif

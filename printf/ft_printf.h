@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:14:21 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/11 21:15:25 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/12 17:10:12 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
-
-# define TRUE 1
-# define FALSE 0
-
-typedef int	t_bool;
 
 int		ft_printf(const char *format, ...);
 int		ft_print_format_string(const char *format, \

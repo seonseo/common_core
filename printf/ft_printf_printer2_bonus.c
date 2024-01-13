@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_printer2.c                               :+:      :+:    :+:   */
+/*   ft_printf_printer2_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/11 20:49:26 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/12 17:10:33 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "ft_printf_bonus.h"
 
 int	ft_print_d(int d, size_t *printbyte)
 {

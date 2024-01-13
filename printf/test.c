@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
-	int	a;
+	char	s;
 
-	a = -10;
-	printf("%lld", (long long)a);
+	s = 'a';
+	printf("%s", &s);
 	return (0);
 }
 
