@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/13 13:33:14 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:38:19 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_printf(const char *format, ...)
 	while (format[i] && -1 != error)
 	{
 		if ('%' == format[i])
-			error = ft_print_format_string(format, args, &i, &printbyte);
+			error = print_format_string(format, args, &i, &printbyte);
 		else
-			error = ft_print_plain_string(format, &i, &printbyte);
+			error = print_plain_string(format, &i, &printbyte);
 	}
 	va_end(args);
 	if (-1 == error)
@@ -36,7 +36,7 @@ int	ft_printf(const char *format, ...)
 	return (printbyte);
 }
 
-static int	ft_printf_format_string(const char *format, va_list args, size_t *i, size_t *printbyte)
+static int	print_format_string(const char *format, va_list args, size_t *i, size_t *printbyte)
 {
 	t_format	spec;//format specification
 	int			error;//error flag
@@ -45,22 +45,22 @@ static int	ft_printf_format_string(const char *format, va_list args, size_t *i, 
 	spec = (t_format){};
 	spec.precision = -1;
 	error = 0;
-	ft_read_flags(format, i, &spec);
-	error = ft_read_width(format, i, &spec);
+	read_flags(format, i, &spec);
+	error = read_width(format, i, &spec);
 	if (-1 != error)
-		error = ft_read_precision(format, i, &spec);
+		error = read_precision(format, i, &spec);
 	if (-1 != error)
-		error = ft_read_type(format, i, &spec);
+		error = read_type(format, i, &spec);
 	if (-1 != error)
-		error = ft_is_spec_valid(&spec);
+		error = is_spec_valid(&spec);
 	if (-1 != error)
-		error = ft_make_str(&spec, args);
+		error = make_str(&spec, args);
 	if (-1 != error)
-		error = ft_print_str(&spec, printbyte);
+		error = print_str(&spec, printbyte);
 	return (error);
 }
 
-void	ft_read_flags(const char *format, t_format *spec, size_t *i)
+void	read_flags(const char *format, t_format *spec, size_t *i)
 {
 	while (1)
 	{
@@ -80,7 +80,7 @@ void	ft_read_flags(const char *format, t_format *spec, size_t *i)
 	}
 }
 
-int	ft_read_width(const char *format, t_format *spec, size_t *i)
+int	read_width(const char *format, t_format *spec, size_t *i)
 {
 	while (ft_isdigit(format[*i]))
 	{
@@ -92,7 +92,7 @@ int	ft_read_width(const char *format, t_format *spec, size_t *i)
 	return (0);
 }
 
-int	ft_read_precision(const char *format, t_format *spec, size_t *i)
+int	read_precision(const char *format, t_format *spec, size_t *i)
 {
 	if ('.' == format[*i])
 	{
@@ -110,7 +110,7 @@ int	ft_read_precision(const char *format, t_format *spec, size_t *i)
 	return (0);
 }
 
-int	ft_read_type(const char *format, t_format *spec, size_t *i)
+int	read_type(const char *format, t_format *spec, size_t *i)
 {
 	int	j;
 
@@ -124,24 +124,31 @@ int	ft_read_type(const char *format, t_format *spec, size_t *i)
 	return (0);
 }
 
-int	ft_is_spec_valid(t_format *spec)
+int	flag_is_on(t_format *spec, int flag)
 {
-	if (FLAG_PLUS == spec->flags & FLAG_PLUS || \
-	FLAG_BLANK == spec->flags & FLAG_BLANK)//if FLAG_PLUS or FLAG_BLANK is true
+	if (flag == (spec->flags & flag))
+		return (1);
+	return (0);
+}
+
+int	check_spec(t_format *spec)
+{
+	if (flag_is_on(spec, FLAG_PLUS) || flag_is_on(spec, FLAG_BLANK))
 		if ('d' != spec->type && 'i' != spec->type)
 			return (-1);
-	if (FLAG_SHARP == spec->flags & FLAG_SHARP)
+	if (flag_is_on(spec, FLAG_SHARP))
 		if ('x' != spec->type && 'X' != spec->type)
 			return (-1);
-	if (FLAG_ZERO == spec->flags & FLAG_ZERO)
+	if (flag_is_on(spec, FLAG_ZERO))
 		if ('c' == spec->type || 's' == spec->type || 'p' == spec->type)
 			return (-1);
 	if (-1 != spec->precision)//if precision has a value
 		if ('c' == spec->type || 'p' == spec->type)
 			return (-1);
+	return (0);
 }
 
-int	ft_make_str(t_format *spec, va_list args)
+int	make_str(t_format *spec, va_list args)
 {
 	char	type;
 	int		error;
@@ -149,25 +156,25 @@ int	ft_make_str(t_format *spec, va_list args)
 	type = spec->type;
 	error = 0;
 	if ('c' == type)
-		error = ft_print_c(spec, va_arg(args, int));
+		error = make_str_c(spec, va_arg(args, int));
 	else if ('s' == type)
-		error = ft_print_s(spec, va_arg(args, char *));
+		error = make_str_s(spec, va_arg(args, char *));
 	else if ('p' == type)
-		error = ft_print_p(spec, va_arg(args, void *));
+		error = make_str_p(spec, va_arg(args, void *));
 	else if ('d' == type || 'i' == type)
-		error = ft_print_d(spec, va_arg(args, int));
+		error = make_str_d(spec, va_arg(args, int));
 	else if ('u' == type)
-		error = ft_print_u(spec, va_arg(args, unsigned int));
+		error = make_str_u(spec, va_arg(args, unsigned int));
 	else if ('x' == type)
-		error = ft_print_x(spec, va_arg(args, unsigned int), "0123456789abcdef");
+		error = make_str_x(spec, va_arg(args, unsigned int), "0123456789abcdef");
 	else if ('X' == type)
-		error = ft_print_x(spec, va_arg(args, unsigned int), "0123456789ABCDEF");
+		error = make_str_x(spec, va_arg(args, unsigned int), "0123456789ABCDEF");
 	else if ('%' == type)
-		error = ft_print_c(spec, '%');
+		error = make_str_c(spec, '%');
 	return (error);	
 }
 
-static int	ft_print_plain_string(const char *format, size_t *i, size_t *printbyte)
+static int	print_plain_string(const char *format, size_t *i, size_t *printbyte)
 {
 	const char	*start;
 	size_t		len;
