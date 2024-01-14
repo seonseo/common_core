@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/14 21:32:06 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/14 21:44:18 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,5 @@ int	make_str_x(t_format *spec, unsigned int u, char *base)
 	spec->str = str;
 	return (0);
 }
+
+make_str_spec(tformat *spec, char *str, size_t *i)
