@@ -8,9 +8,9 @@ int	main(void)
 	int	printbyte;
 
 	a = -10;
-	printbyte = ft_printf(" %x %x %x %x %x %x %x", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	printbyte = ft_printf("%5.7d", a);
 	printf("\npb:%d\n", printbyte);
-	printbyte = printf(" %x %x %x %x %x %x %x", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	printbyte = printf("%5.7d", a);
 	printf("\npb:%d\n", printbyte);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/13 21:38:19 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/14 16:40:23 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_printf(const char *format, ...)
 	return (printbyte);
 }
 
-static int	print_format_string(const char *format, va_list args, size_t *i, size_t *printbyte)
+int	print_format_string(const char *format, va_list args, size_t *i, size_t *printbyte)
 {
 	t_format	spec;//format specification
 	int			error;//error flag
@@ -45,18 +45,27 @@ static int	print_format_string(const char *format, va_list args, size_t *i, size
 	spec = (t_format){};
 	spec.precision = -1;
 	error = 0;
-	read_flags(format, i, &spec);
-	error = read_width(format, i, &spec);
+	error = read_spec(format, &spec, i);
 	if (-1 != error)
-		error = read_precision(format, i, &spec);
-	if (-1 != error)
-		error = read_type(format, i, &spec);
-	if (-1 != error)
-		error = is_spec_valid(&spec);
+		error = check_spec(&spec);
 	if (-1 != error)
 		error = make_str(&spec, args);
 	if (-1 != error)
 		error = print_str(&spec, printbyte);
+	return (error);
+}
+
+int		read_spec(const char *format, t_format *spec, size_t *i)
+{
+	int	error;
+
+	error = 0;
+	read_flags(format, spec, i);
+	error = read_width(format, spec, i);
+	if (-1 != error)
+		error = read_precision(format, spec, i);
+	if (-1 != error)
+		error = read_type(format, spec, i);
 	return (error);
 }
 
@@ -174,7 +183,15 @@ int	make_str(t_format *spec, va_list args)
 	return (error);	
 }
 
-static int	print_plain_string(const char *format, size_t *i, size_t *printbyte)
+int	print_str(t_format *spec, size_t *printbyte)
+{
+	if (-1 == write(1, spec->str, spec->obj_size))
+		return (-1);
+	(*printbyte) += spec->obj_size;
+	return (0);
+}
+
+int	print_plain_string(const char *format, size_t *i, size_t *printbyte)
 {
 	const char	*start;
 	size_t		len;
