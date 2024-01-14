@@ -3,10 +3,10 @@
 
 int	main(void)
 {
-	int	d;
+	int		a;
 
-	d = -42;
-	printf("%-5.3d", d);
+	a = 312;
+	printf("%-10d", a);
 	return (0);
 }
 

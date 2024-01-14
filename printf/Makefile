@@ -13,7 +13,10 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_printf.c ft_printf_printer1.c ft_printf_printer2.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-SRCS_BONUS = $(patsubst %.c,%_bonus.c,$(SRCS))
+SRCS_BONUS = \
+ft_printf_bonus.c				ft_printf_format_string_bonus.c	ft_printf_read_spec_bonus.c\
+ft_printf_make_str_cs_bonus.c	ft_printf_make_str_pdux_bonus.c	ft_printf_make_str_num_bonus.c\
+ft_printf_make_str_bonus.c
 OBJS_BONUS = $(patsubst %.c, %.o, $(SRCS_BONUS))
 
 all: $(NAME)

@@ -7,10 +7,10 @@ int	main(void)
 	int	a;
 	int	printbyte;
 
-	a = -10;
-	printbyte = ft_printf("%5.7d", a);
+	a = 42;
+	printbyte = ft_printf("% 0.7d", a);
 	printf("\npb:%d\n", printbyte);
-	printbyte = printf("%5.7d", a);
+	printbyte = printf("% 0.7d", a);
 	printf("\npb:%d\n", printbyte);
 	return (0);
 }
