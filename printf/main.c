@@ -4,14 +4,15 @@
 
 int	main(void)
 {
-	int	a;
+	char	a;
 	int	printbyte;
+	char *input = "|%020p|";
 
-	a = 42;
-	printbyte = ft_printf("% 0.7d", a);
-	printf("\npb:%d\n", printbyte);
-	printbyte = printf("% 0.7d", a);
-	printf("\npb:%d\n", printbyte);
+	a = 'a';
+	printbyte = ft_printf(input, &a);
+	printf("\nprintbyte:%d\n\n", printbyte);
+	printbyte = printf(input, &a);
+	printf("\nprintbyte:%d\n", printbyte);
 	return (0);
 }
 //" %x ", LONG_MIN

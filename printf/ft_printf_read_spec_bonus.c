@@ -6,13 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:20:41 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/14 21:16:53 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/15 20:15:47 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	read_flags(const char *format, t_format *spec, size_t *i)
+void	ft_printf_read_flags(const char *format, t_format *spec, size_t *i)
 {
 	while (1)
 	{
@@ -32,7 +32,7 @@ void	read_flags(const char *format, t_format *spec, size_t *i)
 	}
 }
 
-int	read_width(const char *format, t_format *spec, size_t *i)
+int	ft_printf_read_width(const char *format, t_format *spec, size_t *i)
 {
 	while (ft_isdigit(format[*i]))
 	{
@@ -44,13 +44,12 @@ int	read_width(const char *format, t_format *spec, size_t *i)
 	return (0);
 }
 
-int	read_precision(const char *format, t_format *spec, size_t *i)
+int	ft_printf_read_precision(const char *format, t_format *spec, size_t *i)
 {
 	if ('.' == format[*i])
 	{
+		spec->precision = 0;
 		(*i)++;
-		if (ft_isdigit(format[*i]))
-			spec->precision = 0;
 		while (ft_isdigit(format[*i]))
 		{
 			spec->precision = spec->precision * 10 + format[*i] - '0';
@@ -62,7 +61,7 @@ int	read_precision(const char *format, t_format *spec, size_t *i)
 	return (0);
 }
 
-int	read_type(const char *format, t_format *spec, size_t *i)
+int	ft_printf_read_type(const char *format, t_format *spec, size_t *i)
 {
 	int	j;
 
