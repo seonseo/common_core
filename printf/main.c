@@ -4,14 +4,14 @@
 
 int	main(void)
 {
-	char	a;
+	char	*a;
 	int	printbyte;
-	char *input = "|%020p|";
+	char *input = "|%10.3s|";
 
-	a = 'a';
-	printbyte = ft_printf(input, &a);
+	a = "apple";
+	printbyte = ft_printf(input, a);
 	printf("\nprintbyte:%d\n\n", printbyte);
-	printbyte = printf(input, &a);
+	printbyte = printf(input, a);
 	printf("\nprintbyte:%d\n", printbyte);
 	return (0);
 }

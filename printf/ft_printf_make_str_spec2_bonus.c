@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_make_str_spec2_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/15 21:58:15 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 00:08:37 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_printf_make_str_malloc(t_format *spec)
 		(spec->obj_size)++;
 	if ('p' == spec->type || flag_is_on(spec->flags, FLAG_SHARP))
 		spec->obj_size += 2;
-	spec->rest_width = spec->obj_size;
+	spec->trimmed_str_len = spec->obj_size;
 	if (spec->obj_size < (size_t)spec->width)
 		spec->obj_size = spec->width;
 	return ((char *)malloc(sizeof(char) * spec->obj_size));
@@ -67,16 +67,16 @@ void	ft_printf_make_str_precision(t_format *spec, char *str, size_t *i)
 
 void	ft_printf_make_str_width(t_format *spec, char *str, size_t *i)
 {
-	int	padding;
+	int	margin;
 
-	if (spec->obj_size > spec->rest_width)
+	if (spec->obj_size > spec->trimmed_str_len)
 	{
-		padding = spec->obj_size - spec->rest_width;
+		margin = spec->obj_size - spec->trimmed_str_len;
 		if (flag_is_on(spec->flags, FLAG_ZERO))
-			ft_memset(&str[*i], '0', padding);
+			ft_memset(&str[*i], '0', margin);
 		else
-			ft_memset(&str[*i], ' ', padding);
-		(*i) += padding;
+			ft_memset(&str[*i], ' ', margin);
+		(*i) += margin;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_print_format_string_bonus.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:18:51 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/15 21:38:44 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:48:03 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ int	ft_printf_check_spec(t_format *spec)
 		if ('x' != spec->type && 'X' != spec->type)
 			return (-1);
 	if (-1 != spec->precision)//if precision has a value
-		if ('c' == spec->type)
-			return (-1);
-		if ('p' == spec->type)
+		if ('c' == spec->type || 'p' == spec->type)
 			spec->precision = -1;
 	if (flag_is_on(spec->flags, FLAG_ZERO))
 	{
-		if ('c' == spec->type || 's' == spec->type || 'p' == spec->type)
+		if ('c' == spec->type || 's' == spec->type)
 			spec->flags = (spec->flags ^ FLAG_ZERO);
 		if (flag_is_on(spec->flags, FLAG_MINUS) || -1 != spec->precision)
 			spec->flags = (spec->flags ^ FLAG_ZERO);
