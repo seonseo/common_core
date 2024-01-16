@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_print_format_string_bonus.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:18:51 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/15 23:48:03 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 20:57:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int		ft_printf_read_spec(const char *format, t_format *spec, size_t *i)
+int	ft_printf_read_spec(const char *format, t_format *spec, size_t *i)
 {
 	int	error;
 
@@ -45,7 +45,7 @@ int	ft_printf_check_spec(t_format *spec)
 	if (flag_is_on(spec->flags, FLAG_SHARP))
 		if ('x' != spec->type && 'X' != spec->type)
 			return (-1);
-	if (-1 != spec->precision)//if precision has a value
+	if (-1 != spec->precision)
 		if ('c' == spec->type || 'p' == spec->type)
 			spec->precision = -1;
 	if (flag_is_on(spec->flags, FLAG_ZERO))
@@ -76,22 +76,25 @@ int	ft_printf_make_str(t_format *spec, va_list args)
 	else if ('u' == type)
 		error = ft_printf_make_str_u(spec, va_arg(args, unsigned int));
 	else if ('x' == type)
-		error = ft_printf_make_str_x(spec, va_arg(args, unsigned int), "0123456789abcdef");
+		error = ft_printf_make_str_x(spec, va_arg(args, unsigned int), \
+		"0123456789abcdef");
 	else if ('X' == type)
-		error = ft_printf_make_str_x(spec, va_arg(args, unsigned int), "0123456789ABCDEF");
+		error = ft_printf_make_str_x(spec, va_arg(args, unsigned int), \
+		"0123456789ABCDEF");
 	else if ('%' == type)
 		error = ft_printf_make_str_c(spec, '%');
-	if (-1 == error)
-		return (-1);
-	return (0);
+	return (error);
 }
 
 int	ft_printf_print_str(t_format *spec, size_t *printbyte)
 {
-	if (-1 == write(1, spec->str, spec->obj_size))
-		return (-1);
-	(*printbyte) += spec->obj_size;
+	int	error;
+
+	error = write(1, spec->str, spec->obj_size);
 	free(spec->str);
-	spec->str = 0;
+	spec->str = NULL;
+	(*printbyte) += spec->obj_size;
+	if (-1 == error)
+		return (-1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_make_str_pdux_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/15 23:39:14 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 20:45:37 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_printf_make_str_d(t_format *spec, int d)
 	if (d < 0)
 		spec->sign = -1;
 	i = 9;
-	while (1)
+	while (0 != d)
 	{
 		if (-1 == spec->sign)
 			str_d[i] = "0123456789"[-(d % 10)];
@@ -53,7 +53,10 @@ int	ft_printf_make_str_d(t_format *spec, int d)
 			break ;
 		i--;
 	}
-	spec->str = &str_d[i];
+	if (0 == spec->str_len && -1 == spec->precision)
+		spec->precision = 1;
+	if (0 != spec->str_len)
+		spec->str = &str_d[i];
 	return (ft_printf_make_str_spec(spec));
 }
 
@@ -63,7 +66,7 @@ int	ft_printf_make_str_u(t_format *spec, unsigned int u)
 	int		i;
 
 	i = 9;
-	while (1)
+	while (0 != u)
 	{
 		str_u[i] = "0123456789"[u % 10];
 		u /= 10;
@@ -72,7 +75,10 @@ int	ft_printf_make_str_u(t_format *spec, unsigned int u)
 			break ;
 		i--;
 	}
-	spec->str = &str_u[i];
+	if (0 == spec->str_len && -1 == spec->precision)
+		spec->precision = 1;
+	if (0 != spec->str_len)
+		spec->str = &str_u[i];
 	return (ft_printf_make_str_spec(spec));
 }
 
@@ -82,7 +88,7 @@ int	ft_printf_make_str_x(t_format *spec, unsigned int u, char *base)
 	int		i;
 
 	i = 7;
-	while (1)
+	while (0 != u)
 	{
 		str_x[i] = base[u % 16];
 		u /= 16;
@@ -91,7 +97,9 @@ int	ft_printf_make_str_x(t_format *spec, unsigned int u, char *base)
 			break ;
 		i--;
 	}
-	spec->str = &str_x[i];
+	if (0 == spec->str_len && -1 == spec->precision)
+		spec->precision = 1;
+	if (0 != spec->str_len)
+		spec->str = &str_x[i];
 	return (ft_printf_make_str_spec(spec));
 }
-

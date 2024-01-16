@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/15 16:11:53 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:06:22 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ int	ft_printf(const char *format, ...)
 	return (printbyte);
 }
 
-int	ft_printf_print_format_string(const char *format, va_list args, size_t *i, size_t *printbyte)
+int	ft_printf_print_format_string(const char *format, va_list args, \
+size_t *i, size_t *printbyte)
 {
-	t_format	spec;//format specification
-	int			error;//error flag
+	t_format	spec;
+	int			error;
 
 	(*i)++;
 	spec = (t_format){};
@@ -55,7 +56,8 @@ int	ft_printf_print_format_string(const char *format, va_list args, size_t *i, s
 	return (error);
 }
 
-int	ft_printf_print_plain_string(const char *format, size_t *i, size_t *printbyte)
+int	ft_printf_print_plain_string(const char *format, \
+size_t *i, size_t *printbyte)
 {
 	const char	*start;
 	size_t		len;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_make_str_spec2_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/16 00:08:37 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 20:10:01 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 char	*ft_printf_make_str_malloc(t_format *spec)
 {
-
 	spec->obj_size = spec->str_len;
-	if (spec->precision >= 0 && spec->obj_size < (size_t)spec->precision)
+	if (spec->precision >= 0 && spec->obj_size < (size_t)spec->precision \
+	&& 's' != spec->type)
 		spec->obj_size = spec->precision;
-	if (-1 == spec->sign || flag_is_on(spec->flags, FLAG_PLUS)\
-		|| flag_is_on(spec->flags, FLAG_BLANK))
+	if (-1 == spec->sign || flag_is_on(spec->flags, FLAG_PLUS) \
+	|| flag_is_on(spec->flags, FLAG_BLANK))
 		(spec->obj_size)++;
-	if ('p' == spec->type || flag_is_on(spec->flags, FLAG_SHARP))
+	if ('p' == spec->type || (flag_is_on(spec->flags, FLAG_SHARP) \
+	&& (NULL != spec->str)))
 		spec->obj_size += 2;
 	spec->trimmed_str_len = spec->obj_size;
 	if (spec->obj_size < (size_t)spec->width)
@@ -42,7 +43,7 @@ void	ft_printf_make_str_prefix(t_format *spec, char *str, size_t *i)
 		ft_memcpy(&str[*i], "0x", 2);
 		(*i) += 2;
 	}
-	if (flag_is_on(spec->flags, FLAG_SHARP))
+	if (flag_is_on(spec->flags, FLAG_SHARP) && (NULL != spec->str))
 	{
 		if ('x' == spec->type)
 			ft_memcpy(&str[*i], "0x", 2);
@@ -57,12 +58,14 @@ void	ft_printf_make_str_precision(t_format *spec, char *str, size_t *i)
 	int	padding;
 
 	if ('s' != spec->type)
+	{
 		if (spec->precision > 0 && (size_t)spec->precision > spec->str_len)
 		{
 			padding = (size_t)spec->precision - spec->str_len;
 			ft_memset(&str[*i], '0', padding);
 			(*i) += padding;
 		}
+	}
 }
 
 void	ft_printf_make_str_width(t_format *spec, char *str, size_t *i)
@@ -85,4 +88,3 @@ void	ft_printf_make_str_cpy_num(t_format *spec, char *str, size_t *i)
 	ft_memcpy(&str[*i], spec->str, spec->str_len);
 	(*i) += spec->str_len;
 }
-

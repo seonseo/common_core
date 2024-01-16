@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_make_str_spec1_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:00:11 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/15 23:33:50 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:08:54 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_printf_make_str_spec(t_format *spec)
 	if (NULL == str)
 		return (-1);
 	i = 0;
-	if (!flag_is_on(spec->flags, FLAG_MINUS) && !flag_is_on(spec->flags, FLAG_ZERO))
+	if (!flag_is_on(spec->flags, FLAG_MINUS) && \
+	!flag_is_on(spec->flags, FLAG_ZERO))
 		ft_printf_make_str_width(spec, str, &i);
 	ft_printf_make_str_prefix(spec, str, &i);
 	ft_printf_make_str_precision(spec, str, &i);

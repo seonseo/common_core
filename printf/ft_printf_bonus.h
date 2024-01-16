@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:14:21 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/16 00:06:26 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 19:08:43 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include <stdlib.h>
 # include <stdarg.h>
@@ -19,7 +19,7 @@
 # include <stdio.h>//			exclude befor evalulation!!!!!!!!!!!
 
 # ifndef INT_MAX
-# define INT_MAX	2147483647
+#  define INT_MAX	2147483647
 # endif
 
 # define FLAG_MINUS	0b00000001
@@ -43,8 +43,10 @@ typedef struct s_format
 
 //ft_printf_bonus.c
 int		ft_printf(const char *format, ...);
-int		ft_printf_print_format_string(const char *format, va_list args, size_t *i, size_t *printbyte);
-int		ft_printf_print_plain_string(const char *format, size_t *i, size_t *printbyte);
+int		ft_printf_print_format_string(const char *format, va_list args, \
+size_t *i, size_t *printbyte);
+int		ft_printf_print_plain_string(const char *format, \
+size_t *i, size_t *printbyte);
 size_t	ft_printf_strlen(const char *s);
 
 //ft_printf_print_format_string_bonus.c
@@ -85,5 +87,6 @@ size_t	ft_strlen(const char *s);
 int		ft_isdigit(int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

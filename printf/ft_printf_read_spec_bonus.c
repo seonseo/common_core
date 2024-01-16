@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_read_spec_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:20:41 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/15 23:30:41 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:15:05 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_printf_read_flags(const char *format, t_format *spec, size_t *i)
 		else if ('0' == format[*i])
 			spec->flags |= FLAG_ZERO;
 		else
-			break;
+			break ;
 		(*i)++;
 	}
 }
