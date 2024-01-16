@@ -20,6 +20,15 @@ ft_printf_make_str_pdux_bonus.c	ft_printf_make_str_spec1_bonus.c\
 ft_printf_make_str_spec2_bonus.c
 OBJS_BONUS = $(patsubst %.c, %.o, $(SRCS_BONUS))
 
+SRCS_LIBFT = $(addprefix $(LIBFT_DIR), \
+ft_isalpha.c    ft_memchr.c     ft_putchar_fd.c ft_strchr.c     ft_strlcpy.c    ft_strrchr.c\
+ft_atoi.c       ft_isascii.c    ft_memcmp.c     ft_putendl_fd.c ft_strdup.c     ft_strlen.c     ft_strtrim.c\
+ft_bzero.c      ft_isdigit.c    ft_memcpy.c     ft_putnbr_fd.c  ft_striteri.c   ft_strmapi.c    ft_substr.c\
+ft_calloc.c     ft_isprint.c    ft_memmove.c    ft_putstr_fd.c  ft_strjoin.c    ft_strncmp.c    ft_tolower.c\
+ft_isalnum.c    ft_itoa.c       ft_memset.c     ft_split.c      ft_strlcat.c    ft_strnstr.c    ft_toupper.c)
+OBJS_LIBFT = $(patsubst %.c, %.o, $(SRCS_LIBFT))
+
+
 all: $(NAME)
 
 bonus: $(OBJS_BONUS) $(LIBFT)
@@ -31,16 +40,19 @@ $(NAME): $(OBJS) $(LIBFT)
 	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJS)
 
-$(LIBFT): $(LIBFT_SRCS) $(LIBFT_HEADER) $(LIBFT_MAKEFILE)
-	make -C $(LIBFT_DIR)
+$(LIBFT): $(OBJS_LIBFT)
+	ar rcs $@ $^
 
 %.o: %.c $(HEADER) $(HEADER_BONUS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT_DIR)/%.o: $(LIBFT_DIR)/%.c $(LIBFT_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 	rm -f $(OBJS_BONUS)
-	make clean -C $(LIBFT_DIR)
+	rm -f $(OBJS_LIBFT)
 	rm -f $(LIBFT)
 	rm -f bonus
 
