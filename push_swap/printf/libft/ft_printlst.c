@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_printlst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/11/08 15:41:25 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/09 11:04:47 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
+#include "libft.h"
 
-int	main(void)
+size_t	ft_printlst(t_list *lst)
 {
-	int		a;
-	int		ret;
+	size_t	size;
 
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
-	return (0);
+	if (lst == NULL)
+		return (0);
+	size = 0;
+	while (lst->content)
+	{
+		ft_putstr_fd(lst->content, 1);
+		(lst->content)++;
+		size++;
+	}
+	return (size);
 }

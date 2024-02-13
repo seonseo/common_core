@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/13 20:46:46 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/16 17:01:32 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
-
-int	main(void)
+int	ft_isprint(int c)
 {
-	int		a;
-	int		ret;
-
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
+	if (32 <= c && c <= 126)
+		return (1);
 	return (0);
 }

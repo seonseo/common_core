@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/12 20:40:47 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/12 20:44:51 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
-
-int	main(void)
+int	ft_isdigit(int c)
 {
-	int		a;
-	int		ret;
-
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
+	if ('0' <= c && c <= '9')
+		return (1);
 	return (0);
 }

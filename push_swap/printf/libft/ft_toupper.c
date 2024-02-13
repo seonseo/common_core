@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/16 21:07:25 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/16 21:18:41 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_toupper(int c)
+{
+	if ('a' <= c && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
+}
+/*
 #include <stdio.h>
-#include <limits.h>
 
 int	main(void)
 {
-	int		a;
-	int		ret;
-
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
-	return (0);
+	printf("%c\n", ft_tolower('C'));
+	printf("%c\n", ft_tolower('a'));
+	printf("%c\n", ft_tolower('^'));
 }
+*/

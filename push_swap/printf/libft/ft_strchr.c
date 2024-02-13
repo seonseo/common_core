@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/16 21:19:24 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/07 18:40:13 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if ('\0' == (char)c)
+		return ((char *)s + i);
+	return (NULL);
+}
+/*
 #include <stdio.h>
-#include <limits.h>
 
 int	main(void)
 {
-	int		a;
-	int		ret;
+	char	str[] = "ontorld";
 
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
-	return (0);
+	printf("%p\n%p\n%s\n", str, ft_strchr(str, '\0'), ft_strchr(str, '\0'));
 }
+*/

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_make_str_spec1_bonus.c                   :+:      :+:    :+:   */
+/*   ft_printf_make_str_spec1.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:00:11 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/21 17:24:43 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/13 19:01:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	ft_printf_make_str_spec(t_format *spec)
 {

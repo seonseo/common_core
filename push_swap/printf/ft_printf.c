@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/21 17:13:45 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/12 20:08:08 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	ft_printf(const char *format, ...)
 	int		error;
 	va_list	args;
 
-	if (NULL == format)
-		return (-1);
 	va_start(args, format);
 	error = 0;
 	printbyte = 0;
@@ -28,12 +26,9 @@ int	ft_printf(const char *format, ...)
 	while (format[i] && -1 != error)
 	{
 		if ('%' == format[i])
-		{
-			i++;
-			error = ft_print_format_string(format, args, &i, &printbyte);
-		}
+			error = ft_printf_print_format_string(format, args, &i, &printbyte);
 		else
-			error = ft_print_plain_string(format, &i, &printbyte);
+			error = ft_printf_print_plain_string(format, &i, &printbyte);
 	}
 	va_end(args);
 	if (-1 == error)
@@ -41,35 +36,28 @@ int	ft_printf(const char *format, ...)
 	return (printbyte);
 }
 
-int	ft_print_format_string(const char *format, \
-va_list args, size_t *i, size_t *printbyte)
+int	ft_printf_print_format_string(const char *format, va_list args, \
+size_t *i, size_t *printbyte)
 {
-	int	error;
+	t_format	spec;
+	int			error;
 
-	error = -1;
-	if ('c' == format[*i])
-		error = ft_print_c(va_arg(args, int), printbyte);
-	else if ('s' == format[*i])
-		error = ft_print_s(va_arg(args, char *), printbyte);
-	else if ('p' == format[*i])
-		error = ft_print_p(va_arg(args, void *), printbyte);
-	else if ('d' == format[*i] || 'i' == format[*i])
-		error = ft_print_d(va_arg(args, int), printbyte);
-	else if ('u' == format[*i])
-		error = ft_print_u(va_arg(args, unsigned int), printbyte);
-	else if ('x' == format[*i])
-		error = ft_print_x(va_arg(args, unsigned int), \
-		"0123456789abcdef", printbyte);
-	else if ('X' == format[*i])
-		error = ft_print_x(va_arg(args, unsigned int), \
-		"0123456789ABCDEF", printbyte);
-	else if ('%' == format[*i])
-		error = ft_print_c('%', printbyte);
 	(*i)++;
+	spec = (t_format){};
+	spec.precision = -1;
+	error = 0;
+	error = ft_printf_read_spec(format, &spec, i);
+	if (-1 != error)
+		error = ft_printf_check_spec(&spec);
+	if (-1 != error)
+		error = ft_printf_make_str(&spec, args);
+	if (-1 != error)
+		error = ft_printf_print_str(&spec, printbyte);
 	return (error);
 }
 
-int	ft_print_plain_string(const char *format, size_t *i, size_t *printbyte)
+int	ft_printf_print_plain_string(const char *format, \
+size_t *i, size_t *printbyte)
 {
 	const char	*start;
 	size_t		len;

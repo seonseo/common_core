@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/06 11:23:38 by seonseo           #+#    #+#             */
+/*   Updated: 2023/10/12 20:39:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_isalpha(int c)
+{
+	if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'))
+		return (1);
+	return (0);
+}
+/*
 #include <stdio.h>
-#include <limits.h>
 
 int	main(void)
 {
-	int		a;
-	int		ret;
+	char	c;
 
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
-	return (0);
+	c = 0;
+	while (scanf("%c", &c))
+	{
+		printf("%d\n", ft_isalpha(c));
+		getchar();
+	}
 }
+*/

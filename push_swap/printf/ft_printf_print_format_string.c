@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_print_format_string_bonus.c              :+:      :+:    :+:   */
+/*   ft_printf_print_format_string.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:18:51 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/21 17:14:52 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/13 21:35:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	ft_printf_read_spec(const char *format, t_format *spec, size_t *i)
 {
@@ -62,7 +62,7 @@ int	ft_printf_make_str(t_format *spec, va_list args)
 	int		error;
 	char	type;
 
-	error = 0;
+	error = -1;
 	type = spec->type;
 	if ('c' == type)
 		error = ft_printf_make_str_c(spec, va_arg(args, int));

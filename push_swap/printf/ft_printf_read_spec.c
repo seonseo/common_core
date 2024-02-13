@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_read_spec_bonus.c                        :+:      :+:    :+:   */
+/*   ft_printf_read_spec.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:20:41 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/21 17:22:17 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/13 19:01:50 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 void	ft_printf_read_flags(const char *format, t_format *spec, size_t *i)
 {

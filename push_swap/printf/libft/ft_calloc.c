@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:17:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/01/18 21:43:13 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/22 20:44:09 by seonseo           #+#    #+#             */
+/*   Updated: 2023/11/07 14:18:27 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
+#include "libft.h"
 
-int	main(void)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int		a;
-	int		ret;
+	void	*mem;
 
-	a = 312;
-	ret = printf("%.1100000000d\n", a);
-	printf("ret:%d\n", ret);
-	return (0);
+	mem = malloc(count * size);
+	if (mem == NULL)
+		return (NULL);
+	if (count * size == 0)
+		ft_bzero(mem, 1);
+	else
+		ft_bzero(mem, count * size);
+	return (mem);
 }
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	char	str[] = "I will be pirate king";
+	char	*ptr;
+
+	ptr = (char *)calloc(22, 1);
+	ft_strlcpy(ptr, str, 22);
+	printf("%s\n", ptr);
+}
+*/
