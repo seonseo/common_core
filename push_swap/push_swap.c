@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/13 22:28:42 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/14 20:04:31 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
-	char	**solution;
+	char	**instructions;
 
-	if (argc == 1)
+	if (1 == argc)
 		return (0);
 	stack_a = (t_stack){};
-	if (parse_input(argc, argv, &stack_a) == -1)
+	if (-1 == parse_input(argc, argv, &stack_a))
 		return (print_error());
-	sort_stack(&stack_a, solution);
-	print_solution(solution);
+	sort_stack(&stack_a, instructions);
+	print_strs(instructions);
 	return (0);
 }
 
@@ -31,103 +31,39 @@ int	parse_input(int argc, char **argv, t_stack *stack_a)
 {
 	int	*arg_arr;
 	int	arr_size;
-
-	arg_arr = (int *)malloc(sizeof(int) * (argc - 1));
-	arr_size = argc - 1;
-	if (fill_arr(argc, argv, arg_arr) == -1)
-		return (-1);
-	if (check_dup_arr(arg_arr, arr_size) == -1)
-		return (-1);
-	init_stack(stack_a, arg_arr, arr_size);
-	return (0);
-}
-
-int	fill_arr(int argc, char **argv, int *arg_arr)
-{
-	int	i;
 	int	err_flag;
 
-	i = 1;
-	while (i < argc)
-	{
-		arg_arr[i - 1] = ft_atoi_safe(argv[i], &err_flag);
-		if (err_flag == -1)
-			return (-1);
-		i++;
-	}
-	return (0);
+	arg_arr = (int *)malloc(sizeof(*arg_arr) * (argc - 1));
+	if (NULL == arg_arr)
+		return (-1);
+	arr_size = argc - 1;
+	err_flag = fill_arr(argc, argv, arg_arr);
+	if (-1 != err_flag)
+		err_flag = check_dup_arr(arg_arr, arr_size);
+	if (-1 != err_flag)
+		err_flag = init_stack(stack_a, arg_arr, arr_size);
+	return (err_flag);
 }
 
-int	ft_atoi_safe(const char *str, int *err_flag)
+void	sort_stack(t_stack *stack_a, char **instructions)
 {
-	size_t		i;
-	int			sign;
-	long long	number;
 
-	err_flag = 0;
-	number = 0;
-	sign = 1;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i++] == '+' || str[i] == '-')
-		if (str[i - 1] == '-')
-			sign = -1;
-	while (ft_isdigit(str[i]))
-	{
-		number = number * 10 + str[i] - '0';
-		if (number < (-INT_MAX - 1) || INT_MAX < number)
-			*err_flag = -1;
-		i++;
-	}
-	if (str[i] != '\0')
-		*err_flag = -1;
-	return ((int)(number * sign));
 }
 
-int	check_dup_arr(int *arr, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = i;
-		while (j < size)
-		{
-			if (arr[i] == arr[j])
-				return (-1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)
+void	print_strs(char **strs)
 {
 	int	i;
 
 	i = 0;
-	while (i < arr_size)
+	while (NULL != strs[i])
 	{
-		if (stack_add_top(stack_a, arg_arr[i]) == -1)
-		{
-			free_stack(stack_a);
-			return (-1);
-		}
+		ft_printf("%s\n", strs[i]);
 		i++;
 	}
-}
-
-int	add_node(t_stack *stack_a, int n)
-{
-	
 }
 
 int	print_error(void)
 {
-	printf("Error\n");
-	return (1);
+	ft_printf("Error\n");
+	return (-1);
 }
