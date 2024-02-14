@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_ops.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:08:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/14 21:49:20 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 01:24:07 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,25 @@ void	ft_push(t_stack *stack_from, t_stack *stack_to)
 	from_second = from_first->lower;
 	to_first = stack_to->top;
 	to_second = to_first->lower;
-
 	from_first->lower = to_second;
-	from_second->upper = to_first;
-	to_first->lower = from_second;
-	to_second->upper = from_first;
-	
+	if (NULL != to_first)
+		to_first->lower = from_second;
+	if (NULL != from_second)
+		from_second->upper = to_first;
+	if (NULL != to_second)/////////need revision
+		to_second->upper = from_first;
 	stack_from->top = to_first;
 	stack_to->top = from_first;
 }
 
 void	ft_rotate(t_stack *stack)
 {
+	t_node	*temp;
+
+	stack->top->upper = stack->bottom;
+	stack->bottom->lower = stack->top;
+	stack->top->lower->upper = NULL;
+	stack->top->lower = NULL;
 
 }
 
