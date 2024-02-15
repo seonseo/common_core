@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/15 19:39:44 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 21:25:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack	stack_a;
-char	**instructions;	
+	t_stack		stack_a;
 
 	if (1 == argc)
 		return (0);
 	stack_a = (t_stack){};
 	if (-1 == parse_input(argc, argv, &stack_a))
 		return (print_error());
-	radix_sort(&stack_a, instructions);
-	print_strs(instructions);
+	radix_sort(&stack_a);
 	return (0);
 }
 
@@ -40,16 +38,18 @@ int	parse_input(int argc, char **argv, t_stack *stack_a)
 	err_flag = fill_arr(argc, argv, arg_arr);
 	if (-1 != err_flag)
 		err_flag = check_dup_arr(arg_arr, arr_size);
+	rank_based_indexing(arg_arr, arr_size);
 	if (-1 != err_flag)
 		err_flag = init_stack(stack_a, arg_arr, arr_size);
 	return (err_flag);
 }
 
-void	radix_sort(t_stack *stack_a, char **instructions)
+void	radix_sort(t_stack *stack_a)
 {
 	t_stack	stack_b;
+	int		index;
 
-
+	stack_b = (t_stack){};
 }
 
 void	print_strs(char **strs)

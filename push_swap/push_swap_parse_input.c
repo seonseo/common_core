@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/15 19:40:14 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 22:14:12 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,31 @@ int	check_dup_arr(int *arr, int size)
 		i++;
 	}
 	return (0);
+}
+
+void	rank_based_indexing(int *arr, int size)
+{
+	int	*arr_index;
+	int	max;
+	int	rank;
+	int	i;
+
+	arr_index = (int *)ft_calloc(size, sizeof(*arr_index));
+	rank = size - 1;
+	while (0 <= rank)
+	{
+		max = -1;
+		i = 0;
+		while (i < size)
+		{
+			if (0 == arr_index[i] && (max == -1 || arr[max] < arr[i]))
+				max = i;
+			i++;
+		}
+		arr_index[max] = rank;
+		rank--;
+	}
+
 }
 
 int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)

@@ -6,14 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:08:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/15 18:52:18 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:27:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-//sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr
-//swap, push, rotate, reverse_rotate
 
 void	ft_swap(t_stack *stack)
 {
