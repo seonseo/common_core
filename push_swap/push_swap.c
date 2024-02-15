@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/14 20:04:31 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:39:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
-	char	**instructions;
+char	**instructions;	
 
 	if (1 == argc)
 		return (0);
 	stack_a = (t_stack){};
 	if (-1 == parse_input(argc, argv, &stack_a))
 		return (print_error());
-	sort_stack(&stack_a, instructions);
+	radix_sort(&stack_a, instructions);
 	print_strs(instructions);
 	return (0);
 }
@@ -45,8 +45,10 @@ int	parse_input(int argc, char **argv, t_stack *stack_a)
 	return (err_flag);
 }
 
-void	sort_stack(t_stack *stack_a, char **instructions)
+void	radix_sort(t_stack *stack_a, char **instructions)
 {
+	t_stack	stack_b;
+
 
 }
 

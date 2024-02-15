@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/14 19:48:09 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:40:14 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)
 		}
 		i++;
 	}
+	stack_a->size = arr_size;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/14 20:09:44 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:19:02 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_stack
 }	t_stack;
 
 int		parse_input(int argc, char **argv, t_stack *stack_a);
-void	sort_stack(t_stack *stack_a, char **instructions);
+void	radix_sort(t_stack *stack_a, char **instructions);
 void	print_strs(char **strs);
 int		print_error(void);
 
@@ -43,8 +43,8 @@ int		init_stack(t_stack *stack_a, int *arg_arr, int arr_size);
 
 int		ft_atoi_safe(const char *str, int *err_flag);
 int		stack_add_top(t_stack *stack_a, int n);
-t_node	*make_node(int n);
 void	free_stack(t_stack *stack_a);
+t_node	*make_node(int n);
 
 
 #endif
