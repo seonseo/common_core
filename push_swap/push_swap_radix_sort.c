@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 19:43:57 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 20:52:22 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	digit_by_digit_sort(t_stack *stack_a, t_stack *stack_b, int digit_idx)
 	while (i < repeat)
 	{
 		digit = get_digit(stack_a->top->value, digit_idx);
-		ft_printf("---\n");
-		ft_print_stack(stack_a);
-		ft_print_stack(stack_b);
-		ft_print_stack_r(stack_a);
-		ft_print_stack_r(stack_b);
-		ft_printf("digit:%d\n", digit);
+		// ft_printf("---\n");
+		// ft_print_stack(stack_a);
+		// ft_print_stack(stack_b);
+		// ft_print_stack_r(stack_a);
+		// ft_print_stack_r(stack_b);
+		// ft_printf("digit:%d\n", digit);
 		if (0 == digit)
 		{
 			pb(stack_a, stack_b);
@@ -72,14 +72,19 @@ int	get_digit(int value, int digit_idx)
 	return (value % 3);
 }
 
-void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b)
+void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int digit_idx)
 {
-	ft_printf("---\n");
-	ft_print_stack(stack_a);
-	ft_print_stack(stack_b);
-	ft_print_stack_r(stack_a);
-	ft_print_stack_r(stack_b);
-	ft_printf("reassamble\n");
-	while (NULL != stack_b->top)
+	// ft_printf("---\n");
+	// ft_print_stack(stack_a);
+	// ft_print_stack(stack_b);
+	// ft_print_stack_r(stack_a);
+	// ft_print_stack_r(stack_b);
+	// ft_printf("reassamble\n");
+	while (NULL != stack_b->top && 1 == get_digit(stack_b, digit_idx))
 		pa(stack_a, stack_b);
+	while (NULL != stack_b->top)
+	{
+		rrb(stack_b);
+		pa(stack_a, stack_b);
+	}
 }

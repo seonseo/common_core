@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 19:49:49 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 20:46:36 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_node	*make_node(int n);
 
 int		get_max_digits(t_stack *stack_a);
 void	digit_by_digit_sort(t_stack *stack_a, t_stack *stack_b, int digit_idx);
-void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b);
+void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int digit_idx);
 int		get_digit(int value, int digit_idx);
 
 void	ft_swap(t_stack *stack);

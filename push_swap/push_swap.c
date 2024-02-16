@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 19:51:47 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 20:45:08 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	radix_sort(t_stack *stack_a)
 	{
 		ft_printf("digit_idx:%d\n", digit_idx);
 		digit_by_digit_sort(stack_a, &stack_b, digit_idx);
-		reassemble_in_stack_a(stack_a, &stack_b);
+		reassemble_in_stack_a(stack_a, &stack_b, digit_idx);
 		digit_idx++;
 	}
 }
