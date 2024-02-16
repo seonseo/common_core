@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/14 19:49:41 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:41:25 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,29 @@ int	ft_atoi_safe(const char *str, int *err_flag)
 	return ((int)(number * sign));
 }
 
-int	stack_add_top(t_stack *stack_a, int n)
+int	stack_add_bottom(t_stack *stack_a, int n)
 {
 	t_node	*new_node;
 
 	new_node = make_node(n);
 	if (new_node == NULL)
 		return (-1);
-	if (NULL == stack_a->top)
+	if (NULL == stack_a->bottom)
 	{
 		stack_a->top = new_node;
 		stack_a->bottom = new_node;
 	}
 	else
 	{
-		new_node->lower = stack_a->top;
-		stack_a->top->upper = new_node;
-		stack_a->top = new_node;
+		new_node->upper = stack_a->bottom;
+		stack_a->bottom->lower = new_node;
+		stack_a->bottom = new_node;
 	}
 	(stack_a->size)++;
 	return (0);
 }
 
-void free_stack(t_stack *stack_a)
+void	free_stack(t_stack *stack_a)
 {
 	t_node	*curr;
 	t_node	*prev;

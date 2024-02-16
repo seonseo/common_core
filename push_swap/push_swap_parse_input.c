@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/15 22:14:12 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:53:34 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,33 @@ int	check_dup_arr(int *arr, int size)
 	return (0);
 }
 
-void	rank_based_indexing(int *arr, int size)
+int	rank_based_indexing(int **arr, int size)
 {
-	int	*arr_index;
-	int	max;
+	int	*arr_idx;
+	int	max_idx;
 	int	rank;
 	int	i;
 
-	arr_index = (int *)ft_calloc(size, sizeof(*arr_index));
+	arr_idx = (int *)ft_calloc(size, sizeof(*arr_idx));
+	if (NULL == arr_idx)
+		return (-1);
 	rank = size - 1;
 	while (0 <= rank)
 	{
-		max = -1;
+		max_idx = -1;
 		i = 0;
 		while (i < size)
 		{
-			if (0 == arr_index[i] && (max == -1 || arr[max] < arr[i]))
-				max = i;
+			if (0 == arr_idx[i] && (max_idx == -1 || (*arr)[max_idx] < (*arr)[i]))
+				max_idx = i;
 			i++;
 		}
-		arr_index[max] = rank;
+		arr_idx[max_idx] = rank;
 		rank--;
 	}
-
+	free(*arr);
+	*arr = arr_idx;
+	return (0);
 }
 
 int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)
@@ -80,7 +84,7 @@ int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)
 	i = 0;
 	while (i < arr_size)
 	{
-		if (-1 == stack_add_top(stack_a, arg_arr[i]))
+		if (-1 == stack_add_bottom(stack_a, arg_arr[i]))
 		{
 			free_stack(stack_a);
 			return (-1);
