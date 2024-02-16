@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 20:52:22 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:00:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int digit_idx)
 	// ft_print_stack_r(stack_a);
 	// ft_print_stack_r(stack_b);
 	// ft_printf("reassamble\n");
-	while (NULL != stack_b->top && 1 == get_digit(stack_b, digit_idx))
+	while (NULL != stack_b->top && 1 == get_digit(stack_b->top->value, digit_idx))
 		pa(stack_a, stack_b);
 	while (NULL != stack_b->top)
 	{

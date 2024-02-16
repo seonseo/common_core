@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 20:45:08 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:01:23 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ void	radix_sort(t_stack *stack_a)
 	int		max_digits;
 	int		digit_idx;
 
-	ft_printf("stack_a->size:%d\n", stack_a->size);
+	// ft_printf("stack_a->size:%d\n", stack_a->size);
 	stack_b = (t_stack){};
 	max_digits = get_max_digits(stack_a);
 	digit_idx = 1;
 	while (digit_idx <= max_digits)
 	{
-		ft_printf("digit_idx:%d\n", digit_idx);
+		// ft_printf("digit_idx:%d\n", digit_idx);
 		digit_by_digit_sort(stack_a, &stack_b, digit_idx);
 		reassemble_in_stack_a(stack_a, &stack_b, digit_idx);
 		digit_idx++;
