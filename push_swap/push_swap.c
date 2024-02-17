@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 21:01:23 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/17 22:34:40 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,9 @@ int	main(int argc, char **argv)
 	stack_a = (t_stack){};
 	if (-1 == parse_input(argc, argv, &stack_a))
 		return (print_error());
-	radix_sort(&stack_a);
+	ft_print_stack(&stack_a);
+	// ternary_radix_sort(&stack_a);
 	return (0);
-}
-
-void	ft_print_stack(t_stack *stack)
-{
-	t_node	*curr;
-
-	curr = stack->top;
-	while (NULL != curr)
-	{
-		ft_printf("%d ", curr->value);
-		curr = curr->lower;
-	}
-	ft_printf("\n");
-}
-
-void	ft_print_stack_recur(t_stack *stack, t_node *curr)
-{
-	if (NULL == curr)
-		return ;
-	ft_print_stack_recur(stack, curr->upper);
-	ft_printf("%d ", curr->value);
-}
-
-void	ft_print_stack_r(t_stack *stack)
-{
-	ft_print_stack_recur(stack, stack->bottom);
-	ft_printf("\n");
 }
 
 int	parse_input(int argc, char **argv, t_stack *stack_a)
@@ -68,23 +42,24 @@ int	parse_input(int argc, char **argv, t_stack *stack_a)
 	if (-1 != err_flag)
 		err_flag = rank_based_indexing(&arg_arr, arr_size);
 	if (-1 != err_flag)
-		err_flag = init_stack(stack_a, arg_arr, arr_size);
-	if (-1 == err_flag)
-		free(arg_arr);
+		err_flag = init_stack_with_index(stack_a, arg_arr, arr_size);
+	if (-1 != err_flag)
+		err_flag = add_ternary_info_to_stack(stack_a);
+	free(arg_arr);
+	arg_arr = NULL;
 	return (err_flag);
 }
 
-void	radix_sort(t_stack *stack_a)
+void	ternary_radix_sort(t_stack *stack_a)
 {
 	t_stack	stack_b;
-	int		max_digits;
 	int		digit_idx;
 
 	// ft_printf("stack_a->size:%d\n", stack_a->size);
 	stack_b = (t_stack){};
-	max_digits = get_max_digits(stack_a);
+	stack_b.max_digits = stack_a->max_digits;
 	digit_idx = 1;
-	while (digit_idx <= max_digits)
+	while (digit_idx <= stack_a->max_digits)
 	{
 		// ft_printf("digit_idx:%d\n", digit_idx);
 		digit_by_digit_sort(stack_a, &stack_b, digit_idx);
@@ -97,4 +72,37 @@ int	print_error(void)
 {
 	ft_printf("Error\n");
 	return (-1);
+}
+
+void	ft_print_stack(t_stack *stack)
+{
+	t_node	*curr;
+	int		i;
+
+	curr = stack->top;
+	while (NULL != curr)
+	{
+		i = 0;
+		while (i < stack->max_digits)
+		{
+			ft_printf("%d", (curr->ternary_value)[i]);
+			i++;
+		}
+		ft_printf("\n");
+		curr = curr->lower;
+	}
+}
+
+void	ft_print_stack_r(t_stack *stack)
+{
+	ft_print_stack_recur(stack, stack->bottom);
+	ft_printf("\n");
+}
+
+void	ft_print_stack_recur(t_stack *stack, t_node *curr)
+{
+	if (NULL == curr)
+		return ;
+	ft_print_stack_recur(stack, curr->upper);
+	ft_printf("%d ", curr->value);
 }

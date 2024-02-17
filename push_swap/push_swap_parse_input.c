@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 12:53:34 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/17 22:36:19 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	rank_based_indexing(int **arr, int size)
 	return (0);
 }
 
-int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)
+int	init_stack_with_index(t_stack *stack_a, int *arg_arr, int arr_size)
 {
 	int	i;
 
@@ -92,5 +92,13 @@ int	init_stack(t_stack *stack_a, int *arg_arr, int arr_size)
 		i++;
 	}
 	stack_a->size = arr_size;
+	return (0);
+}
+
+int	add_ternary_info_to_stack(t_stack *stack_a)
+{
+	stack_a->max_digits = get_max_digits(stack_a);
+	if (-1 == add_ternary_value(stack_a))
+		return (-1);
 	return (0);
 }

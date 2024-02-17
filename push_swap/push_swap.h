@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 20:46:36 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/17 22:16:06 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_node
 	struct s_node	*upper;
 	struct s_node	*lower;
 	int				value;
+	int				*ternary_value;
 }	t_node;
 
 typedef struct s_stack
@@ -30,16 +31,18 @@ typedef struct s_stack
 	t_node	*top;
 	t_node	*bottom;
 	size_t	size;
+	int		max_digits;
 }	t_stack;
 
 int		parse_input(int argc, char **argv, t_stack *stack_a);
-void	radix_sort(t_stack *stack_a);
+void	ternary_radix_sort(t_stack *stack_a);
 int		print_error(void);
 
 int		fill_arr(int argc, char **argv, int *arg_arr);
 int		check_dup_arr(int *arr, int size);
 int		rank_based_indexing(int **arr, int size);
-int		init_stack(t_stack *stack_a, int *arg_arr, int arr_size);
+int		init_stack_with_index(t_stack *stack_a, int *arg_arr, int arr_size);
+int		add_ternary_info_to_stack(t_stack *stack_a);
 
 int		ft_atoi_safe(const char *str, int *err_flag);
 int		stack_add_bottom(t_stack *stack_a, int n);
@@ -47,6 +50,9 @@ void	free_stack(t_stack *stack_a);
 t_node	*make_node(int n);
 
 int		get_max_digits(t_stack *stack_a);
+int		add_ternary_value(t_stack *stack_a);
+int		*decimal_to_ternary(int value, int max_digits);
+
 void	digit_by_digit_sort(t_stack *stack_a, t_stack *stack_b, int digit_idx);
 void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int digit_idx);
 int		get_digit(int value, int digit_idx);
