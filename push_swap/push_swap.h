@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/18 14:47:41 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/18 22:50:32 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,45 @@
 # include "printf/ft_printf.h"
 # include "printf/libft/libft.h"
 
+# define SA 0
+# define SB 1
+# define SS 2
+# define PA 3
+# define PB 4
+# define RA 5
+# define RB 6
+# define RR 7
+# define RRA 8
+# define RRB 9
+# define RRR 10
+
 typedef struct s_node
 {
-	struct s_node	*upper;
-	struct s_node	*lower;
 	int				value;
 	int				*ternary_value;
+	struct s_node	*upper;
+	struct s_node	*lower;
 }	t_node;
 
 typedef struct s_stack
 {
-	t_node	*top;
-	t_node	*bottom;
 	size_t	size;
 	int		max_digits;
+	t_node	*top;
+	t_node	*bottom;
 }	t_stack;
+
+typedef struct	s_command_list
+{
+	int	command;
+	struct s_command_list	*next;
+	struct s_command_list	*prev;
+}	t_command_list;
 
 int		parse_input(int argc, char **argv, t_stack *stack_a);
 void	ternary_radix_sort(t_stack *stack_a);
 int		print_error(void);
+size_t	ft_strslen(char **strs);
 
 int		fill_arr(int argc, char **argv, int *arg_arr);
 int		check_dup_arr(int *arr, int size);
@@ -53,9 +73,10 @@ int		get_max_digits(t_stack *stack_a);
 int		add_ternary_value(t_stack *stack_a);
 int		*decimal_to_ternary(int value, int max_digits);
 
-void	digit_by_digit_sort(t_stack *stack_a, t_stack *stack_b, int digit_idx);
-void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int digit_idx);
-int		get_digit(int value, int digit_idx);
+void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, int digit_idx);
+void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, int digit_idx);
+void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b);
+void	reassemble_in_stack_b(t_stack *stack_a, t_stack *stack_b);
 
 void	ft_swap(t_stack *stack);
 void	ft_push(t_stack *stack_from, t_stack *stack_to);

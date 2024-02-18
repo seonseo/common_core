@@ -6,21 +6,21 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/17 22:36:19 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/18 20:33:49 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	fill_arr(int argc, char **argv, int *arg_arr)
+int	fill_arr(int arr_size, char **strings, int *arg_arr)
 {
 	int	i;
 	int	err_flag;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (i < arr_size)
 	{
-		arg_arr[i - 1] = ft_atoi_safe(argv[i], &err_flag);
+		arg_arr[i] = ft_atoi_safe(strings[i], &err_flag);
 		if (-1 == err_flag)
 			return (-1);
 		i++;

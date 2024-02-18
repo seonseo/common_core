@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_radix_sort.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/18 14:47:50 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/18 22:52:51 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,17 @@ int	get_max_digits(t_stack *stack_a)
 	return (max_digits);
 }
 
-void	digit_by_digit_sort(t_stack *stack_a, t_stack *stack_b, int digit_idx)
+void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, int digit_idx)
 {
 	int		digit;
 	int		repeat;
 	int		i;
 
-	repeat = (stack_a->size);
+	repeat = stack_a->size;
 	i = 0;
 	while (i < repeat)
 	{
-		digit = get_digit(stack_a->top->value, digit_idx);
-		// ft_printf("---\n");
-		// ft_print_stack(stack_a);
-		// ft_print_stack(stack_b);
-		// ft_print_stack_r(stack_a);
-		// ft_print_stack_r(stack_b);
-		// ft_printf("digit:%d\n", digit);
+		digit = (stack_a->top->ternary_value)[digit_idx];
 		if (0 == digit)
 		{
 			pb(stack_a, stack_b);
@@ -59,32 +53,38 @@ void	digit_by_digit_sort(t_stack *stack_a, t_stack *stack_b, int digit_idx)
 	}
 }
 
-int	get_digit(int value, int digit_idx)
+void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, int digit_idx)
 {
-	int	i;
+	int		digit;
+	int		repeat;
+	int		i;
 
+	repeat = stack_b->size;
 	i = 0;
-	while (i < digit_idx - 1)
+	while (i < repeat)
 	{
-		value /= 3;
+		digit = (stack_b->top->ternary_value)[digit_idx];
+		if (2 == digit)
+		{
+			pa(stack_a, stack_b);
+			ra(stack_a);
+		}
+		else if (1 == digit)
+			pa(stack_a, stack_b);
+		else if (0 == digit)
+			rb(stack_b);
 		i++;
 	}
-	return (value % 3);
 }
 
-void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int digit_idx)
+void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b)
 {
-	// ft_printf("---\n");
-	// ft_print_stack(stack_a);
-	// ft_print_stack(stack_b);
-	// ft_print_stack_r(stack_a);
-	// ft_print_stack_r(stack_b);
-	// ft_printf("reassamble\n");
-	while (NULL != stack_b->top && 1 == get_digit(stack_b->top->value, digit_idx))
-		pa(stack_a, stack_b);
 	while (NULL != stack_b->top)
-	{
-		rrb(stack_b);
 		pa(stack_a, stack_b);
-	}
+}
+
+void	reassemble_in_stack_b(t_stack *stack_a, t_stack *stack_b)
+{
+	while (NULL != stack_a->top)
+		pb(stack_a, stack_b);
 }

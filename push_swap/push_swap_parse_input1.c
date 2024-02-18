@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/16 11:41:25 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/18 21:16:18 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_atoi_safe(const char *str, int *err_flag)
 		if (number < (-INT_MAX - 1) || INT_MAX < number)
 			*err_flag = -1;
 	}
-	if (str[i] != '\0')
+	if (0 == i || '\0' != str[i])
 		*err_flag = -1;
 	return ((int)(number * sign));
 }
