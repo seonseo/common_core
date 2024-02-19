@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/18 22:53:04 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/19 21:11:31 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,71 +15,74 @@
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
+	t_arr	args;
+	int		err_flag;
 
 	if (1 == argc)
 		return (0);
 	stack_a = (t_stack){};
-	if (-1 == parse_input(argc, argv, &stack_a))
+	err_flag = parse_input(argc, argv, &args);
+	if (-1 != err_flag)
+		err_flag = init_stack_with_arguments(&args, &stack_a);
+	if (-1 != err_flag)
+		err_flag = radix_sort(&args, &stack_a);
+	free_stack(&stack_a);
+	if (-1 == err_flag)
 		return (print_error());
-	ternary_radix_sort(&stack_a);
-	// ft_print_stack(&stack_a);
 	return (0);
 }
 
-int	parse_input(int argc, char **argv, t_stack *stack_a)
+int	parse_input(int argc, char **argv, t_arr *args)
 {
 	char **strings;
-	int	*arg_arr;
-	int	arr_size;
 	int	err_flag;
 
-	if (argc == 2)
+	if (2 == argc)
 		strings = ft_split(argv[1], ' ');
 	else
 		strings = argv + 1;
-	arr_size = ft_strslen(strings);
-	arg_arr = (int *)malloc(sizeof(*arg_arr) * arr_size);
-		if (NULL == arg_arr)
+	args->size = ft_strslen(strings);
+	args->arr = (int *)malloc(sizeof(*(args->arr)) * args->size);
+		if (NULL == args->arr)
 			return (-1);
-	err_flag = fill_arr(arr_size, strings, arg_arr);
+	err_flag = fill_arr(args, strings);
 	if (-1 != err_flag)
-		err_flag = check_dup_arr(arg_arr, arr_size);
+		err_flag = check_dup_arr(args);
 	if (-1 != err_flag)
-		err_flag = rank_based_indexing(&arg_arr, arr_size);
-	if (-1 != err_flag)
-		err_flag = init_stack_with_index(stack_a, arg_arr, arr_size);
-	if (-1 != err_flag)
-		err_flag = add_ternary_info_to_stack(stack_a);
-	free(arg_arr);
-	arg_arr = NULL;
+		err_flag = rank_based_indexing(args);
 	return (err_flag);
 }
 
-void	ternary_radix_sort(t_stack *stack_a)
+int	radix_sort(t_arr *args, t_stack *stack_a)
 {
-	t_stack	stack_b;
-	int		digit_idx;
-	int		max_digits;
+	if (-1 == ternary_radix_sort(stack_a, 0))
+		return (-1);
+	modify_arguments(args, stack_a);
+	free_stack(stack_a);
+	if (-1 == init_stack_with_arguments(args, stack_a))
+		return (-1);
+	if (-1 == ternary_radix_sort(stack_a, 1))
+		return (-1);
+	return (0);
+}
 
-	stack_b = (t_stack){};
-	max_digits = stack_a->max_digits;
-	digit_idx = 0;
-	while (digit_idx + 1 < max_digits)
+int	init_stack_with_arguments(t_arr *args, t_stack *stack_a)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < args->size)
 	{
-		digit_sort_from_a(stack_a, &stack_b, digit_idx);
-		digit_idx++;
-		reassemble_in_stack_b(stack_a, &stack_b);
-		digit_sort_from_b(stack_a, &stack_b, digit_idx);
-		digit_idx++;
-		reassemble_in_stack_a(stack_a, &stack_b);
+		if (-1 == stack_add_bottom(stack_a, (args->arr)[i]))
+		{
+			free_stack(stack_a);
+			return (-1);
+		}
+		i++;
 	}
-	while (digit_idx < max_digits)
-	{
-		digit_sort_from_a(stack_a, &stack_b, digit_idx);
-		digit_idx++;
-		reassemble_in_stack_a(stack_a, &stack_b);
-	}
-} 
+	stack_a->size = args->size;
+	return (0);
+}
 
 int	print_error(void)
 {
@@ -97,7 +100,7 @@ size_t	ft_strslen(char **strs)
 	return (len);
 }
 
-void	ft_print_stack(t_stack *stack)
+void	print_stack(t_stack *stack)
 {
 	t_node	*curr;
 
@@ -106,26 +109,5 @@ void	ft_print_stack(t_stack *stack)
 	{
 		ft_printf("%d\n", curr->value);
 		curr = curr->lower;
-	}
-}
-
-void	ft_print_stack_r(t_stack *stack)
-{
-	ft_print_stack_recur(stack, stack->bottom);
-	ft_printf("\n");
-}
-
-void	ft_print_stack_recur(t_stack *stack, t_node *curr)
-{
-	int	i;
-
-	if (NULL == curr)
-		return ;
-	ft_print_stack_recur(stack, curr->upper);
-	i = 0;
-	while (i < stack->max_digits)
-	{
-		ft_printf("%d", (curr->ternary_value)[i]);
-		i++;
 	}
 }

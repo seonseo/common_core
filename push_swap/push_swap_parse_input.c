@@ -6,21 +6,21 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/18 20:33:49 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/19 20:36:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	fill_arr(int arr_size, char **strings, int *arg_arr)
+int	fill_arr(t_arr *args, char **strings)
 {
-	int	i;
+	size_t	i;
 	int	err_flag;
 
 	i = 0;
-	while (i < arr_size)
+	while (i < args->size)
 	{
-		arg_arr[i] = ft_atoi_safe(strings[i], &err_flag);
+		(args->arr)[i] = ft_atoi_safe(strings[i], &err_flag);
 		if (-1 == err_flag)
 			return (-1);
 		i++;
@@ -28,18 +28,18 @@ int	fill_arr(int arr_size, char **strings, int *arg_arr)
 	return (0);
 }
 
-int	check_dup_arr(int *arr, int size)
+int	check_dup_arr(t_arr *args)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (i < size)
+	while (i < args->size)
 	{
 		j = i + 1;
-		while (j < size)
+		while (j < args->size)
 		{
-			if (arr[i] == arr[j])
+			if ((args->arr)[i] == (args->arr)[j])
 				return (-1);
 			j++;
 		}
@@ -48,50 +48,30 @@ int	check_dup_arr(int *arr, int size)
 	return (0);
 }
 
-int	rank_based_indexing(int **arr, int size)
+int	rank_based_indexing(t_arr *args)
 {
-	int	*arr_idx;
-	int	max_idx;
-	int	rank;
-	int	i;
+	int		*arr_idx;
+	int		max_idx;
+	int		rank;
+	size_t	i;
 
-	arr_idx = (int *)ft_calloc(size, sizeof(*arr_idx));
+	arr_idx = (int *)ft_calloc(args->size, sizeof(*arr_idx));
 	if (NULL == arr_idx)
 		return (-1);
-	rank = size - 1;
+	rank = args->size - 1;
 	while (0 <= rank)
 	{
 		max_idx = -1;
-		i = 0;
-		while (i < size)
-		{
-			if (0 == arr_idx[i] && (max_idx == -1 || (*arr)[max_idx] < (*arr)[i]))
+		i = -1;
+		while (++i < args->size)
+			if (0 == arr_idx[i]\
+			 && (max_idx == -1 || (args->arr)[max_idx] < (args->arr)[i]))
 				max_idx = i;
-			i++;
-		}
 		arr_idx[max_idx] = rank;
 		rank--;
 	}
-	free(*arr);
-	*arr = arr_idx;
-	return (0);
-}
-
-int	init_stack_with_index(t_stack *stack_a, int *arg_arr, int arr_size)
-{
-	int	i;
-
-	i = 0;
-	while (i < arr_size)
-	{
-		if (-1 == stack_add_bottom(stack_a, arg_arr[i]))
-		{
-			free_stack(stack_a);
-			return (-1);
-		}
-		i++;
-	}
-	stack_a->size = arr_size;
+	free(args->arr);
+	args->arr = arr_idx;
 	return (0);
 }
 

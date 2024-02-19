@@ -6,11 +6,28 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:17:50 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/17 22:18:13 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:53:47 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	get_max_digits(t_stack *stack_a)
+{
+	int		max_digits;
+	int		max_value;
+
+	max_value = (stack_a->size) - 1;
+	max_digits = 0;
+	while (1)
+	{
+		max_value /= 3;
+		max_digits++;
+		if (0 == max_value)
+			break;
+	}
+	return (max_digits);
+}
 
 int	add_ternary_value(t_stack *stack_a)
 {
