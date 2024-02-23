@@ -6,11 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/22 23:04:56 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/23 22:20:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	leak_check() {system("leaks push_swap");}
 
 int	main(int argc, char **argv)
 {
@@ -18,6 +20,7 @@ int	main(int argc, char **argv)
 	t_stack	stack_a;
 	int		err_flag;
 
+	atexit(leak_check);
 	if (1 == argc)
 		return (0);
 	stack_a = (t_stack){};
