@@ -6,20 +6,18 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 20:52:40 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/19 20:53:25 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:09:05 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ternary_radix_sort(t_stack *stack_a, int print)
+void	ternary_radix_sort(t_stack *stack_a, int print)
 {
 	t_stack	stack_b;
-	int		digit_idx;
 	int		max_digits;
+	int		digit_idx;
 
-	if (-1 == add_ternary_info_to_stack(stack_a))
-		return (-1);
 	stack_b = (t_stack){};
 	max_digits = stack_a->max_digits;
 	digit_idx = 0;
@@ -32,19 +30,41 @@ int	ternary_radix_sort(t_stack *stack_a, int print)
 		digit_idx++;
 		reassemble_in_stack_a(stack_a, &stack_b, print);
 	}
-	while (digit_idx < max_digits)
+	if (digit_idx < max_digits)
+	{
+		digit_sort_from_a(stack_a, &stack_b, digit_idx, print);
+		reassemble_in_stack_a(stack_a, &stack_b, print);
+	}
+}
+
+void	ternary_radix_sort_1(t_stack *stack_a, int print)
+{
+	t_stack	stack_b;
+	int		max_digits;
+	int		digit_idx;
+
+	stack_b = (t_stack){};
+	max_digits = stack_a->max_digits;
+	digit_idx = 0;
+	while (1)
 	{
 		digit_sort_from_a(stack_a, &stack_b, digit_idx, print);
 		digit_idx++;
+		reassemble_in_stack_b(stack_a, &stack_b, print);
+		if (digit_idx + 2 == max_digits)
+			break;
+		digit_sort_from_b(stack_a, &stack_b, digit_idx, print);
+		digit_idx++;
 		reassemble_in_stack_a(stack_a, &stack_b, print);
 	}
-	return (0);
+	digit_sort_from_b_last(stack_a, &stack_b, digit_idx, print);
+	reassemble_in_stack_a_last(stack_a, &stack_b, print);
 }
 
-void	modify_arguments(t_arr *args, t_stack *stack_a)
+void	modify_args(t_arr *args, t_stack *stack_a)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < args->size)
 	{
@@ -66,4 +86,19 @@ int	get_nth_value(t_stack *stack, size_t n)
 		i++;
 	}
 	return (curr->value);
+}
+
+void	update_stack_with_modified_args(t_arr *args, t_stack *stack_a)
+{
+	t_node	*curr;
+	size_t	i;
+
+	i = 0;
+	curr = stack_a->top;
+	while (curr)
+	{
+		curr->value = (args->arr)[i];
+		i++;
+		curr = curr->lower;
+	}
 }

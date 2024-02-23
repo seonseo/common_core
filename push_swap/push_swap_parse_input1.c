@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/18 21:16:18 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:05:24 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,17 @@ void	free_stack(t_stack *stack_a)
 	t_node	*curr;
 	t_node	*prev;
 
-	curr = stack_a->top;
 	prev = NULL;
-	while (NULL != curr)
+	curr = stack_a->top;
+	while (curr)
 	{
 		prev = curr;
 		curr = curr->lower;
+		free(prev->ternary_value);
 		*prev = (t_node){};
 		free(prev);
 	}
+	prev = NULL;
 	*stack_a = (t_stack){};
 }
 

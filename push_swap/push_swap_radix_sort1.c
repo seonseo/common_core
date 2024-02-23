@@ -5,73 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/19 21:36:34 by seonseo          ###   ########.fr       */
+/*   Created: 2024/02/17 22:17:50 by seonseo           #+#    #+#             */
+/*   Updated: 2024/02/21 19:09:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print)
+int	get_max_digits(t_stack *stack_a)
 {
-	int		digit;
-	int		repeat;
-	int		i;
+	int		max_digits;
+	int		max_value;
 
-	repeat = stack_a->size;
-	i = 0;
-	while (i < repeat)
+	max_value = (stack_a->size) - 1;
+	max_digits = 0;
+	while (1)
 	{
-		digit = (stack_a->top->ternary_value)[digit_idx];
-		if (2 == digit)
-		{
-			pb(stack_a, stack_b, print);
-			if (1 < stack_b->size)
-				rb(stack_b, print);
-		}
-		else if (1 == digit)
-			pb(stack_a, stack_b, print);
-		else if (0 == digit)
-			if (1 < stack_a->size)
-				ra(stack_a, print);
-		i++;
+		max_value /= 3;
+		max_digits++;
+		if (0 == max_value)
+			break;
+	}
+	return (max_digits);
+}
+
+int	add_ternary_value(t_stack *stack_a)
+{
+	t_node	*curr;
+
+	curr = stack_a->top;
+	while (curr)
+	{
+		if (-1 == malloc_ternary_value(curr, stack_a->max_digits))
+			return (-1);
+		decimal_to_ternary(curr, stack_a->max_digits);
+		curr = curr->lower;
+	}
+	return (0);
+}
+
+void	update_ternary_value(t_stack *stack_a)
+{
+	t_node	*curr;
+
+	curr = stack_a->top;
+	while (curr)
+	{
+		decimal_to_ternary(curr, stack_a->max_digits);
+		curr = curr->lower;
 	}
 }
 
-void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print)
+int	malloc_ternary_value(t_node *curr, int max_digits)
 {
-	int		digit;
-	int		repeat;
-	int		i;
+	curr->ternary_value = (int *)malloc(sizeof(int) * max_digits);
+	if (NULL == curr->ternary_value)
+		return (-1);
+	return (0);
+}
 
-	repeat = stack_b->size;
+void	decimal_to_ternary(t_node *curr, int max_digits)
+{
+	int	i;
+	int	curr_value;
+
+	curr_value = curr->value;
 	i = 0;
-	while (i < repeat)
+	while (i < max_digits)
 	{
-		digit = (stack_b->top->ternary_value)[digit_idx];
-		if (0 == digit)
-		{
-			pa(stack_a, stack_b, print);
-			if (1 < stack_a->size)
-				ra(stack_a, print);
-		}
-		else if (1 == digit)
-			pa(stack_a, stack_b, print);
-		else if (2 == digit)
-			if (1 < stack_b->size)
-				rb(stack_b, print);
+		(curr->ternary_value)[i] = curr_value % 3;
+		curr_value /= 3;
 		i++;
 	}
-}
-
-void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int print)
-{
-	while (NULL != stack_b->top)
-		pa(stack_a, stack_b, print);
-}
-
-void	reassemble_in_stack_b(t_stack *stack_a, t_stack *stack_b, int print)
-{
-	while (NULL != stack_a->top)
-		pb(stack_a, stack_b, print);
 }

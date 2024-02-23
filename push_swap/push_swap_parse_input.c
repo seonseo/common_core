@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/19 20:36:30 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/21 15:59:53 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,12 @@ int	rank_based_indexing(t_arr *args)
 	return (0);
 }
 
-int	add_ternary_info_to_stack(t_stack *stack_a)
+size_t	ft_strslen(char **strs)
 {
-	stack_a->max_digits = get_max_digits(stack_a);
-	if (-1 == add_ternary_value(stack_a))
-		return (-1);
-	return (0);
+	size_t	len;
+
+	len = 0;
+	while (strs[len])
+		len++;
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/19 21:19:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:07:47 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,6 @@
 # include <unistd.h>
 # include "printf/ft_printf.h"
 # include "printf/libft/libft.h"
-
-# define SA 0
-# define SB 1
-# define SS 2
-# define PA 3
-# define PB 4
-# define RA 5
-# define RB 6
-# define RR 7
-# define RRA 8
-# define RRB 9
-# define RRR 10
 
 typedef struct s_node
 {
@@ -51,35 +39,47 @@ typedef struct	s_arr
 	int		*arr;
 	size_t	size;
 }	t_arr;
+
 //push.swap.c
-int		parse_input(int argc, char **argv, t_arr *args);
-int		init_stack_with_arguments(t_arr *args, t_stack *stack_a);
+int		parse_input(int argc, char **argv, t_arr *args, t_stack *stack_a);
+int		init_stack_with_args(t_arr *args, t_stack *stack_a);
 int		radix_sort(t_arr *args, t_stack *stack_a);
 int		print_error(void);
-size_t	ft_strslen(char **strs);
+void	free_args(t_arr *args);
 //push_swap_parse_input.c
 int		fill_arr(t_arr *args, char **strings);
 int		check_dup_arr(t_arr *args);
 int		rank_based_indexing(t_arr *args);
-int		add_ternary_info_to_stack(t_stack *stack_a);
+size_t	ft_strslen(char **strs);
 //push_swap_parse_input1.c
 int		ft_atoi_safe(const char *str, int *err_flag);
 int		stack_add_bottom(t_stack *stack_a, int n);
 void	free_stack(t_stack *stack_a);
 t_node	*make_node(int n);
-//push_swap_parse_input2.c
+//push_swap_radix_sort.c
+void	ternary_radix_sort(t_stack *stack_a, int print);
+void	ternary_radix_sort_1(t_stack *stack_a, int print);
+void	modify_args(t_arr *args, t_stack *stack_a);
+int		get_nth_value(t_stack *stack, size_t n);
+void	update_stack_with_modified_args(t_arr *args, t_stack *stack_a);
+//push_swap_radix_sort1.c
 int		get_max_digits(t_stack *stack_a);
 int		add_ternary_value(t_stack *stack_a);
-int		*decimal_to_ternary(int value, int max_digits);
-//push_swap_radix_sort.c
-int		ternary_radix_sort(t_stack *stack_a, int print);
-void	modify_arguments(t_arr *args, t_stack *stack_a);
-int		get_nth_value(t_stack *stack, size_t n);
-//push_swap_radix_sort1.c
+void	update_ternary_value(t_stack *stack_a);
+int		malloc_ternary_value(t_node *curr, int max_digits);
+void	decimal_to_ternary(t_node *curr, int max_digits);
+//push_swap_radix_sort2.c
 void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print);
 void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print);
+void	digit_sort_from_b_last(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print);
+//push_swap_radix_sort3.c
 void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int print);
 void	reassemble_in_stack_b(t_stack *stack_a, t_stack *stack_b, int print);
+void	reassemble_in_stack_a_last(t_stack *stack_a, t_stack *stack_b, int print);
+//push_swap_radix_sort4.c
+int		is_quaternary_needed(size_t size, int max_digits);
+int		is_in_scope(int n);
+int		ft_pow(int base, int exponent);
 //push_swap_ops.c
 void	ft_swap(t_stack *stack);
 void	ft_push(t_stack *stack_from, t_stack *stack_to);
@@ -99,7 +99,8 @@ int		rr(t_stack *stack_a, t_stack *stack_b, int print);
 int		rra(t_stack *stack_a, int print);
 int		rrb(t_stack *stack_a, int print);
 int		rrr(t_stack *stack_a, t_stack *stack_b, int print);
-
+// debugging functions ./push.swap.c
 void	print_stack(t_stack *stack_a);
+void	print_stack_ternary(t_stack *stack);
 
 #endif

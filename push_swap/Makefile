@@ -14,9 +14,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = \
-push_swap.c				push_swap_parse_input.c	push_swap_parse_input1.c	push_swap_parse_input2.c\
+push_swap.c				push_swap_parse_input.c	push_swap_parse_input1.c\
 push_swap_ops.c			push_swap_ops1.c		push_swap_ops2.c			push_swap_ops3.c\
-push_swap_radix_sort.c	push_swap_radix_sort1.c
+push_swap_radix_sort.c	push_swap_radix_sort1.c	push_swap_radix_sort2.c		push_swap_radix_sort3.c\
+push_swap_radix_sort4.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 SRCS_PRINTF = $(addprefix $(PRINTF_DIR), \
