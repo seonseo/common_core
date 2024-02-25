@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:12:29 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 01:41:27 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 08:13:12 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,22 @@ ssize_t	inst_for_fitting_into_a(t_stack *stack_a, int n)
 {
 	t_node	*curr;
 	ssize_t	inst;
+	int		upper_value;
 
 	inst = 0;
 	curr = stack_a->top;
 	while (curr)
 	{
 		if (curr == stack_a->top)
-		{
-			if ((stack_a->bottom->value < n && n < curr->value)\
-		 || (stack_a->bottom->value > n && n > curr->value))
-		 	break;
-		}
-		else if ((curr->upper->value < n && n < curr->value)\
-		 || (curr->upper->value > n && n > curr->value))
+			upper_value = stack_a->bottom->value;
+		else
+			upper_value = curr->upper->value;
+		if (upper_value < n && n < curr->value)
 			break;
+		if ((upper_value > curr->value) &&\
+		 ((upper_value < n && n > curr->value)\
+		 || (upper_value > n && n < curr->value)))
+		 	break;
 		inst++;
 		curr = curr->lower;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_parse_input1.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/25 18:13:27 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 07:53:41 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	stack_add_bottom(t_stack *stack_a, int n)
 	else
 	{
 		new_node->upper = stack_a->bottom;
-		new_node->lower = stack_a->top;
 		stack_a->bottom->lower = new_node;
 		stack_a->bottom = new_node;
 	}
