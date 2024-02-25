@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:12:29 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/23 22:56:47 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/25 22:03:56 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,37 +51,63 @@ int	is_stack_partially_sorted(t_stack *stack_a)
 
 void	merge_in_stack_a(t_stack *stack_a, t_stack *stack_b)
 {
-	int	*cost_a_arr;
-	int	*total_cost_arr;
-	int	i;
+	int	instructions;
 
-	cost_a_arr = (int *)malloc(sizeof(int) * stack_b->size);
-	i = 0;
-	while (i < stack_b->size)
+	while (NULL != stack_b->top)
 	{
-		cost_a_arr[i] = cost_of_fitting_into_a(stack_a, get_nth_value(stack_b, i));
-		i++;
+		instructions = inst_for_fitting_into_a(stack_a, stack_b->top->value);
+		merge_top_of_b_into_a(stack_a, stack_b, instructions);
 	}
+	return (0);
 }
 
-int	cost_of_fitting_into_a(t_stack *stack_a, int n)
+int	inst_for_fitting_into_a(t_stack *stack_a, int n)
 {
 	t_node	*curr;
-	int		cost;
+	int		inst;
 
-	cost = 0;
+	inst = 0;
 	curr = stack_a->top;
 	while (curr)
 	{
-		if (NULL != curr->upper && curr->upper->value <= n && n <= curr->value)
+		if (curr == stack_a->top)
+		{
+			if ((stack_a->bottom->value < n && n < curr->value)\
+		 || (stack_a->bottom->value > n && n > curr->value))
+		 	break;
+		}
+		else if ((curr->upper->value < n && n < curr->value)\
+		 || (curr->upper->value > n && n > curr->value))
 			break;
-		cost++;
-		curr = curr->next;
+		inst++;
+		curr = curr->lower;
 	}
-	return (cost);
+	if (n > stack_a->size / 2)
+		inst = n - stack_a->size;
+	return (inst);
 }
 
-int	get_nth_value(t_stack *stack, size_t n)
+void	merge_top_of_b_into_a(t_stack *stack_a, t_stack *stack_b, int inst)
+{
+	int	i;
+
+	pa(stack_a, stack_b, 1);
+	i = 0;
+	if (inst >= 0)
+		while(i < inst)
+		{
+			ra(stack_a, 1);
+			i++;
+		}
+	else
+		while(i > inst)
+		{
+			rra(stack_a, 1);
+			i--;
+		}
+}
+
+void	stand_stack_up(t_stack *stack_a)
 {
 
 }

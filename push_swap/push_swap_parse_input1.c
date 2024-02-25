@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/22 23:05:24 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/25 18:13:27 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	stack_add_bottom(t_stack *stack_a, int n)
 	else
 	{
 		new_node->upper = stack_a->bottom;
+		new_node->lower = stack_a->top;
 		stack_a->bottom->lower = new_node;
 		stack_a->bottom = new_node;
 	}
