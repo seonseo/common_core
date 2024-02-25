@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/22 23:07:47 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 01:00:20 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ void	reassemble_in_stack_a_last(t_stack *stack_a, t_stack *stack_b, int print);
 int		is_quaternary_needed(size_t size, int max_digits);
 int		is_in_scope(int n);
 int		ft_pow(int base, int exponent);
+//push_swap_small_sort.c
+void	small_sort(t_stack *stack_a);
+void	sort_three_circularly(t_stack *stack_a);
+void	merge_into_stack_a(t_stack *stack_a, t_stack *stack_b);
+void	stand_stack_up(t_stack *stack_a);
+//push_swap_small_sort1.c
+int		is_stack_circularly_sorted(t_stack *stack_a);
+ssize_t	inst_for_fitting_into_a(t_stack *stack_a, int n);
+void	rotate_a_as_inst(t_stack *stack_a, ssize_t inst);
+ssize_t	how_many_times_to_rotate(t_stack *stack, int n);
 //push_swap_ops.c
 void	ft_swap(t_stack *stack);
 void	ft_push(t_stack *stack_from, t_stack *stack_to);

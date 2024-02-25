@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/25 18:04:57 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 00:31:12 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ int	main(int argc, char **argv)
 	stack_a = (t_stack){};
 	err_flag = parse_input(argc, argv, &args, &stack_a);
 	if (-1 != err_flag)
-		err_flag = radix_sort(&args, &stack_a);
+	{
+		if (stack_a.size <= 5)
+			small_sort(&stack_a);
+		else
+			err_flag = radix_sort(&args, &stack_a);
+	}
 	free_stack(&stack_a);
 	free_args(&args);
 	if (-1 == err_flag)
