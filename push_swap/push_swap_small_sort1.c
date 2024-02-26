@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_small_sort1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:12:29 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 08:13:12 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:58:34 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ ssize_t	inst_for_fitting_into_a(t_stack *stack_a, int n)
 		else
 			upper_value = curr->upper->value;
 		if (upper_value < n && n < curr->value)
-			break;
-		if ((upper_value > curr->value) &&\
-		 ((upper_value < n && n > curr->value)\
-		 || (upper_value > n && n < curr->value)))
-		 	break;
+			break ;
+		if ((upper_value > curr->value) && \
+		((upper_value < n && n > curr->value) \
+		|| (upper_value > n && n < curr->value)))
+			break ;
 		inst++;
 		curr = curr->lower;
 	}
@@ -60,26 +60,30 @@ ssize_t	inst_for_fitting_into_a(t_stack *stack_a, int n)
 	return (inst);
 }
 
-void	rotate_a_as_inst(t_stack *stack_a, ssize_t inst)
+void	rotate_a_by_inst(t_stack *stack_a, ssize_t inst)
 {
 	ssize_t	i;
 
 	i = 0;
 	if (inst >= 0)
-		while(i < inst)
+	{
+		while (i < inst)
 		{
 			ra(stack_a, 1);
 			i++;
 		}
+	}
 	else
-		while(i > inst)
+	{
+		while (i > inst)
 		{
 			rra(stack_a, 1);
 			i--;
 		}
+	}
 }
 
-ssize_t	how_many_times_to_rotate(t_stack *stack, int n)
+ssize_t	inst_for_stading_stack_up(t_stack *stack, int n)
 {
 	ssize_t	i;
 	t_node	*curr;
@@ -89,7 +93,7 @@ ssize_t	how_many_times_to_rotate(t_stack *stack, int n)
 	while (NULL != curr)
 	{
 		if (curr->value == n)
-			break;
+			break ;
 		i++;
 		curr = curr->lower;
 	}

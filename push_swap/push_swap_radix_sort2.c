@@ -6,13 +6,14 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/21 22:22:33 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:53:31 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print)
+void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, \
+int digit_idx, int print)
 {
 	int		digit;
 	int		repeat;
@@ -38,7 +39,8 @@ void	digit_sort_from_a(t_stack *stack_a, t_stack *stack_b, int digit_idx, int pr
 	}
 }
 
-void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print)
+void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, \
+int digit_idx, int print)
 {
 	int		digit;
 	int		repeat;
@@ -64,7 +66,8 @@ void	digit_sort_from_b(t_stack *stack_a, t_stack *stack_b, int digit_idx, int pr
 	}
 }
 
-void	digit_sort_from_b_last(t_stack *stack_a, t_stack *stack_b, int digit_idx, int print)
+void	digit_sort_from_b_last(t_stack *stack_a, t_stack *stack_b, \
+int digit_idx, int print)
 {
 	int		digit;
 	int		repeat;

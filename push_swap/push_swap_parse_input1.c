@@ -3,93 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_parse_input1.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 07:53:41 by seonseo          ###   ########.fr       */
+/*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
+/*   Updated: 2024/02/26 16:51:52 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi_safe(const char *str, int *err_flag)
+int	check_dup_arr(t_arr *args)
 {
-	size_t		i;
-	int			sign;
-	long long	number;
+	size_t	i;
+	size_t	j;
 
-	*err_flag = 0;
-	number = 0;
-	sign = 1;
 	i = 0;
-	while (ft_isspace(str[i]))
+	while (i < args->size)
+	{
+		j = i + 1;
+		while (j < args->size)
+		{
+			if ((args->arr)[i] == (args->arr)[j])
+				return (-1);
+			j++;
+		}
 		i++;
-	if ('+' == str[i] || '-' == str[i])
-	{
-		if ('-' == str[i])
-			sign = -1;
-		i++;
 	}
-	while (ft_isdigit(str[i]))
-	{
-		number = number * 10 + str[i++] - '0';
-		if (number < (-INT_MAX - 1) || INT_MAX < number)
-			*err_flag = -1;
-	}
-	if (0 == i || '\0' != str[i])
-		*err_flag = -1;
-	return ((int)(number * sign));
-}
-
-int	stack_add_bottom(t_stack *stack_a, int n)
-{
-	t_node	*new_node;
-
-	new_node = make_node(n);
-	if (new_node == NULL)
-		return (-1);
-	if (NULL == stack_a->bottom)
-	{
-		stack_a->top = new_node;
-		stack_a->bottom = new_node;
-	}
-	else
-	{
-		new_node->upper = stack_a->bottom;
-		stack_a->bottom->lower = new_node;
-		stack_a->bottom = new_node;
-	}
-	(stack_a->size)++;
 	return (0);
 }
 
-void	free_stack(t_stack *stack_a)
+int	rank_based_indexing(t_arr *args)
 {
-	t_node	*curr;
-	t_node	*prev;
+	int		*arr_idx;
+	int		max_idx;
+	int		rank;
+	size_t	i;
 
-	prev = NULL;
-	curr = stack_a->top;
-	while (curr)
+	arr_idx = (int *)ft_calloc(args->size, sizeof(*arr_idx));
+	if (NULL == arr_idx)
+		return (-1);
+	rank = args->size - 1;
+	while (0 <= rank)
 	{
-		prev = curr;
-		curr = curr->lower;
-		free(prev->ternary_value);
-		*prev = (t_node){};
-		free(prev);
+		max_idx = -1;
+		i = -1;
+		while (++i < args->size)
+			if (0 == arr_idx[i] && \
+			(max_idx == -1 || (args->arr)[max_idx] < (args->arr)[i]))
+				max_idx = i;
+		arr_idx[max_idx] = rank;
+		rank--;
 	}
-	prev = NULL;
-	*stack_a = (t_stack){};
+	free(args->arr);
+	args->arr = arr_idx;
+	return (0);
 }
 
-t_node	*make_node(int n)
+int	init_stack_with_args(t_arr *args, t_stack *stack_a)
 {
-	t_node	*new_node;
+	size_t	i;
 
-	new_node = (t_node *)malloc(sizeof(*new_node));
-	if (NULL == new_node)
-		return (NULL);
-	*new_node = (t_node){};
-	new_node->value = n;
-	return (new_node);
+	i = 0;
+	while (i < args->size)
+	{
+		if (-1 == stack_add_bottom(stack_a, (args->arr)[i]))
+			return (-1);
+		i++;
+	}
+	stack_a->size = args->size;
+	return (0);
+}
+
+size_t	ft_strslen(char **strs)
+{
+	size_t	len;
+
+	len = 0;
+	while (strs[len])
+		len++;
+	return (len);
 }

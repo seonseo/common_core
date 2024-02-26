@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 20:52:40 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/22 23:09:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:52:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ternary_radix_sort_1(t_stack *stack_a, int print)
 		digit_idx++;
 		reassemble_in_stack_b(stack_a, &stack_b, print);
 		if (digit_idx + 2 == max_digits)
-			break;
+			break ;
 		digit_sort_from_b(stack_a, &stack_b, digit_idx, print);
 		digit_idx++;
 		reassemble_in_stack_a(stack_a, &stack_b, print);

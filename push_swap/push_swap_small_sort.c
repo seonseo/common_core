@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_small_sort.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:12:29 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 01:05:10 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:03:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	small_sort(t_stack *stack_a)
-{
-	t_stack stack_b;
-
-	stack_b = (t_stack){};
-	while (3 < stack_a->size)
-		pb(stack_a, &stack_b, 1);
-	sort_three_circularly(stack_a);
-	merge_into_stack_a(stack_a, &stack_b);
-	stand_stack_up(stack_a);
-}
 
 void	sort_three_circularly(t_stack *stack_a)
 {
@@ -37,7 +25,7 @@ void	merge_into_stack_a(t_stack *stack_a, t_stack *stack_b)
 	while (NULL != stack_b->top)
 	{
 		instructions = inst_for_fitting_into_a(stack_a, stack_b->top->value);
-		rotate_a_as_inst(stack_a, instructions);
+		rotate_a_by_inst(stack_a, instructions);
 		pa(stack_a, stack_b, 1);
 	}
 }
@@ -46,6 +34,6 @@ void	stand_stack_up(t_stack *stack_a)
 {
 	ssize_t	inst;
 
-	inst = how_many_times_to_rotate(stack_a, 0);
-	rotate_a_as_inst(stack_a, inst);
+	inst = inst_for_stading_stack_up(stack_a, 0);
+	rotate_a_by_inst(stack_a, inst);
 }

@@ -6,16 +6,54 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/21 15:59:53 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:55:48 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	get_strs(int argc, char **argv, char ***strings)
+{
+	if (2 == argc)
+	{
+		*strings = ft_split(argv[1], ' ');
+		if (NULL == *strings)
+			return (-1);
+	}
+	else
+		*strings = argv + 1;
+	return (0);
+}
+
+int	get_args(t_arr *args, char **strings)
+{
+	args->size = ft_strslen(strings);
+	args->arr = (int *)malloc(sizeof(*(args->arr)) * args->size);
+	if (NULL == args->arr)
+		return (-1);
+	return (0);
+}
+
+void	free_strs(char ***strings)
+{
+	int	i;
+
+	i = 0;
+	while ((*strings)[i])
+	{
+		free((*strings)[i]);
+		(*strings)[i] = NULL;
+		i++;
+	}
+	free(*strings);
+	*strings = NULL;
+	strings = NULL;
+}
+
 int	fill_arr(t_arr *args, char **strings)
 {
 	size_t	i;
-	int	err_flag;
+	int		err_flag;
 
 	i = 0;
 	while (i < args->size)
@@ -26,61 +64,4 @@ int	fill_arr(t_arr *args, char **strings)
 		i++;
 	}
 	return (0);
-}
-
-int	check_dup_arr(t_arr *args)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < args->size)
-	{
-		j = i + 1;
-		while (j < args->size)
-		{
-			if ((args->arr)[i] == (args->arr)[j])
-				return (-1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	rank_based_indexing(t_arr *args)
-{
-	int		*arr_idx;
-	int		max_idx;
-	int		rank;
-	size_t	i;
-
-	arr_idx = (int *)ft_calloc(args->size, sizeof(*arr_idx));
-	if (NULL == arr_idx)
-		return (-1);
-	rank = args->size - 1;
-	while (0 <= rank)
-	{
-		max_idx = -1;
-		i = -1;
-		while (++i < args->size)
-			if (0 == arr_idx[i]\
-			 && (max_idx == -1 || (args->arr)[max_idx] < (args->arr)[i]))
-				max_idx = i;
-		arr_idx[max_idx] = rank;
-		rank--;
-	}
-	free(args->arr);
-	args->arr = arr_idx;
-	return (0);
-}
-
-size_t	ft_strslen(char **strs)
-{
-	size_t	len;
-
-	len = 0;
-	while (strs[len])
-		len++;
-	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/21 21:58:16 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:53:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int print)
 		pa(stack_a, stack_b, print);
 }
 
-void	reassemble_in_stack_a_last(t_stack *stack_a, t_stack *stack_b, int print)
+void	reassemble_in_stack_a_last(t_stack *stack_a, t_stack *stack_b, \
+int print)
 {
 	int	last_digit;
 

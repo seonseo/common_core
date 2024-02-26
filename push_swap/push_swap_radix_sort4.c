@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/22 18:01:55 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:53:55 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	is_quaternary_needed(size_t size, int max_digits)
 	if (is_in_scope(size) && (1 == max_digits % 2))
 		return (1);
 	return (0);
-	
 }
 
 int	is_in_scope(int n)

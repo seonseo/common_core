@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:17:50 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/21 19:09:30 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:52:36 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_max_digits(t_stack *stack_a)
 		max_value /= 3;
 		max_digits++;
 		if (0 == max_value)
-			break;
+			break ;
 	}
 	return (max_digits);
 }
