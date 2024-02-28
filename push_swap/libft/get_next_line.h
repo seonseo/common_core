@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:28 by macbookair        #+#    #+#             */
-/*   Updated: 2024/02/26 19:01:07 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:32:25 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_fdlist
 {
@@ -35,9 +36,10 @@ int			ft_get_left(t_fdlist *fdnode, char *newline);
 t_fdlist	*ft_set_fdnode(t_fdlist **head, int fd);
 void		*ft_free_fdnode(t_fdlist **head, t_fdlist *fdnode);
 int			ft_bufjoin(t_fdlist *fdnode, char *buf);
-char		*ft_strchr(const char *s, int c);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char		*gnl_strchr(const char *s, int c);
+size_t		gnl_strlcpy(char *dst, const char *src, size_t dstsize);
+char		*gnl_substr(char const *s, unsigned int start, size_t len);
+//libft.a
 size_t		ft_strlen(const char *s);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

@@ -1,16 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap1.c                                       :+:      :+:    :+:   */
+/*   push_swap2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 16:24:36 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/28 12:56:15 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_stack_sorted(t_stack *stack_a)
+{
+	if (is_stack_circularly_sorted(stack_a) && 0 == stack_a->top->value)
+		return (1);
+	return (0);
+}
+
+int	is_stack_circularly_sorted(t_stack *stack_a)
+{
+	t_node	*curr;
+	ssize_t	descending_cnt;
+
+	if (1 == stack_a->size)
+		return (1);
+	descending_cnt = 0;
+	curr = stack_a->top;
+	while (curr)
+	{
+		if (NULL != curr->upper && curr->upper->value > curr->value)
+			descending_cnt++;
+		curr = curr->lower;
+	}
+	if (stack_a->bottom->value > stack_a->top->value)
+		descending_cnt++;
+	if (1 == descending_cnt)
+		return (1);
+	return (0);
+}
 
 int	print_error(void)
 {

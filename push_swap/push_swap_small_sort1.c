@@ -6,31 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:12:29 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 16:58:34 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:32:47 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_stack_circularly_sorted(t_stack *stack_a)
-{
-	t_node	*curr;
-	ssize_t	descending_cnt;
-
-	descending_cnt = 0;
-	curr = stack_a->top;
-	while (curr)
-	{
-		if (NULL != curr->upper && curr->upper->value > curr->value)
-			descending_cnt++;
-		curr = curr->lower;
-	}
-	if (stack_a->bottom->value > stack_a->top->value)
-		descending_cnt++;
-	if (1 == descending_cnt)
-		return (1);
-	return (0);
-}
 
 ssize_t	inst_for_fitting_into_a(t_stack *stack_a, int n)
 {

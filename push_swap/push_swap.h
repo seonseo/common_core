@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:42:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 22:18:23 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:23:22 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,18 @@ typedef struct s_arr
 }	t_arr;
 
 //push_swap1.c
-int		parse_input(int argc, char **argv, t_arr *args, t_stack *stack_a);
 void	small_sort(t_stack *stack_a);
 int		radix_sort(t_arr *args, t_stack *stack_a);
-int		is_stack_sorted(t_stack *stack_a);
 //push_swap2.c
+int		is_stack_sorted(t_stack *stack_a);
+int		is_stack_circularly_sorted(t_stack *stack_a);
 int		print_error(void);
 void	free_args(t_arr *args);
 void	free_stack(t_stack *stack_a);
 //push_swap_parse_input.c
+int		parse_input(int argc, char **argv, t_arr *args, t_stack *stack_a);
 int		get_strs(int argc, char **argv, char ***strings);
-int		get_args(t_arr *args, char **strings);
+int		malloc_args(t_arr *args, char **strings);
 void	free_strs(char ***strings);
 int		fill_arr(t_arr *args, char **strings);
 //push_swap_parse_input1.c
@@ -68,7 +69,6 @@ void	sort_three_circularly(t_stack *stack_a);
 void	merge_into_stack_a(t_stack *stack_a, t_stack *stack_b);
 void	stand_stack_up(t_stack *stack_a);
 //push_swap_small_sort1.c
-int		is_stack_circularly_sorted(t_stack *stack_a);
 ssize_t	inst_for_fitting_into_a(t_stack *stack_a, int n);
 void	rotate_a_by_inst(t_stack *stack_a, ssize_t inst);
 ssize_t	inst_for_stading_stack_up(t_stack *stack, int n);
@@ -121,7 +121,8 @@ int		rrb(t_stack *stack_a, int print);
 int		rrr(t_stack *stack_a, t_stack *stack_b, int print);
 //checker.c
 int		read_and_execute_inst(t_stack *stack_a, t_stack *stack_b);
-int		compare_and_execute_inst(char *line, t_stack *stack_a, t_stack *stack_b);
+int		compare_and_execute_inst(char *line, \
+t_stack *stack_a, t_stack *stack_b);
 // debugging functions ./push.swap.c
 // void	print_stack(t_stack *stack_a);
 // void	print_stack_ternary(t_stack *stack);

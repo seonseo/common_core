@@ -1,7 +1,12 @@
 NAME = libft.a
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-HEADER = libft.h ft_printf.h get_next_line.h
+
+HEADER = libft.h
+PRINTF_HEADER = ft_printf.h
+GNL_HEADER = get_next_line.h
+
 SRCS =\
 ft_isalpha.c    ft_memchr.c     ft_putchar_fd.c ft_strchr.c     ft_strlcpy.c    ft_strrchr.c\
 ft_atoi.c       ft_isascii.c    ft_memcmp.c     ft_putendl_fd.c ft_strdup.c     ft_strlen.c     ft_strtrim.c\
@@ -23,6 +28,12 @@ $(NAME): $(OBJS)
 	ranlib $@
 
 %.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+ft_printf%.o: ft_printf%.c $(PRINTF_HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+get_next_line%.o: get_next_line%.c $(GNL_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

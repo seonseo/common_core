@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:08:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/25 19:03:39 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/27 16:05:18 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_reverse_rotate(t_stack *stack)
 	t_node	*second_last;
 	t_node	*last;
 
-	if (NULL == stack->bottom->upper)
+	if (NULL == stack->bottom || NULL == stack->bottom->upper)
 		return ;
 	first = stack->top;
 	last = stack->bottom;

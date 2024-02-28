@@ -6,12 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/02/26 22:56:12 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:29:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -27,7 +26,7 @@ char	*get_next_line(int fd)
 	newline = NULL;
 	while (1)
 	{
-		newline = ft_strchr(fdnode->save, '\n');
+		newline = gnl_strchr(fdnode->save, '\n');
 		if (newline != NULL)
 			break ;
 		readbyte = read(fd, buf, BUFFER_SIZE);
@@ -51,16 +50,16 @@ char	*ft_get_line(t_fdlist **head, t_fdlist *fdnode, char *newline)
 	{
 		if ((fdnode->save != NULL) && (*(fdnode->save) == '\0'))
 			return (ft_free_fdnode(head, fdnode));
-		line = ft_substr(fdnode->save, 0, fdnode->save_size);
+		line = gnl_substr(fdnode->save, 0, fdnode->save_size);
 		ft_free_fdnode(head, fdnode);
 		return (line);
 	}
-	line = ft_substr(fdnode->save, 0, newline + 1 - fdnode->save);
+	line = gnl_substr(fdnode->save, 0, newline + 1 - fdnode->save);
 	if (line == NULL)
 		return (ft_free_fdnode(head, fdnode));
 	fdnode->save_len = ft_strlen(newline + 1);
 	fdnode->save_size = fdnode->save_len + 1;
-	left = ft_substr(newline + 1, 0, fdnode->save_len);
+	left = gnl_substr(newline + 1, 0, fdnode->save_len);
 	if (left == NULL)
 	{
 		free(line);
@@ -139,11 +138,11 @@ int	ft_bufjoin(t_fdlist *fdnode, char *buf)
 		joinstr = (char *)malloc(sizeof(char) * fdnode->save_size);
 		if (joinstr == NULL)
 			return (-1);
-		ft_strlcpy(joinstr, fdnode->save, fdnode->save_size);
+		gnl_strlcpy(joinstr, fdnode->save, fdnode->save_size);
 		free(fdnode->save);
 		fdnode->save = joinstr;
 	}
-	ft_strlcpy(fdnode->save + fdnode->save_len, buf, fdnode->save_size);
+	gnl_strlcpy(fdnode->save + fdnode->save_len, buf, fdnode->save_size);
 	fdnode->save_len = joinlen;
 	return (0);
 }
