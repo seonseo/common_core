@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/28 12:56:15 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/29 19:54:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_stack_sorted(t_stack *stack_a)
 {
+	if (0 == stack_a->size)
+		return (1);
 	if (is_stack_circularly_sorted(stack_a) && 0 == stack_a->top->value)
 		return (1);
 	return (0);
@@ -43,7 +45,7 @@ int	is_stack_circularly_sorted(t_stack *stack_a)
 
 int	print_error(void)
 {
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	return (-1);
 }
 

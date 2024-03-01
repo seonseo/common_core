@@ -6,11 +6,12 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 16:22:37 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/01 21:28:20 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 int	ft_atoi_safe(const char *str, int *err_flag)
 {
@@ -33,7 +34,7 @@ int	ft_atoi_safe(const char *str, int *err_flag)
 	while (ft_isdigit(str[i]))
 	{
 		number = number * 10 + str[i++] - '0';
-		if (number < (-INT_MAX - 1) || INT_MAX < number)
+		if (number * sign < (-INT_MAX - 1) || INT_MAX < number * sign)
 			*err_flag = -1;
 	}
 	if (0 == i || '\0' != str[i])

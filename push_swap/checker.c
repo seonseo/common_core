@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:07:07 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/28 13:21:43 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/01 21:29:11 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	read_and_execute_inst(t_stack *stack_a, t_stack *stack_b)
 
 int	compare_and_execute_inst(char *line, t_stack *stack_a, t_stack *stack_b)
 {
-	if (0 == ft_strncmp(line, "sa", 2))
+	if (0 == ft_strncmp(line, "sa\n", 3))
 		sa(stack_a, 0);
 	else if (0 == ft_strncmp(line, "sb\n", 3))
 		sb(stack_b, 0);
