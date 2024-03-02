@@ -6,12 +6,22 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:45:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/01 21:28:20 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:13:06 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+
+size_t	ft_strslen(char **strs)
+{
+	size_t	len;
+
+	len = 0;
+	while (strs[len])
+		len++;
+	return (len);
+}
 
 int	ft_atoi_safe(const char *str, int *err_flag)
 {

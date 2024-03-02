@@ -6,74 +6,70 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:41:59 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/27 15:34:25 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:09:06 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	small_sort(t_stack *stack_a)
+int	is_stack_sorted(t_stack *stack_a)
 {
-	t_stack	stack_b;
-
-	stack_b = (t_stack){};
-	while (3 < stack_a->size)
-		pb(stack_a, &stack_b, 1);
-	sort_three_circularly(stack_a);
-	merge_into_stack_a(stack_a, &stack_b);
-	stand_stack_up(stack_a);
-}
-
-int	radix_sort(t_arr *args, t_stack *stack_a)
-{
-	int	quaternary_flag;
-
-	stack_a->max_digits = get_max_digits(stack_a);
-	quaternary_flag = is_quaternary_needed(stack_a->size, stack_a->max_digits);
-	if (-1 == add_ternary_value(stack_a))
-		return (-1);
-	if (0 == quaternary_flag)
-		ternary_radix_sort(stack_a, 0);
-	else
-		ternary_radix_sort_1(stack_a, 0);
-	modify_args(args, stack_a);
-	update_stack_with_modified_args(args, stack_a);
-	update_ternary_value(stack_a);
-	if (0 == quaternary_flag)
-		ternary_radix_sort(stack_a, 1);
-	else
-		ternary_radix_sort_1(stack_a, 1);
+	if (0 == stack_a->size)
+		return (1);
+	if (is_stack_circularly_sorted(stack_a) && 0 == stack_a->top->value)
+		return (1);
 	return (0);
 }
 
-// void	print_stack(t_stack *stack)
-// {
-// 	t_node	*curr;
+int	is_stack_circularly_sorted(t_stack *stack_a)
+{
+	t_node	*curr;
+	ssize_t	descending_cnt;
 
-// 	curr = stack->top;
-// 	while (NULL != curr)
-// 	{
-// 		ft_printf("%d\n", curr->value);
-// 		curr = curr->lower;
-// 	}
-// }
+	if (1 == stack_a->size)
+		return (1);
+	descending_cnt = 0;
+	curr = stack_a->top;
+	while (curr)
+	{
+		if (NULL != curr->upper && curr->upper->value > curr->value)
+			descending_cnt++;
+		curr = curr->lower;
+	}
+	if (stack_a->bottom->value > stack_a->top->value)
+		descending_cnt++;
+	if (1 == descending_cnt)
+		return (1);
+	return (0);
+}
 
-// void	print_stack_ternary(t_stack *stack)
-// {
-// 	t_node	*curr;
-// 	int		i;
+void	free_stack(t_stack *stack_a)
+{
+	t_node	*curr;
+	t_node	*prev;
 
-// 	curr = stack->top;
-// 	ft_printf("max_digits:%d\n", stack->max_digits);
-// 	while (NULL != curr)
-// 	{
-// 		i = 0;
-// 		while (i < stack->max_digits)
-// 		{
-// 			ft_printf("%d", (curr->ternary_value)[i]);
-// 			i++;
-// 		}
-// 		ft_printf("\n");
-// 		curr = curr->lower;
-// 	}
-// }
+	prev = NULL;
+	curr = stack_a->top;
+	while (curr)
+	{
+		prev = curr;
+		curr = curr->lower;
+		free(prev->ternary_value);
+		*prev = (t_node){};
+		free(prev);
+	}
+	prev = NULL;
+	*stack_a = (t_stack){};
+}
+
+void	free_args(t_arr *args)
+{
+	free(args->arr);
+	*args = (t_arr){};
+}
+
+int	print_error(void)
+{
+	write(2, "Error\n", 6);
+	return (-1);
+}

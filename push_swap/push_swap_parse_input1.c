@@ -6,11 +6,27 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 16:51:52 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:18:46 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	fill_arr(t_arr *args, char **strings)
+{
+	size_t	i;
+	int		err_flag;
+
+	i = 0;
+	while (i < args->size)
+	{
+		(args->arr)[i] = ft_atoi_safe(strings[i], &err_flag);
+		if (-1 == err_flag)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
 
 int	check_dup_arr(t_arr *args)
 {
@@ -72,14 +88,4 @@ int	init_stack_with_args(t_arr *args, t_stack *stack_a)
 	}
 	stack_a->size = args->size;
 	return (0);
-}
-
-size_t	ft_strslen(char **strs)
-{
-	size_t	len;
-
-	len = 0;
-	while (strs[len])
-		len++;
-	return (len);
 }

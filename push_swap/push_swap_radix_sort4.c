@@ -1,54 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_radix_sort4.c                            :+:      :+:    :+:   */
+/*   push_swap_radix_sort3.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:59:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/26 16:53:55 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:53:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_quaternary_needed(size_t size, int max_digits)
+void	reassemble_in_stack_a(t_stack *stack_a, t_stack *stack_b, int print)
 {
-	if (is_in_scope(size) && (1 == max_digits % 2))
-		return (1);
-	return (0);
+	while (NULL != stack_b->top)
+		pa(stack_a, stack_b, print);
 }
 
-int	is_in_scope(int n)
+void	reassemble_in_stack_a_last(t_stack *stack_a, t_stack *stack_b, \
+int print)
 {
-	int	k;
-	int	lowerbound;
-	int	upperbound;
+	int	last_digit;
 
-	lowerbound = 0;
-	k = 1;
-	while (lowerbound <= n)
+	while (NULL != stack_b->top)
 	{
-		lowerbound = ft_pow(3, k) + 1;
-		upperbound = lowerbound + ft_pow(3, k - 1) - 1;
-		if (lowerbound <= n && n <= upperbound)
-			return (1);
-		k++;
+		last_digit = stack_b->top->ternary_value[stack_a->max_digits - 1];
+		if (0 == last_digit)
+			pa(stack_a, stack_b, print);
+		if (1 == last_digit)
+		{
+			pa(stack_a, stack_b, print);
+			if (1 < stack_a->size)
+				ra(stack_a, print);
+		}
 	}
-	return (0);
 }
 
-int	ft_pow(int base, int exponent)
+void	reassemble_in_stack_b(t_stack *stack_a, t_stack *stack_b, int print)
 {
-	int	number;
-	int	i;
-
-	number = 1;
-	i = 0;
-	while (i < exponent)
-	{
-		number *= base;
-		i++;
-	}
-	return (number);
+	while (NULL != stack_a->top)
+		pb(stack_a, stack_b, print);
 }

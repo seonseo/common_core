@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:37:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/29 19:39:40 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:18:16 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,4 @@ void	free_strs(char ***strings)
 	free(*strings);
 	*strings = NULL;
 	strings = NULL;
-}
-
-int	fill_arr(t_arr *args, char **strings)
-{
-	size_t	i;
-	int		err_flag;
-
-	i = 0;
-	while (i < args->size)
-	{
-		(args->arr)[i] = ft_atoi_safe(strings[i], &err_flag);
-		if (-1 == err_flag)
-			return (-1);
-		i++;
-	}
-	return (0);
 }
