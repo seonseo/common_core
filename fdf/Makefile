@@ -2,12 +2,12 @@ NAME = fdf
 HEADER = fdf.h
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 MLX_DIR = mlx/
-MLX = $(MLX_DIR)libmlx.dylib
+MLX = libmlx.dylib
 MLX_HEADER = $(MLX_DIR)mlx.h
 
 LIBFT_DIR = libft/
@@ -33,9 +33,9 @@ LIBFT_OBJ = $(patsubst %.c, %.o, $(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(OBJ) $(LIBFT) $(MLX_DIR)$(MLX)
 	$(CC) $(OBJ) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
-	cp $(MLX) .
+	cp $(MLX_DIR)$(MLX) .
 
 $(LIBFT): $(LIBFT_SRCS) $(LIBFT_HEADER)
 	make -C $(LIBFT_DIR)
@@ -45,11 +45,11 @@ $(LIBFT): $(LIBFT_SRCS) $(LIBFT_HEADER)
 
 clean:
 	rm -f $(OBJ)
-	rm -f libmlx.dylib
 	make -C $(LIBFT_DIR) fclean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(MLX)
 
 re: fclean all
 
