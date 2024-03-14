@@ -6,107 +6,153 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 21:01:42 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/11 21:05:01 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/14 20:42:01 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(void)
+void	leak_check(){system("leaks fdf");}
+
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
-	t_img	circle;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "moving circle");
-	vars.img = &circle;
+	if (2 != argc)
+		error_exit("invalid argument", 0);
+	parse_input(argv[1], &vars.map);
+	init_vars(&vars);
 
-	circle.width = 100;
-	circle.height = 100;
-	circle.img = mlx_new_image(vars.mlx, circle.width, circle.height);
-	circle.addr = mlx_get_data_addr(circle.img, &circle.bits_per_pixel,\
-	 &circle.size_line, &circle.endian);
-	draw_circle(circle.img, (t_point){50, 50}, 50, 0x000000ff);
-	circle.pos.x = 500;
-	circle.pos.y = 500;
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, circle.pos.x, circle.pos.y);
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_hook
-
+	draw_line(&vars.img, (t_line){(t_point){0, 4}, (t_point){1, 5}});
+	
+	mlx_put_image_to_window(vars.mlx, vars.win.ptr, vars.img.ptr, 0, 0);
+	mlx_loop(vars.mlx);
 	return (0);
 }
 
-int	render_next_frame(t_vars *vars)
+void	init_vars(t_vars *vars)
 {
-	return (0);
+	vars->mlx = mlx_init();
+	
+	vars->win.width = 1080;
+	vars->win.height = 1080;
+	vars->win.ptr = mlx_new_window(vars->mlx, vars->win.width, vars->win.height, "fdf");
+
+	vars->img.width = vars->win.width;
+	vars->img.height = vars->win.height;
+	vars->img.ptr = mlx_new_image(vars->mlx, vars->img.width, vars->img.height);
+	vars->img.data = mlx_get_data_addr(vars->img.ptr, &vars->img.bits_per_pixel, &vars->img.size_line, &vars->img.endian);
 }
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length) + (x * (data->bits_per_pixel / 8));
-	*(int*)dst = color;
-}
-
-void	paint_img_with_color(t_img *img, int width, int height, int color)
+void	draw_line(t_img *img, t_line line)
 {
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < height)
+	x = 0;
+	while (x < img->width)
 	{
-		x = 0;
-		while (x < width)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			x++;
-		}
-		y++;
+		y = line_func(x, line);
+		if (0 <= y && y < img->height)
+			my_mlx_pixel_put(img, x, y, 0x00ffffff);
+		x++;
 	}
 }
 
-
-int	draw_circle(t_img *img, t_point center, int radius, int color)
+int	line_func(int x, t_line line)
 {
-	t_point point;
+	double y;
+	double m;
+	double b;
 
-	point.y = 0;
-	while (point.y < img->height)
+	m = slope_calc(line);
+	b = y_intercept_calc(line);
+	y = (m * x) + b;
+	return ((int)y);
+}
+
+double	slope_calc(t_line line)
+{
+	double x1;
+	double x2;
+	double y1;
+	double y2;
+
+	x1 = (double)line.p1.x;
+	x2 = (double)line.p2.x;
+	y1 = (double)line.p1.y;
+	y2 = (double)line.p2.y;
+	return ((y2 - y1) / (x2 - x1));
+}
+
+double	y_intercept_calc(t_line line)
+{
+	double x1;
+	double x2;
+	double y1;
+	double y2;
+
+	x1 = (double)line.p1.x;
+	x2 = (double)line.p2.x;
+	y1 = (double)line.p1.y;
+	y2 = (double)line.p2.y;
+	return (y1 - (((y2 - y1) / (x2 - x1)) * x1));
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->data + (y * img->size_line) + (x * (img->bits_per_pixel / 8));
+	*(int*)dst = color;
+}
+
+// void	paint_img_with_color(t_img *img, int color)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	y = 0;
+// 	while (y < img->height)
+// 	{
+		
+// 		x = 0;
+// 		while (x < img->width)
+// 		{
+// 			my_mlx_pixel_put(img, x, y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
+// int	key_hook(int keycode)
+// {
+// 	if (53 == keycode)
+// 		exit(0);
+// 	return (0);
+// }
+
+// int	close_window()
+// {
+// 	exit(0);
+// }
+
+void	print_map_data(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->col)
 	{
-		point.x = 0;
-		while (point.x < img->width)
+		j = 0;
+		while (j < map->row)
 		{
-			if ((int)distance_between_points(center, point) <= radius)
-				my_mlx_pixel_put(img, point.x, point.y, color);
-			else
-				my_mlx_pixel_put(img, point.x, point.y, 0xff000000);
-			point.x++;
+			ft_printf("%d  ", map->data[i][j]);
+			j++;
 		}
-		point.y++;
+		ft_printf("\n");
+		i++;
 	}
-	return (0);
-}
-
-double distance_between_points(t_point p1, t_point p2)
-{
-	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2)));
-}
-
-int	key_hook(int keycode, void *vars)
-{
-	if (53 == keycode)
-		exit(0);
-	if (123 == keycode)
-		vars->img->pos->x -= 100;
-	if (124 == keycode)
-		vars->img->pos->x += 100;
-	if (125 == keycode)
-		vars->img->pos->y -= 100;
-	if (126 == keycode)
-		vars->img->pos->y += 100;
-	paint_img_with_color(vars->img, )
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, circle.pos.x, circle.pos.y);
-	return (0);
 }

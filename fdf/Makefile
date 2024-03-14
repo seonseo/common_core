@@ -15,7 +15,7 @@ LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_HEADER = $(addprefix $(LIBFT_DIR), libft.h ft_printf.h get_next_line.h)
 LIBFT_FLAGS = -Llibft -lft
 
-SRC = fdf.c
+SRC = fdf.c	fdf_error_exit.c	fdf_parse_input.c	fdf_parse_input1.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \
@@ -37,7 +37,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX_DIR)$(MLX)
 	$(CC) $(OBJ) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
 	cp $(MLX_DIR)$(MLX) .
 
-$(LIBFT): $(LIBFT_SRCS) $(LIBFT_HEADER)
+$(LIBFT): $(LIBFT_SRC) $(LIBFT_HEADER)
 	make -C $(LIBFT_DIR)
 
 %.o: %.c $(MLX_HEADER) $(LIBFT_HEADER)

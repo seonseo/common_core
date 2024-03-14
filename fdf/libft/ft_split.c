@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:34:57 by seonseo           #+#    #+#             */
-/*   Updated: 2023/11/04 16:21:24 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/13 19:47:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_wordlen(char *s, char c, char **strs)
 	return (0);
 }
 
-static size_t	ft_wordcount(char *s, char c)
+size_t	ft_wordcount(char *s, char c)
 {
 	size_t	wordcount;
 	int		is_word;
