@@ -15,7 +15,9 @@ LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_HEADER = $(addprefix $(LIBFT_DIR), libft.h ft_printf.h get_next_line.h)
 LIBFT_FLAGS = -Llibft -lft
 
-SRC = fdf.c	fdf_error_exit.c	fdf_parse_input.c	fdf_parse_input1.c
+SRC = fdf.c		fdf1.c				fdf_parse_input_to_int_matrix.c	fdf_parse_input_to_int_matrix1.c\
+fdf_convert_map_to_point_matrix.c	fdf_create_wireframe.c					fdf_create_wireframe1.c\
+fdf_key_hook.c						fdf_exit_error.c		fdf_isometric_projection.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \
@@ -40,7 +42,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX_DIR)$(MLX)
 $(LIBFT): $(LIBFT_SRC) $(LIBFT_HEADER)
 	make -C $(LIBFT_DIR)
 
-%.o: %.c $(MLX_HEADER) $(LIBFT_HEADER)
+%.o: %.c $(HEADER) $(MLX_HEADER) $(LIBFT_HEADER)
 	$(CC) $(CFLAGS) -Imlx -Ilibft -c $< -o $@
 
 clean:

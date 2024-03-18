@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/13 19:02:17 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/17 20:57:23 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # undef INT_MAX
 # define LONG_MAX 9223372036854775807L
 # define INT_MAX 2147483647
+# define INT_MIN (-INT_MAX -1)
 # define TRUE 1
 # define FALSE 0
 
