@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 21:41:02 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/20 22:08:16 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/21 15:11:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	transform_coordinates(t_vars *vars)
 		}
 		i++;
 	}
-	center_shape(vars);
+	// center_shape(vars);
 }
 
 void isometric_projection(t_point *point)
@@ -51,34 +51,34 @@ void isometric_projection(t_point *point)
     point->y = (x + y) * sin(theta) - z;
 }
 
-void center_shape(t_vars *vars)
-{
-	t_matrix	*matrix;
-    int			minX = INT_MAX;
-	int			maxX = INT_MIN;
-	int			minY = INT_MAX;
-	int			maxY = INT_MIN;
+// void center_shape(t_vars *vars)
+// {
+// 	t_matrix	*matrix;
+//     int			minX = INT_MAX;
+// 	int			maxX = INT_MIN;
+// 	int			minY = INT_MAX;
+// 	int			maxY = INT_MIN;
     
-	matrix = &vars->matrix;
-    for (int i = 0; i < matrix->height; i++) {
-        for (int j = 0; j < matrix->width; j++) {
-            if (matrix->data[i][j].x < minX) minX = matrix->data[i][j].x;
-            if (matrix->data[i][j].x > maxX) maxX = matrix->data[i][j].x;
-            if (matrix->data[i][j].y < minY) minY = matrix->data[i][j].y;
-            if (matrix->data[i][j].y > maxY) maxY = matrix->data[i][j].y;
-        }
-    }
-    int offsetX = (vars->img.width - (maxX - minX)) / 2 - minX;
-    int offsetY = (vars->img.height - (maxY - minY)) / 2 - minY;
-    for (int i = 0; i < matrix->height; i++)
-	{
-        for (int j = 0; j < matrix->width; j++)
-		{
-            matrix->data[i][j].x += offsetX;
-            matrix->data[i][j].y += offsetY;
-        }
-    }
-}
+// 	matrix = &vars->matrix;
+//     for (int i = 0; i < matrix->height; i++) {
+//         for (int j = 0; j < matrix->width; j++) {
+//             if (matrix->data[i][j].x < minX) minX = matrix->data[i][j].x;
+//             if (matrix->data[i][j].x > maxX) maxX = matrix->data[i][j].x;
+//             if (matrix->data[i][j].y < minY) minY = matrix->data[i][j].y;
+//             if (matrix->data[i][j].y > maxY) maxY = matrix->data[i][j].y;
+//         }
+//     }
+//     int offsetX = (vars->img.width - (maxX - minX)) / 2 - minX;
+//     int offsetY = (vars->img.height - (maxY - minY)) / 2 - minY;
+//     for (int i = 0; i < matrix->height; i++)
+// 	{
+//         for (int j = 0; j < matrix->width; j++)
+// 		{
+//             matrix->data[i][j].x += offsetX;
+//             matrix->data[i][j].y += offsetY;
+//         }
+//     }
+// }
 
 // void	transform_coordinate(t_point *point, int z)
 // {
