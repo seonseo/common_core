@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:25:41 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/20 20:29:41 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/21 19:33:55 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	line_func(int x, t_line *line)
 	m = slope_calc(line);
 	b = y_intercept_calc(line);
 	y = (m * x) + b;
-	return ((int)y);
+	return ((int)round(y));
 }
 
 float	slope_calc(t_line *line)

@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:35:25 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/16 14:39:31 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/21 21:57:30 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,13 @@ char **read_lines(int fd)
 void	malloc_map_data(t_map *map, char **strs)
 {
 	map->height = ft_ptrslen((void **)strs);
-	map->data = (int **)malloc(sizeof(int *) * map->height);
-	if (NULL == map->data)
+	map->data = (int ***)malloc(sizeof(int **) * 2);
+	if (NULL == map->data[0])
+	map->data[0] = (int **)malloc(sizeof(int *) * map->height);
+	if (NULL == map->data[0])
+		exit_error("Error malloc for map_data", 1);
+	map->data[1] = (int **)malloc(sizeof(int *) * map->height);
+	if (NULL == map->data[1])
 		exit_error("Error malloc for map_data", 1);
 }
 

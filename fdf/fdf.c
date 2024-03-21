@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 21:01:42 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/20 21:58:35 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/21 19:35:51 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int	main(int argc, char **argv)
 	parse_input_to_int_matrix(argv[1], &vars.map);
 	init_vars(&vars);
 	convert_map_to_point_matrix(&vars, 30);
-	transform_coordinates(&vars);
+	isometric_projection(&vars);
 	create_wireframe(&vars);
-
 	mlx_put_image_to_window(vars.mlx, vars.win.ptr, vars.img.ptr, 0, 0);
 	mlx_hook(vars.win.ptr, CLOSE_WINDOW, 0, exit_no_error, NULL);
 	mlx_key_hook(vars.win.ptr, key_hook, &vars);
