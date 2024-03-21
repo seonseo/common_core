@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:24:45 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/16 19:46:09 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/20 20:09:16 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,35 @@ void	draw_vertical_line(t_img *img, t_line *line)
 	}
 }
 
+// void	draw_non_vertical_line(t_img *img, t_line *line)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	y_next;
+// 	int	x_max;
+
+// 	x_max = ft_max(line->p1.x, line->p2.x);
+// 	x = ft_min(line->p1.x, line->p2.x);
+// 	while (x <= x_max && 0 <= x && x < img->width)
+// 	{
+// 		y = line_func(x, line);
+// 		y_next = line_func(x + 1, line);
+// 		if (y == y_next && 0 <= y && y < img->height)
+// 			my_mlx_pixel_put(img, x, y, 0x00ffffff);
+// 		while (y < y_next && 0 <= y && y < img->height)
+// 		{
+// 			my_mlx_pixel_put(img, x, y, 0x00ffffff);
+// 			y++;
+// 		}
+// 		while (y > y_next && 0 <= y && y < img->height)
+// 		{
+// 			my_mlx_pixel_put(img, x, y, 0x00ffffff);
+// 			y--;
+// 		}
+// 		x++;
+// 	}
+// }
+
 void	draw_non_vertical_line(t_img *img, t_line *line)
 {
 	int	x;
@@ -83,15 +112,15 @@ void	draw_non_vertical_line(t_img *img, t_line *line)
 		y_next = line_func(x + 1, line);
 		if (y == y_next && 0 <= y && y < img->height)
 			my_mlx_pixel_put(img, x, y, 0x00ffffff);
-		while (y < y_next && 0 <= y && y < img->height)
+		while (y != y_next && 0 <= y && y < img->height)
 		{
 			my_mlx_pixel_put(img, x, y, 0x00ffffff);
-			y++;
-		}
-		while (y > y_next && 0 <= y && y < img->height)
-		{
-			my_mlx_pixel_put(img, x, y, 0x00ffffff);
-			y--;
+			if (x == x_max)
+				break;
+			if (y < y_next)
+				y++;
+			if (y > y_next)
+				y--;
 		}
 		x++;
 	}

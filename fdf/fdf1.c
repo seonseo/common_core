@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:30:21 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/16 19:45:50 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/20 18:17:47 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_vars(t_vars *vars)
 
 	vars->img.width = vars->win.width;
 	vars->img.height = vars->win.height;
+	vars->img.center = (t_point){vars->win.width / 2, vars->win.height / 2, 0};
 	vars->img.ptr = mlx_new_image(vars->mlx, vars->img.width, vars->img.height);
 	vars->img.data = mlx_get_data_addr(vars->img.ptr, &vars->img.bits_per_pixel, &vars->img.size_line, &vars->img.endian);
 }

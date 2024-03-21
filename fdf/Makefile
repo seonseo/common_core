@@ -16,8 +16,9 @@ LIBFT_HEADER = $(addprefix $(LIBFT_DIR), libft.h ft_printf.h get_next_line.h)
 LIBFT_FLAGS = -Llibft -lft
 
 SRC = fdf.c		fdf1.c				fdf_parse_input_to_int_matrix.c	fdf_parse_input_to_int_matrix1.c\
-fdf_convert_map_to_point_matrix.c	fdf_create_wireframe.c					fdf_create_wireframe1.c\
-fdf_key_hook.c						fdf_exit_error.c		fdf_isometric_projection.c
+fdf_convert_map_to_point_matrix.c	fdf_create_wireframe.c			fdf_create_wireframe1.c\
+fdf_key_hook.c						fdf_exit_error.c				fdf_transform_coordinates.c\
+fdf_transform_coordinates1.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \

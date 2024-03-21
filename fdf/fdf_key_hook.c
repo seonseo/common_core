@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 20:44:26 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/15 20:44:42 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/20 22:04:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	key_hook(int keycode)
 {
 	if (53 == keycode)
-		exit(0);
+		exit(0);	
 	return (0);
 }

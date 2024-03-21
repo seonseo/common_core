@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:41:01 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/17 20:58:51 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/20 21:34:11 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,22 @@
 # include "get_next_line.h"
 
 # define CLOSE_WINDOW 17
+# define ESC_KEY 53
+# define Q_KEY 12
+# define W_KEY 13
+# define E_KEY 14
+# define R_KEY 15
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define MINUS_KEY 27
+# define PLUS_KEY 24
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
+	int	z;
 }	t_point;
 
 typedef struct s_line
@@ -53,6 +64,7 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
+	t_point	center;
 	t_point	pos;
 }	t_img;
 
@@ -82,14 +94,20 @@ typedef struct s_vars
 
 //fdf.c
 int		main(int argc, char **argv);
+// void	print_matrix(t_vars *vars);
 //fdf1.c
 void	init_vars(t_vars *vars);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-void	isometric_projection(t_vars *vars);
-void	transform_coordinate(t_point *point, int z);
+//fdf_transform_coordinates.c
+void	transform_coordinates(t_vars *vars);
+void	isometric_projection(t_point *point);
 void	center_shape(t_vars *vars);
 // void	multiply_matrix(const double (*first)[1], const double (*second)[3], double (*result)[1]);
+//fdf_transform_coordinate1.c
+void	rotate_x(t_point *point, float angle);
+void	rotate_y(t_point *point, float angle);
+void	rotate_z(t_point *point, float angle);
 
 //fdf_parse_input_to_int_matrix.c
 int		parse_input_to_int_matrix(char *pathname, t_map *map);
@@ -112,8 +130,8 @@ void	draw_vertical_line(t_img *img, t_line *line);
 void	draw_non_vertical_line(t_img *img, t_line *line);
 // fdf_create_wireframe1.c
 int		line_func(int x, t_line *line);
-double	slope_calc(t_line *line);
-double	y_intercept_calc(t_line *line);
+float	slope_calc(t_line *line);
+float	y_intercept_calc(t_line *line);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 

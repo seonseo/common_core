@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:06:53 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/17 20:51:08 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/20 21:05:49 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	convert_map_to_point_matrix(t_vars *vars, int interval)
 		{
 			matrix->data[i][j].x = start_point.x + (interval * j);
 			matrix->data[i][j].y = start_point.y + (interval * i);
+			matrix->data[i][j].z = vars->map.data[i][j] * interval / 10;
 			j++;
 		}
 		i++;
@@ -65,7 +66,7 @@ void	get_matrix_start_point(t_vars *vars)
 
 	w_matrix = vars->matrix.interval * vars->map.width;
 	h_matrix = vars->matrix.interval * vars->map.height;
-	center = (t_point){(vars->img.width / 2), (vars->img.height / 2)};
+	center = vars->img.center;
 	vars->matrix.data[0][0].x = center.x - (w_matrix / 2);
 	vars->matrix.data[0][0].y = center.y - (h_matrix / 2);
 }
