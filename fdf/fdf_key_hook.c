@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 20:44:26 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/21 21:46:30 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:24:46 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,85 +19,69 @@ int	key_hook(int keycode, void *param)
 	vars = (t_vars *)param;
 	if (ESC_KEY == keycode)
 		exit(0);
-	my_mlx_clear_window(vars);
-	if (W_KEY == keycode)
-		transform_coordinates(vars, rotate_x, ((M_PI * 5.0) / 180.0));
-	if (S_KEY == keycode)
-		transform_coordinates(vars, rotate_x, (-(M_PI * 5.0) / 180.0));
-	if (A_KEY == keycode)
-		transform_coordinates(vars, rotate_y, ((M_PI * 5.0) / 180.0));
-	if (D_KEY == keycode)
-		transform_coordinates(vars, rotate_y, (-(M_PI * 5.0) / 180.0));
-	if (Q_KEY == keycode)
-		transform_coordinates(vars, rotate_z, (-(M_PI * 5.0) / 180.0));
-	if (E_KEY == keycode)
-		transform_coordinates(vars, rotate_z, ((M_PI * 5.0) / 180.0));
-	if (PLUS_KEY == keycode)
-		zoom_in(vars);
-	if (MINUS_KEY == keycode)
-		zoom_out(vars);
-	create_wireframe(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win.ptr, vars->img.ptr, 0, 0);
+	key_hook_projection(keycode, vars);
+	key_hook_rotate(keycode, vars);
+	key_hook_translate(keycode, vars);
+	key_hook_zoom(keycode, vars);
+	draw_next_frame(vars);
 	return (0);
 }
 
-void	my_mlx_clear_window(t_vars *vars)
+void	key_hook_projection(int keycode, t_vars *vars)
 {
-	ft_memset(vars->img.data, 0, vars->img.size_line * vars->img.height);
-}
-
-void	zoom_in(t_vars *vars)
-{
-	t_point	**matrix;
-	t_point	center;
-	int		i;
-	int		j;
-	int		m;
-	int		n;
-
-	m = 21;
-	n = 1;
-	matrix = vars->matrix.data;
-	center = vars->img.center;
-	i = 0;
-	while (i < vars->matrix.height)
+	if (ONE_KEY == keycode)
 	{
-		j = 0;
-		while (j < vars->matrix.width)
-		{
-			matrix[i][j].x = ((m * matrix[i][j].x) - (n * center.x)) / (m - n);
-			matrix[i][j].y = ((m * matrix[i][j].y) - (n * center.y)) / (m - n);
-			matrix[i][j].z = ((m * matrix[i][j].z) - (n * center.z)) / (m - n);
-			j++;
-		}
-		i++;
+		vars->matrix.center = (t_point){vars->img.width / 2, \
+		vars->img.height / 2, 0, 0};
+		get_matrix_start_point(vars);
+		fill_matrix_as_map(vars, 20);
+		isometric_projection(vars);
+	}
+	else if (TWO_KEY == keycode)
+	{
+		vars->matrix.center = (t_point){vars->img.width / 2, \
+		vars->img.height / 2, 0, 0};
+		get_matrix_start_point(vars);
+		fill_matrix_as_map(vars, 20);
 	}
 }
 
-void	zoom_out(t_vars *vars)
+void	key_hook_rotate(int keycode, t_vars *vars)
 {
-	t_point	**matrix;
-	t_point	center;
-	int		i;
-	int		j;
-	int		m;
-	int		n;
+	if (W_KEY == keycode)
+		rotate_object(vars, rotate_x, ((M_PI * 5.0) / 180.0));
+	else if (S_KEY == keycode)
+		rotate_object(vars, rotate_x, (-(M_PI * 5.0) / 180.0));
+	else if (A_KEY == keycode)
+		rotate_object(vars, rotate_y, ((M_PI * 5.0) / 180.0));
+	else if (D_KEY == keycode)
+		rotate_object(vars, rotate_y, (-(M_PI * 5.0) / 180.0));
+	else if (Q_KEY == keycode)
+		rotate_object(vars, rotate_z, (-(M_PI * 5.0) / 180.0));
+	else if (E_KEY == keycode)
+		rotate_object(vars, rotate_z, ((M_PI * 5.0) / 180.0));
+}
 
-	m = 20;
-	n = 1;
-	matrix = vars->matrix.data;
-	center = vars->img.center;
-	i = 0;
-	while (i < vars->matrix.height)
+void	key_hook_translate(int keycode, t_vars *vars)
+{
+	if (LEFT_KEY == keycode)
 	{
-		j = 0;
-		while (j < vars->matrix.width)
-		{
-			matrix[i][j].x = ((m * matrix[i][j].x) + (n * center.x)) / (m + n);
-			matrix[i][j].y = ((m * matrix[i][j].y) + (n * center.y)) / (m + n);
-			matrix[i][j].z = ((m * matrix[i][j].z) + (n * center.z)) / (m + n);
-			j++;
-		}
-		i++;
+		translate_object(vars, translate_left);
+		vars->matrix.center.x -= 5;
+	}
+	else if (RIGHT_KEY == keycode)
+	{
+		translate_object(vars, translate_right);
+		vars->matrix.center.x += 5;
+	}
+	else if (DOWN_KEY == keycode)
+	{
+		translate_object(vars, translate_down);
+		vars->matrix.center.y += 5;
+	}
+	else if (UP_KEY == keycode)
+	{
+		translate_object(vars, translate_up);
+		vars->matrix.center.y -= 5;
 	}
 }

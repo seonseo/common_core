@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 22:03:24 by macbookair        #+#    #+#             */
-/*   Updated: 2024/01/06 18:24:29 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:41:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,27 +147,27 @@ int	ft_bufjoin(t_fdlist *fdnode, char *buf)
 	return (0);
 }
 
-// #include <stdio.h>
-// #include <string.h>
+#include <stdio.h>
+#include <string.h>
 
-// int main(void)
-// {
-// 	int fd[2];
+int main(void)
+{
+	int fd[2];
 
-// 	fd[0] = open("text1", O_RDWR);
-// 	printf("%s", get_next_line(fd[0]));
-// 	fd[1] = open("text2", O_RDWR);
-// 	printf("%s", get_next_line(fd[1]));
-// 	printf("%s", get_next_line(fd[0]));
-// 	printf("%s", get_next_line(fd[1]));
-// 	printf("%s", get_next_line(fd[0]));
-// 	printf("%s", get_next_line(fd[0]));
-// 	printf("%s", get_next_line(fd[0]));
-// 	close(fd[0]);
-// 	printf("%s", get_next_line(fd[1]));
-// 	printf("%s", get_next_line(fd[1]));
-// 	printf("%s", get_next_line(fd[1]));
+	fd[0] = open("text1", O_RDWR);
+	printf("%s", get_next_line(fd[0]));
+	fd[1] = open("text2", O_RDWR);
+	printf("%s", get_next_line(0));
+	printf("%s", get_next_line(fd[0]));
+	printf("%s", get_next_line(fd[1]));
+	printf("%s", get_next_line(fd[0]));
+	printf("%s", get_next_line(fd[0]));
+	printf("%s", get_next_line(fd[0]));
+	close(fd[0]);
+	printf("%s", get_next_line(fd[1]));
+	printf("%s", get_next_line(fd[1]));
+	printf("%s", get_next_line(fd[1]));
 
-// 	close(fd[1]);
-// 	return (0);
-// }
+	close(fd[1]);
+	return (0);
+}

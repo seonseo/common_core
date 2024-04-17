@@ -1,0 +1,18 @@
+{
+	"files.associations": {
+		"mlx.h": "c",
+		"mlx_int.h": "c",
+		"cstdlib": "c",
+		"locale": "c",
+		"ostream": "c",
+		"new": "c",
+		"get_next_line.h": "c",
+		"__node_handle": "c",
+		"printf.h": "c",
+		"memory": "c",
+		"utility": "c",
+		"ft_printf.h": "c",
+		"libft.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
+}

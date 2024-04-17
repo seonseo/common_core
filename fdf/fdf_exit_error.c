@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:31:35 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/15 22:15:59 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/03/23 21:26:45 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exit_error(char *err_msg, int perror_flag)
 	exit(1);
 }
 
-int		exit_no_error(void)
+int	exit_no_error(void)
 {
 	exit(0);
 }

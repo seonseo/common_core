@@ -17,8 +17,9 @@ LIBFT_FLAGS = -Llibft -lft
 
 SRC = fdf.c		fdf1.c				fdf_parse_input_to_int_matrix.c	fdf_parse_input_to_int_matrix1.c\
 fdf_convert_map_to_point_matrix.c	fdf_create_wireframe.c			fdf_create_wireframe1.c\
-fdf_key_hook.c						fdf_exit_error.c				fdf_isometric_projection.c\
-fdf_isometric_projection1.c
+fdf_create_wireframe2.c				fdf_key_hook.c					fdf_key_hook1.c\
+fdf_exit_error.c					fdf_isometric_projection.c		fdf_translate_object.c\
+fdf_mouse_move_hook.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \
@@ -36,9 +37,14 @@ LIBFT_OBJ = $(patsubst %.c, %.o, $(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX_DIR)$(MLX)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	$(CC) $(OBJ) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
+
+$(MLX): $(MLX_DIR)$(MLX)
 	cp $(MLX_DIR)$(MLX) .
+
+$(MLX_DIR)$(MLX):
+	make -C $(MLX_DIR)
 
 $(LIBFT): $(LIBFT_SRC) $(LIBFT_HEADER)
 	make -C $(LIBFT_DIR)
@@ -49,6 +55,7 @@ $(LIBFT): $(LIBFT_SRC) $(LIBFT_HEADER)
 clean:
 	rm -f $(OBJ)
 	make -C $(LIBFT_DIR) fclean
+	make -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
