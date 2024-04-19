@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/23 21:51:14 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 20:48:48 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 # undef LONG_MAX
 # undef INT_MAX
 # define LONG_MAX 9223372036854775807
 # define INT_MAX 2147483647
-# define TRUE 1
-# define FALSE 0
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+typedef enum { FALSE, TRUE } t_bool;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -56,6 +52,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlncpy(char *dst, const char *src, size_t dstsize, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

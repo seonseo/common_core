@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:30:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/13 19:01:56 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:52:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 char	*ft_printf_make_str_malloc(t_format *spec)
 {

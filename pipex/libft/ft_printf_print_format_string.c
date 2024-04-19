@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:18:51 by seonseo           #+#    #+#             */
-/*   Updated: 2024/02/13 21:35:28 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:52:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_printf_read_spec(const char *format, t_format *spec, size_t *i)
 {

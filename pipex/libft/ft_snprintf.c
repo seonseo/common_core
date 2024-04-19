@@ -1,46 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_snprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/04/18 18:52:42 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 20:04:03 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_snprintf(char *str, size_t size, const char *format, ...)
 {
 	size_t	i;
-	size_t	printbyte;
-	int		error;
+	ssize_t	printbyte;
+	size_t	total_printbyte;
 	va_list	args;
+	t_str	dst;
 
+	dst.str = str;
+	dst.size = size;
+	total_printbyte = 0;
 	va_start(args, format);
-	error = 0;
-	printbyte = 0;
 	i = 0;
-	while (format[i] && -1 != error)
+	while (format[i])
 	{
 		if ('%' == format[i])
-			error = ft_printf_print_format_string(format, args, &i, &printbyte);
+			printbyte = ft_snprintf_print_format_string(&dst, format, args, &i);
 		else
-			error = ft_printf_print_plain_string(format, &i, &printbyte);
+			printbyte = ft_snprintf_print_plain_string(&dst, format, &i);
+		if (-1 == printbyte)
+			break ;
+		total_printbyte += printbyte;
 	}
 	va_end(args);
-	if (-1 == error)
+	if (-1 == printbyte)
 		return (-1);
-	return (printbyte);
+	return (total_printbyte);
 }
 
-int	ft_printf_print_format_string(const char *format, va_list args, \
-size_t *i, size_t *printbyte)
+int	ft_snprintf_print_format_string(t_str *dst, const char *format, \
+va_list args, size_t *i)
 {
 	t_format	spec;
 	int			error;
+	ssize_t		printbyte;
 
 	(*i)++;
 	spec = (t_format){};
@@ -52,46 +58,33 @@ size_t *i, size_t *printbyte)
 	if (-1 != error)
 		error = ft_printf_make_str(&spec, args);
 	if (-1 != error)
-		error = ft_printf_print_str(&spec, printbyte);
-	return (error);
+		printbyte = ft_snprintf_print_str(dst, &spec);
+	if (-1 == error || -1 == printbyte)
+		return (-1);
+	return (printbyte);
 }
 
-int	ft_printf_print_plain_string(const char *format, \
-size_t *i, size_t *printbyte)
+int	ft_snprintf_print_plain_string(t_str *dst, const char *format, size_t *i)
 {
 	const char	*start;
 	size_t		len;
+	ssize_t		printbyte;
 
 	start = &format[*i];
 	len = ft_printf_strlen(start);
-	if (write(1, start, len) == -1)
+	printbyte = ft_strlncpy(dst->str, start, dst->size, len);
+	if (-1 == printbyte)
 		return (-1);
-	(*i) += len;
-	(*printbyte) += len;
-	return (0);
+	(*i) += printbyte;
+	return (printbyte);
 }
 
-size_t	ft_printf_strlen(const char *s)
+int	ft_snprintf_print_str(t_str *dst, t_format *spec)
 {
-	size_t	len;
+	ssize_t	printbyte;
 
-	len = 0;
-	while (s[len] && s[len] != '%')
-		len++;
-	return (len);
+	printbyte = ft_strlncpy(dst->str, spec->str, dst->size, spec->obj_size);
+	free(spec->str);
+	spec->str = NULL;
+	return (printbyte);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char	a;
-// 	int	printbyte;
-
-// 	a = 'a';
-// 	printbyte = ft_printf("%X%%\n", a);
-// 	printf("\npb:%d\n", printbyte);
-// 	printbyte = printf("%X%%\n", a);
-// 	printf("\npb:%d\n", printbyte);
-// 	return (0);
-// }

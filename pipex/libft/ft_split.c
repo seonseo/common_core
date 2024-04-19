@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:34:57 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/13 19:47:30 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:54:37 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ size_t	ft_wordcount(char *s, char c)
 	int		is_word;
 
 	wordcount = 0;
-	is_word = FALSE;
+	is_word = 0;
 	while (*s)
 	{
-		if (*s != c && is_word == FALSE)
+		if (*s != c && is_word == 0)
 		{
-			is_word = TRUE;
+			is_word = 1;
 			wordcount++;
 		}
-		if (*s == c && is_word == TRUE)
-			is_word = FALSE;
+		if (*s == c && is_word == 1)
+			is_word = 0;
 		s++;
 	}
 	return (wordcount);

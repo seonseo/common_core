@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_make_str_cs.c                            :+:      :+:    :+:   */
+/*   ft_vdprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 20:23:44 by seonseo           #+#    #+#             */
+/*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
 /*   Updated: 2024/04/18 18:52:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_printf_make_str_c(t_format *spec, char c)
+int	ft_vdprintf(int fd, const char *format, va_list args)
 {
-	char	str_c[1];
+	size_t	i;
+	ssize_t	printbyte;
+	size_t	total_printbyte;
 
-	str_c[0] = c;
-	spec->str = str_c;
-	spec->str_len = 1;
-	return (ft_printf_make_str_spec(spec));
-}
-
-int	ft_printf_make_str_s(t_format *spec, char *s)
-{
-	if (NULL == s)
+	total_printbyte = 0;
+	i = 0;
+	while (format[i])
 	{
-		spec->str = "(null)";
-		spec->str_len = 6;
+		if ('%' == format[i])
+			printbyte = ft_dprintf_print_format_string(fd, format, args, &i);
+		else
+			printbyte = ft_dprintf_print_plain_string(fd, format, &i);
+		if (-1 == printbyte)
+			break ;
+		total_printbyte += printbyte;
 	}
-	else
-	{
-		spec->str = s;
-		spec->str_len = ft_strlen(s);
-	}
-	if (-1 != spec->precision && spec->str_len > (size_t)spec->precision)
-		spec->str_len = (size_t)spec->precision;
-	return (ft_printf_make_str_spec(spec));
+	if (-1 == printbyte)
+		return (-1);
+	return (total_printbyte);
 }

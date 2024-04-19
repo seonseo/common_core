@@ -6,12 +6,12 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 08:42:23 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/13 20:03:29 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:52:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

@@ -6,21 +6,21 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/04/17 21:46:57 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:52:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_dprintf(int fd, const char *format, ...)
 {
 	size_t	i;
 	ssize_t	printbyte;
-	size_t total_printbyte;
+	size_t	total_printbyte;
 	va_list	args;
 
 	va_start(args, format);
-	printbyte = 0;
+	total_printbyte = 0;
 	i = 0;
 	while (format[i])
 	{
@@ -29,7 +29,7 @@ int	ft_dprintf(int fd, const char *format, ...)
 		else
 			printbyte = ft_dprintf_print_plain_string(fd, format, &i);
 		if (-1 == printbyte)
-			break;
+			break ;
 		total_printbyte += printbyte;
 	}
 	va_end(args);
@@ -64,37 +64,24 @@ va_list args, size_t *i)
 int	ft_dprintf_print_plain_string(int fd, const char *format, size_t *i)
 {
 	const char	*start;
-	ssize_t		len;
+	size_t		len;
+	ssize_t		printbyte;
 
 	start = &format[*i];
-	len = (ssize_t)ft_printf_strlen(start);
-	if (-1 == write(fd, start, len))
+	len = ft_printf_strlen(start);
+	printbyte = write(fd, start, len);
+	if (-1 == printbyte)
 		return (-1);
-	(*i) += len;
-	return (len);
+	(*i) += printbyte;
+	return (printbyte);
 }
 
-size_t	ft_printf_strlen(const char *s)
+int	ft_dprintf_print_str(int fd, t_format *spec)
 {
-	size_t	len;
+	ssize_t	printbyte;
 
-	len = 0;
-	while (s[len] && s[len] != '%')
-		len++;
-	return (len);
+	printbyte = write(fd, spec->str, spec->obj_size);
+	free(spec->str);
+	spec->str = NULL;
+	return (printbyte);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char	a;
-// 	int	printbyte;
-
-// 	a = 'a';
-// 	printbyte = ft_printf("%X%%\n", a);
-// 	printf("\npb:%d\n", printbyte);
-// 	printbyte = printf("%X%%\n", a);
-// 	printf("\npb:%d\n", printbyte);
-// 	return (0);
-// }
