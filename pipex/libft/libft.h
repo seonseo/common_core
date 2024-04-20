@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/18 20:48:48 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/20 22:55:41 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # include <unistd.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "error_functions.h"
 
 # undef LONG_MAX
 # undef INT_MAX
 # define LONG_MAX 9223372036854775807
 # define INT_MAX 2147483647
 
-typedef enum { FALSE, TRUE } t_bool;
+typedef enum e_bool { FALSE, TRUE }	t_bool;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);

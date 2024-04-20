@@ -6,6 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 HEADER = libft.h
 PRINTF_HEADER = ft_printf.h
 GNL_HEADER = get_next_line.h
+ERROR_FUNCTIONS_HEADER = error_functions.h
 
 SRCS =\
 ft_isalpha.c    ft_memchr.c     ft_putchar_fd.c ft_strchr.c     ft_strlcpy.c    ft_strlncpy.c	ft_strrchr.c\
@@ -18,6 +19,7 @@ ft_printf_make_str_pdux.c		ft_printf_make_str_spec1.c\
 ft_printf_make_str_spec2.c		ft_printf_print_format_string.c\
 ft_printf_read_spec.c			ft_dprintf.c	ft_vdprintf.c	ft_snprintf.c	ft_vsnprintf.c\
 get_next_line.c					get_next_line_utils.c
+error_functions.c				error_functions1.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 
@@ -34,6 +36,9 @@ ft_%printf%.o: ft_%printf%.c $(PRINTF_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 get_next_line%.o: get_next_line%.c $(GNL_HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+error_functions%.o: error_functions%.c $(ERROR_FUNCTIONS_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

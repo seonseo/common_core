@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:14:21 by macbookair        #+#    #+#             */
-/*   Updated: 2024/04/18 20:09:17 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/20 22:50:54 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ int		ft_snprintf_print_format_string(t_str *dst, const char *format, \
 va_list args, size_t *i);
 int		ft_snprintf_print_plain_string(t_str *dst, const char *format, \
 size_t *i);
-int	ft_snprintf_print_str(t_str *dst, t_format *spec);
+int		ft_snprintf_print_str(t_str *dst, t_format *spec);
 
 //ft_vsnprintf.c
-int	ft_vsnprintf(char *str, size_t size, const char *format, va_list args);
+int		ft_vsnprintf(char *str, size_t size, const char *format, va_list args);
 
 #endif
