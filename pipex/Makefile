@@ -13,7 +13,8 @@ LIBFT_FLAGS = -Llibft -lft
 SRC = pipex.c	ft_getenv.c	ft_execvp.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
-SRC_BONUS = pipex_bonus.c	ft_getenv.c	ft_execvp.c
+SRC_BONUS = pipex_bonus.c	pipex_bonus_execute_pipeline.c	pipex_bonus_child.c\
+ft_getenv.c	ft_execvp.c
 OBJ_BONUS = $(patsubst %.c, %.o, $(SRC_BONUS))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \

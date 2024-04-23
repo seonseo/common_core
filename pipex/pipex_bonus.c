@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/23 20:57:21 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/23 23:08:07 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,43 @@
 
 int	main(int argc, char *argv[])
 {
-	if (argc < 5)
-		usage_err("infile cmd1 cmd2 ... cmdn outfile");
-	execute_pipeline(argc, argv);
-	wait_child(argc);
+	t_bool here_doc;
+
+	check_here_doc(argv, &here_doc);
+	pipex_argc_check(argc, here_doc);
+	execute_pipeline(argc, argv, here_doc);
+	wait_children(argc, here_doc);
 	exit(EXIT_SUCCESS);
 }
 
-void	execute_pipeline(int argc, char *argv[])
+void	check_here_doc(char *argv[], t_bool *here_doc)
 {
-	int		pfd_0[2];
-	int		pfd_1[2];
-	int		pid;
-	int		i;
-
-	i = 0;
-	while (i < argc - 3)
-	{
-		create_pipe(argc, i, pfd_0);
-		safe_fork(&pid);
-		if (pid == 0)
-		{
-			if (i == 0)
-				pipex_child_left(pfd_0, argv[1]);
-			else if (i < argc - 4)
-				pipex_child_middle(pfd_0, pfd_1);
-			else
-				pipex_child_right(pfd_1, argv[argc - 1]);
-			pipex_exec(argv, i);
-		}
-		close_pipes(pfd_0, pfd_1, i);
-		pfd_1[0] = pfd_0[0];
-		i++;
-	}
-	close(pfd_0[0]);
+	if (ft_memcmp("here_doc", argv[1], 9) == 0)
+		*here_doc = TRUE;
 }
 
-void	wait_children(int argc)
+void	pipex_argc_check(int argc, t_bool here_doc)
+{
+	if (here_doc == TRUE)
+	{
+		if (argc < 6)
+			usage_err("here_doc LIMITER cmd1 cmd2 ... cmdn file");
+	}
+	else if (argc < 5)
+		usage_err("infile cmd1 cmd2 ... cmdn outfile");
+}
+
+void	wait_children(int argc, t_bool here_doc)
 {
 	int	i;
+	int	command_count;
 
+	if (here_doc == TRUE)
+		command_count = argc - 4;
+	else
+		command_count = argc - 3;
 	i = 0;
-	while (i < argc - 4)
+	while (i < command_count)
 	{
 		if (wait(NULL) == -1)
 			err_exit("wait");

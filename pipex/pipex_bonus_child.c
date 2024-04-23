@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:52:03 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/23 20:52:31 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/23 23:21:48 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	pipex_child_middle(int pfd_0[2], int pfd_1[2])
 		err_exit("close 3");
 }
 
-void	pipex_child_right(int pfd_1[2], char *outfile)
+void	pipex_child_right(int pfd_1[2], char *outfile, t_bool here_doc)
 {
 	int	outfile_fd;
 
@@ -53,7 +53,10 @@ void	pipex_child_right(int pfd_1[2], char *outfile)
 		err_exit("dup2");
 	if (close(pfd_1[0]) == -1)
 		err_exit("close 6");
-	outfile_fd = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, (mode_t)0777);
+	if (here_doc == TRUE)
+		outfile_fd = open(outfile, O_CREAT | O_WRONLY | O_APPEND, (mode_t)0777);
+	else
+		outfile_fd = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, (mode_t)0777);
 	if (outfile_fd == -1)
 		err_exit("open 2");
 	if (dup2(outfile_fd, STDOUT_FILENO) == -1)
