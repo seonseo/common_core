@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 22:10:09 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/23 21:03:41 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/23 20:58:24 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include "libft.h"
 # include <sys/wait.h>
 
-void		pipex_fork(char *argv[], int pfd[2]);
-void		pipex_child_left(int pfd[2], char *infile);
-void		pipex_child_right(int pfd[2], char *outfile);
-void		pipex_exec(char *argv[], int i);
+//pipex_bonus.c
+void		execute_pipeline(int argc, char *argv[]);
+void		wait_children(int argc);
 
+//pipex_bonus_execute_pipeline.c
+void		create_pipe(int argc, int i, int pfd[2]);
+void		safe_fork(int *pid);
+void		pipex_exec(char *argv[], int i);
+void		close_pipes(int pfd_0[2], int pfd_1[2], int i);
+
+//pipex_bonus_child.c
+void		pipex_child_left(int pfd_0[2], char *infile);
+void		pipex_child_middle(int pfd_0[2], int pfd_1[2]);
+void		pipex_child_right(int pfd_1[2], char *outfile);
+
+//ft_execvp.c
 int			ft_execvp(const char *file, char *const argv[]);
+
+//ft_getenv.c
 const char	*ft_getenv(const char *key);
 
 #endif

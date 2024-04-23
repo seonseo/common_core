@@ -1,0 +1,15 @@
+Makefile
+bonus
+ft_execvp.c
+ft_execvp.o
+ft_getenv.c
+ft_getenv.o
+infile
+libft
+outfile
+pipex
+pipex.c
+pipex.h
+pipex_bonus.c
+pipex_bonus.h
+pipex_bonus.o

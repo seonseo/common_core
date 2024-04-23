@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:13:00 by macbookair        #+#    #+#             */
-/*   Updated: 2024/04/18 20:06:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/22 13:56:40 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list args)
 	size_t	total_printbyte;
 	t_str	dst;
 
+	if (0 != size)
+		*str = '\0';
 	dst.str = str;
 	dst.size = size;
 	total_printbyte = 0;

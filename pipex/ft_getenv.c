@@ -6,13 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 20:48:20 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/20 21:46:20 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:03:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-extern char	**environ;
+extern const char	**environ;
 
 const char	*ft_getenv(const char *key)
 {

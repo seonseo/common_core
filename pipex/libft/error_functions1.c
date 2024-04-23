@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:10 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/20 22:59:58 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/22 13:43:57 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error_functions.h"
+#include "libft.h"
 
 void	err_msg(const char *format, ...)
 {

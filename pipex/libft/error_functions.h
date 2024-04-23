@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:57:53 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/20 23:00:51 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/23 21:03:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "libft.h"
+
+# ifndef T_BOOL
+
+#  define T_BOOL
+
+typedef enum e_bool { FALSE, TRUE }	t_bool;
+# endif
 
 void	output_error(t_bool use_err, int err, const char *format, va_list args);
 void	err_msg(const char *format, ...);

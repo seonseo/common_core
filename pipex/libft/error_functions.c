@@ -6,11 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:10 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/20 23:01:31 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/22 13:41:38 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error_functions.h"
+#include "libft.h"
 
 static char	*g_ename[] = {
 	"", "EPERM", "ENOENT", "ESRCH", "EINTR", "EIO", "ENXIO", "E2BIG",
