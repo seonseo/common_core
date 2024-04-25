@@ -6,16 +6,23 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/24 23:21:24 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 15:02:26 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
+// static void chk()
+// {
+// 	system("leaks pipex");
+// 	system("lsof -nc pipex");
+// }
+
 int	main(int argc, char *argv[])
 {
 	t_bool here_doc;
 
+	// atexit(chk);
 	here_doc = check_here_doc(argv);
 	pipex_argc_check(argc, here_doc);
 	if (here_doc == FALSE)
@@ -64,18 +71,20 @@ void	wait_children(int argc, t_bool here_doc)
 	}
 }
 
-void	here_doc(char *limiter, int pfd[2])
+void	here_doc(char *limiter, int pfd_1[2])
 {
 	char	*save;
+	size_t	save_len;
 
-	if (close(pfd[0]) == -1)
+	if (close(pfd_1[0]) == -1)
 		err_exit("close here_doc read");
 	ft_dprintf(2, "close pfd_1[0] heredoc\n");
 	save = here_doc_get_string(limiter);
-	if (write(pfd[1], save, ft_strlen(save)) != (ssize_t)ft_strlen(save))
+	save_len = ft_strlen(save);
+	if (write(pfd_1[1], save, save_len) != (ssize_t)save_len)
 		err_exit("write");
 	free(save);
-	if (close(pfd[1] == -1))
+	if (close(pfd_1[1] == -1))
 		err_exit("close here_doc write");
 	ft_dprintf(2, "close pfd_1[1] heredoc\n");
 }

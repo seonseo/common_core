@@ -6,17 +6,23 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/23 21:02:22 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:53:46 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void chk() {
+	system("leaks pipex");
+	system("lsof -nc pipex");
+}
 
 int	main(int argc, char *argv[])
 {
 	int		pfd[2];
 	int		i;
 
+	atexit(chk);
 	if (argc != 5)
 		usage_err("file1 cmd1 cmd2 file2");
 	if (pipe(pfd) == -1)

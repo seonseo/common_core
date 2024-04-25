@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:52:03 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/24 23:05:17 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 15:07:48 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	pipex_child_left_here_doc(int pfd_0[2], int pfd_1[2])
 
 void	pipex_child_middle(int pfd_0[2], int pfd_1[2])
 {
-	ft_dprintf(2, "middle\n");
 	if (close(pfd_0[0]) == -1)
 		err_exit("close middle 1");
+	ft_dprintf(2, "close pfd_0[0] middle\n");
 	if (dup2(pfd_0[1], STDOUT_FILENO) == -1)
 		err_exit("dup2");
 	if (close(pfd_0[1]) == -1)

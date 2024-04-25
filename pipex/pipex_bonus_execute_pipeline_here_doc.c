@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/24 23:14:46 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:49:01 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	execute_pipeline_here_doc(int argc, char *argv[])
 		ft_dprintf(2, "pfd_1[0] = pfd_0[0]\n");
 		i++;
 	}
-	close(pfd_1[0]);
-	ft_dprintf(2, "close pfd_1[0] end\n");
 }
 
 void	create_pipe_here_doc(int argc, int i, int pfd_0[2], int pfd_1[2])
