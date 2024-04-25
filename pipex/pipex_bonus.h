@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 22:10:09 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/24 21:41:33 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:02:45 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,24 @@
 t_bool		check_here_doc(char *argv[]);
 void		pipex_argc_check(int argc, t_bool here_doc);
 void		wait_children(int argc, t_bool here_doc);
-void		here_doc(char *limiter, int pfd[2]);
+
+//pipex_bonus_here_doc.c
+void		here_doc(char *limiter, int i, int pfd[2]);
 char		*here_doc_get_string(char *limiter);
 
 //pipex_bonus_execute_pipeline.c
-void		execute_pipeline(int argc, char *argv[]);
-void		create_pipe(int argc, int i, int pfd[2]);
+void		execute_pipeline(int argc, char *argv[], int cmd_cnt);
+void		create_pipe(int cmd_cnt, int i, int pfd[2]);
 int			safe_fork(void);
 void		pipex_exec(char *argv[], int i, t_bool here_doc);
-void		close_pipes(int argc, int pfd_0[2], int pfd_1[2], int i);
+void		close_pipes(int cmd_cnt, int i, int pfd_0[2], int pfd_1[2]);
 
 //pipex_bonus_execute_pipeline_here_doc.c
-void		execute_pipeline_here_doc(int argc, char *argv[]);
-void		create_pipe_here_doc(int argc, int i, int pfd_0[2], int pfd_1[2]);
-void		close_pipes_here_doc(int argc, int pfd_0[2], int pfd_1[2], int i);
+void		execute_pipeline_here_doc(int argc, char *argv[], int cmd_cnt);
+void		create_pipe_here_doc(int cmd_cnt, int i, \
+int pfd_0[2], int pfd_1[2]);
+void		close_pipes_here_doc(int cmd_cnt, int i, \
+int pfd_0[2], int pfd_1[2]);
 
 //pipex_bonus_child.c
 void		pipex_child_left(int pfd_0[2], char *infile);

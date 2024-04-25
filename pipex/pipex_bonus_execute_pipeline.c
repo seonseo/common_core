@@ -6,23 +6,23 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 14:47:53 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:04:04 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	execute_pipeline(int argc, char *argv[])
+void	execute_pipeline(int argc, char *argv[], int cmd_cnt)
 {
-	int		pfd_0[2];
-	int		pfd_1[2];
-	int		pid;
+	int			pfd_0[2];
+	int			pfd_1[2];
+	int			pid;
 	int		i;
 
 	i = 0;
 	while (i < argc - 3)
 	{
-		create_pipe(argc, i, pfd_0);
+		create_pipe(cmd_cnt, i, pfd_0);
 		pid = safe_fork();
 		if (pid == 0)
 		{
@@ -34,19 +34,15 @@ void	execute_pipeline(int argc, char *argv[])
 				pipex_child_right(pfd_1, argv[argc - 1], FALSE);
 			pipex_exec(argv, i, FALSE);
 		}
-		close_pipes(argc, pfd_0, pfd_1, i);
+		close_pipes(cmd_cnt, i, pfd_0, pfd_1);
 		pfd_1[0] = pfd_0[0];
 		i++;
 	}
 }
 
-void	create_pipe(int argc, int i, int pfd_0[2])
+void	create_pipe(int cmd_cnt, int i, int pfd_0[2])
 {
-	int	command_count;
-
-	ft_dprintf(2, "create_pipe %d\n", i);
-	command_count = argc - 3;
-	if (i < command_count - 1)
+	if (i < cmd_cnt - 1)
 	{
 		if (pipe(pfd_0) == -1)
 			err_exit("pipe");
@@ -67,7 +63,6 @@ void	pipex_exec(char *argv[], int i, t_bool here_doc)
 {
 	char	**child_argv;
 
-	ft_dprintf(2, "exec\n");
 	if (here_doc == FALSE)
 		child_argv = ft_split(argv[2 + i], ' ');
 	else
@@ -78,13 +73,9 @@ void	pipex_exec(char *argv[], int i, t_bool here_doc)
 		err_exit("ft_execvp");
 }
 
-void	close_pipes(int argc, int pfd_0[2], int pfd_1[2], int i)
+void	close_pipes(int cmd_cnt, int i, int pfd_0[2], int pfd_1[2])
 {
-	int	command_count;
-
-	ft_dprintf(2, "close_pipes %d\n", i);
-	command_count = argc - 3;
-	if (i < command_count - 1)
+	if (i < cmd_cnt - 1)
 	{
 		if (close(pfd_0[1]) == -1)
 			err_exit("close_pipes 1");

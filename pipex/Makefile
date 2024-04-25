@@ -14,7 +14,7 @@ SRC = pipex.c	ft_getenv.c	ft_execvp.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 SRC_BONUS = pipex_bonus.c	pipex_bonus_execute_pipeline.c	pipex_bonus_execute_pipeline_here_doc.c\
-pipex_bonus_child.c			ft_getenv.c						ft_execvp.c
+pipex_bonus_child.c			pipex_bonus_here_doc.c			ft_getenv.c		ft_execvp.c
 OBJ_BONUS = $(patsubst %.c, %.o, $(SRC_BONUS))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \
@@ -52,6 +52,7 @@ $(LIBFT): $(LIBFT_SRC) $(LIBFT_HEADER)
 clean:
 	rm -f $(OBJ)
 	rm -f $(OBJ_BONUS)
+	rm -f bonus
 	make -C $(LIBFT_DIR) fclean
 
 fclean: clean
