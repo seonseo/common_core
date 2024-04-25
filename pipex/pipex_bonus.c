@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 18:54:58 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:55:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // 	system("lsof -nc pipex");
 // }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_bool	here_doc;
 	int		cmd_cnt;
@@ -28,12 +28,12 @@ int	main(int argc, char *argv[])
 	if (here_doc == FALSE)
 	{
 		cmd_cnt = argc - 3;
-		execute_pipeline(argc, argv, cmd_cnt);
+		execute_pipeline(argc, argv, envp, cmd_cnt);
 	}
 	else
 	{
 		cmd_cnt = argc - 4;
-		execute_pipeline_here_doc(argc, argv, cmd_cnt);
+		execute_pipeline_here_doc(argc, argv, envp, cmd_cnt);
 	}
 	wait_children(cmd_cnt);
 	exit(EXIT_SUCCESS);

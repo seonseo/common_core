@@ -6,13 +6,14 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 18:12:28 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:59:33 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	execute_pipeline_here_doc(int argc, char *argv[], int cmd_cnt)
+void	execute_pipeline_here_doc(int argc, char *argv[], char *envp[], \
+int cmd_cnt)
 {
 	int		pfd_0[2];
 	int		pfd_1[2];
@@ -32,7 +33,7 @@ void	execute_pipeline_here_doc(int argc, char *argv[], int cmd_cnt)
 				pipex_child_middle(pfd_0, pfd_1);
 			else
 				pipex_child_right(pfd_1, argv[argc - 1], TRUE);
-			pipex_exec(argv, i, TRUE);
+			pipex_exec(argv, envp, i, TRUE);
 		}
 		here_doc(argv[2], i, pfd_1);
 		close_pipes_here_doc(cmd_cnt, i, pfd_0, pfd_1);

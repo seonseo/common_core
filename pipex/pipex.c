@@ -6,13 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 16:48:43 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 23:02:35 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	int		pfd[2];
 	int		i;
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 		usage_err("file1 cmd1 cmd2 file2");
 	if (pipe(pfd) == -1)
 		err_exit("pipe");
-	pipex_fork(argv, pfd);
+	pipex_fork(argv, envp, pfd);
 	i = 0;
 	while (i < 2)
 	{
@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 	exit(EXIT_SUCCESS);
 }
 
-void	pipex_fork(char *argv[], int pfd[2])
+void	pipex_fork(char *argv[], char *envp[], int pfd[2])
 {
 	int	pid;
 	int	i;
@@ -56,7 +56,7 @@ void	pipex_fork(char *argv[], int pfd[2])
 				pipex_child_left(pfd, argv[1]);
 			else
 				pipex_child_right(pfd, argv[4]);
-			pipex_exec(argv, i);
+			pipex_exec(argv, envp, i);
 		}
 		i++;
 	}
@@ -100,13 +100,13 @@ void	pipex_child_right(int pfd[2], char *outfile)
 		err_exit("close 7");
 }
 
-void	pipex_exec(char *argv[], int i)
+void	pipex_exec(char *argv[], char *envp[], int i)
 {
 	char	**child_argv;
 
 	child_argv = ft_split(argv[2 + i], ' ');
 	if (child_argv == NULL)
 		err_exit("ft_split");
-	if (ft_execvp(child_argv[0], child_argv) == -1)
+	if (ft_execvpe(child_argv[0], child_argv, envp) == -1)
 		err_exit("ft_execvp");
 }

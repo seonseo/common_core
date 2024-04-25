@@ -10,11 +10,11 @@ LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_HEADER = $(addprefix $(LIBFT_DIR), libft.h ft_printf.h get_next_line.h error_functions.h)
 LIBFT_FLAGS = -Llibft -lft
 
-SRC = pipex.c	ft_getenv.c	ft_execvp.c
+SRC = pipex.c	ft_getenv.c	ft_execvpe.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 SRC_BONUS = pipex_bonus.c	pipex_bonus_execute_pipeline.c	pipex_bonus_execute_pipeline_here_doc.c\
-pipex_bonus_child.c			pipex_bonus_here_doc.c			ft_getenv.c		ft_execvp.c
+pipex_bonus_child.c			pipex_bonus_here_doc.c			ft_getenv.c		ft_execvpe.c
 OBJ_BONUS = $(patsubst %.c, %.o, $(SRC_BONUS))
 
 LIBFT_SRC = $(addprefix $(LIBFT_DIR), \

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execvp.c                                        :+:      :+:    :+:   */
+/*   ft_execvpe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:04:14 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/23 21:00:39 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 23:05:44 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-extern char *const	environ[];
-
-static void	ft_execvp_search(const char *file, char *const argv[], \
-char **paths);
+static void	ft_execvpe_search(const char *file, char *const argv[], \
+char *envp[], char **paths);
 static char	*path_join(const char *dir, const char *file);
 static void	free_strs(char **strs);
 
-int	ft_execvp(const char *file, char *const argv[])
+int	ft_execvpe(const char *file, char *const argv[], char *envp[])
 {
 	char	**paths;
 
@@ -29,16 +27,17 @@ int	ft_execvp(const char *file, char *const argv[])
 		return (-1);
 	}
 	if (ft_strchr(file, '/'))
-		return (execve(file, argv, environ));
-	paths = ft_split(ft_getenv("PATH"), ':');
+		return (execve(file, argv, envp));
+	paths = ft_split(ft_getenv("PATH", envp), ':');
 	if (paths == NULL)
 		return (-1);
-	ft_execvp_search(file, argv, paths);
+	ft_execvpe_search(file, argv, envp, paths);
 	free_strs(paths);
 	return (-1);
 }
 
-static void	ft_execvp_search(const char *file, char *const argv[], char **paths)
+static void	ft_execvpe_search(const char *file, char *const argv[], \
+char *envp[], char **paths)
 {
 	int		i;
 	char	*path;
@@ -51,7 +50,7 @@ static void	ft_execvp_search(const char *file, char *const argv[], char **paths)
 			break ;
 		if (access(path, F_OK) == 0)
 		{
-			if (access(path, X_OK) == 0 && execve(path, argv, environ) == -1)
+			if (access(path, X_OK) == 0 && execve(path, argv, envp) == -1)
 			{
 				free(path);
 				break ;

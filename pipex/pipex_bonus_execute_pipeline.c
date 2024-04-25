@@ -6,13 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 18:12:26 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:59:54 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	execute_pipeline(int argc, char *argv[], int cmd_cnt)
+void	execute_pipeline(int argc, char *argv[], char *envp[], int cmd_cnt)
 {
 	int		pfd_0[2];
 	int		pfd_1[2];
@@ -32,7 +32,7 @@ void	execute_pipeline(int argc, char *argv[], int cmd_cnt)
 				pipex_child_middle(pfd_0, pfd_1);
 			else
 				pipex_child_right(pfd_1, argv[argc - 1], FALSE);
-			pipex_exec(argv, i, FALSE);
+			pipex_exec(argv, envp, i, FALSE);
 		}
 		close_pipes(cmd_cnt, i, pfd_0, pfd_1);
 		pfd_1[0] = pfd_0[0];
@@ -59,7 +59,7 @@ int	safe_fork(void)
 	return (pid);
 }
 
-void	pipex_exec(char *argv[], int i, t_bool here_doc)
+void	pipex_exec(char *argv[], char *envp[], int i, t_bool here_doc)
 {
 	char	**child_argv;
 
@@ -69,7 +69,7 @@ void	pipex_exec(char *argv[], int i, t_bool here_doc)
 		child_argv = ft_split(argv[3 + i], ' ');
 	if (child_argv == NULL)
 		err_exit("ft_split");
-	if (ft_execvp(child_argv[0], child_argv) == -1)
+	if (ft_execvpe(child_argv[0], child_argv, envp) == -1)
 		err_exit("ft_execvp");
 }
 
