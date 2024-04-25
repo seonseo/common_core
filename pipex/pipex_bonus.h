@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 22:10:09 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 18:52:41 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 18:54:45 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 //pipex_bonus.c
 t_bool		check_here_doc(char *argv[]);
 void		pipex_argc_check(int argc, t_bool here_doc);
-void		wait_children(int argc, int cmd_cnt, t_bool here_doc);
+void		wait_children(int cmd_cnt);
 
 //pipex_bonus_here_doc.c
 void		here_doc(char *limiter, int i, int pfd[2]);
