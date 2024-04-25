@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 17:03:13 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 18:52:31 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int	main(int argc, char *argv[])
 {
 	t_bool	here_doc;
-	int	cmd_cnt;
+	int		cmd_cnt;
 
 	here_doc = check_here_doc(argv);
 	pipex_argc_check(argc, here_doc);
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[])
 		cmd_cnt = argc - 4;
 		execute_pipeline_here_doc(argc, argv, cmd_cnt);
 	}
-	wait_children(argc, here_doc);
+	wait_children(cmd_cnt, here_doc);
 	exit(EXIT_SUCCESS);
 }
 
@@ -58,15 +58,10 @@ void	pipex_argc_check(int argc, t_bool here_doc)
 		usage_err("infile cmd1 cmd2 ... cmdn outfile");
 }
 
-void	wait_children(int argc, t_bool here_doc)
+void	wait_children(int argc, int cmd_cnt, t_bool here_doc)
 {
 	int	i;
-	int	cmd_cnt;
 
-	if (here_doc == FALSE)
-		cmd_cnt = argc - 3;
-	else
-		cmd_cnt = argc - 4;
 	i = 0;
 	while (i < cmd_cnt)
 	{

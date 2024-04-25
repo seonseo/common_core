@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 17:05:04 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:17:43 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ char	*here_doc_get_string(char *limiter)
 		free(line);
 		save = buf;
 	}
+	free(line);
 	return (save);
 }

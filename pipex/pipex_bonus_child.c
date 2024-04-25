@@ -6,15 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:52:03 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 16:52:48 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 18:30:29 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
 
 void	pipex_child_left(int pfd_0[2], char *infile)
 {

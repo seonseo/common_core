@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 17:02:56 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/25 18:12:28 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	execute_pipeline_here_doc(int argc, char *argv[], int cmd_cnt)
 {
-	int			pfd_0[2];
-	int			pfd_1[2];
-	int			pid;
+	int		pfd_0[2];
+	int		pfd_1[2];
+	int		pid;
 	int		i;
 
 	i = 0;
