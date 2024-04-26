@@ -6,20 +6,20 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:04:14 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 23:05:44 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:45:33 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	ft_execvpe_search(const char *file, char *const argv[], \
-char *envp[], char **paths);
+static char	*ft_execvpe_search(const char *file, char *dirs[]);
 static char	*path_join(const char *dir, const char *file);
-static void	free_strs(char **strs);
+static void	free_strs(char *strs[]);
 
 int	ft_execvpe(const char *file, char *const argv[], char *envp[])
 {
-	char	**paths;
+	char	**dirs;
+	char	*path;
 
 	if (file == NULL || *file == '\0')
 	{
@@ -28,33 +28,31 @@ int	ft_execvpe(const char *file, char *const argv[], char *envp[])
 	}
 	if (ft_strchr(file, '/'))
 		return (execve(file, argv, envp));
-	paths = ft_split(ft_getenv("PATH", envp), ':');
-	if (paths == NULL)
+	dirs = ft_split(ft_getenv("PATH", envp), ':');
+	if (dirs == NULL)
 		return (-1);
-	ft_execvpe_search(file, argv, envp, paths);
-	free_strs(paths);
+	path = ft_execvpe_search(file, dirs);
+	free_strs(dirs);
+	if (path != NULL)
+		execve(path, argv, envp);
 	return (-1);
 }
 
-static void	ft_execvpe_search(const char *file, char *const argv[], \
-char *envp[], char **paths)
+static char	*ft_execvpe_search(const char *file, char *dirs[])
 {
 	int		i;
 	char	*path;
 
 	i = 0;
-	while (paths[i])
+	while (dirs[i])
 	{
-		path = path_join(paths[i], file);
+		path = path_join(dirs[i], file);
 		if (path == NULL)
 			break ;
 		if (access(path, F_OK) == 0)
 		{
-			if (access(path, X_OK) == 0 && execve(path, argv, envp) == -1)
-			{
-				free(path);
-				break ;
-			}
+			if (access(path, X_OK) == 0)
+				return (path);
 			else
 			{
 				free(path);
@@ -64,6 +62,7 @@ char *envp[], char **paths)
 		free(path);
 		i++;
 	}
+	return (NULL);
 }
 
 static char	*path_join(const char *dir, const char *file)
@@ -86,7 +85,7 @@ static char	*path_join(const char *dir, const char *file)
 	return (full_path);
 }
 
-static void	free_strs(char **strs)
+static void	free_strs(char *strs[])
 {
 	int	i;
 
