@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/29 12:40:04 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:51:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static int	ft_isspace(int c)
 {
 	if ((9 <= c && c <= 13) || (c == 32))
-		return (TRUE);
-	return (FALSE);
+		return (1);
+	return (0);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
 	size_t	i;
 	int		sign;
@@ -39,12 +39,12 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(str[i]))
 	{
 		if ((number > LONG_MAX / 10) || \
-		(number == LONG_MAX / 10 && (str[i] - '0') > (char)(LONG_MAX % 10)))
+		(number == LONG_MAX / 10 && str[i] > (char)(LONG_MAX % 10)))
 			return (-(sign == 1));
 		number = number * 10 + str[i] - '0';
 		i++;
 	}
-	return ((int)(number * sign));
+	return (number * sign);
 }
 
 // #include <stdio.h>

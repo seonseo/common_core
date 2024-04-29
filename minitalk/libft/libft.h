@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/29 11:39:32 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/27 18:22:35 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include "error_functions.h"
 
 # undef LONG_MAX
 # undef INT_MAX
@@ -25,7 +24,6 @@
 # define INT_MAX 2147483647
 
 int		ft_atoi(const char *str);
-long	ft_atol(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(int c);
