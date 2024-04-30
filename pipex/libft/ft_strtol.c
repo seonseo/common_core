@@ -6,20 +6,20 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/30 22:17:22 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/30 23:00:37 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-const char	*skip_whitespace(const char *str)
+static const char	*skip_whitespace(const char *str)
 {
 	while (ft_isspace((int)*str))
 		str++;
 	return (str);
 }
 
-const char	*handle_sign(const char	*str, int *sign)
+static const char	*handle_sign(const char	*str, int *sign)
 {
 	if (*str == '+' || *str == '-')
 	{
@@ -32,7 +32,7 @@ const char	*handle_sign(const char	*str, int *sign)
 	return (str);
 }
 
-const char	*determine_base(const char *str, int *base)
+static const char	*determine_base(const char *str, int *base)
 {
 	if (*base == 0)
 	{
@@ -42,13 +42,13 @@ const char	*determine_base(const char *str, int *base)
 			if (*str == 'x' || *str == 'X')
 			{
 				str++;
-				base = 16;
+				*base = 16;
 			}
 			else
-				base = 8;
+				*base = 8;
 		}
 		else
-			base = 10;
+			*base = 10;
 	}
 	else if (*base == 16)
 	{
@@ -58,7 +58,7 @@ const char	*determine_base(const char *str, int *base)
 	return (str);
 }
 
-int	char_to_digit(char c, int base)
+static int	char_to_digit(char c, int base)
 {
 	int	digit;
 
@@ -73,7 +73,24 @@ int	char_to_digit(char c, int base)
 	return (digit);
 }
 
-long	convert_to_number(const char *str, int base, int sign, char **endptr)
+int	check_overflow(long result, int base, int sign, int digit)
+{
+	if (sign == 1)
+	{
+		if ((result > LONG_MAX / base) || \
+			((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
+			return (1);
+	}
+	else
+	{
+		if ((result > LONG_MAX / base) || \
+			((result == LONG_MAX / base) && (digit > LONG_MAX % base + 1)))
+			return (1);
+	}
+	return (0);
+}
+
+static long	convert_to_number(const char *str, int base, int sign, char **endptr)
 {
     long	result;
 	int		digit;
@@ -82,18 +99,17 @@ long	convert_to_number(const char *str, int base, int sign, char **endptr)
 	while (*str)
 	{
 		digit = char_to_digit(*str, base);
-		if (digit = -1)
+		if (digit == -1)
 			break;
-		if ((result > LONG_MAX / base) || \
-		((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
+		if (check_overflow(result, base, sign, digit))
 		{
 			errno = ERANGE;
-			if (sign == 1)
-				result = LONG_MAX;
-			else
-				result = -LONG_MAX -1L;
 			break;
 		}
+		if ()
+
+		result = result * base + digit;
+		str++;
 	}
 	if (endptr)
 		*endptr = (char *)str;
@@ -110,3 +126,27 @@ long ft_strtol(const char *str, char **endptr, int base)
     str = determine_base(str, &base);
     return (convert_to_number(str, base, sign, endptr));
 }
+
+		if (sign == 1)
+		{
+			if ((result > LONG_MAX / base) || \
+				((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
+			{
+				errno = ERANGE;
+				result = LONG_MAX;
+				break;
+			}
+		}
+		else
+		{
+			if ((result > LONG_MAX / base) || \
+				((result == LONG_MAX / base) && (digit > LONG_MAX % base + 1)))
+			{
+				errno = ERANGE;
+				result = -LONG_MAX - 1L;
+				break;
+			}
+			else if ((result > LONG_MAX / base) || \
+				((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
+				result = -LONG_MAX - 1L;
+		}
