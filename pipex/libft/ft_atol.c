@@ -6,18 +6,11 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/29 11:51:59 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/04/30 19:55:02 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_isspace(int c)
-{
-	if ((9 <= c && c <= 13) || (c == 32))
-		return (1);
-	return (0);
-}
 
 long	ft_atol(const char *str)
 {
@@ -46,13 +39,3 @@ long	ft_atol(const char *str)
 	}
 	return (number * sign);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char	str[] = "9223372036854775807";
-
-// 	printf("%d\n", atoi(str));
-// 	printf("%d\n", ft_atoi(str));
-// }
