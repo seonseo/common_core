@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2024/05/01 16:24:07 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/01 16:25:04 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ long ft_strtol(const char *str, char **endptr, int base)
     str = determine_base(str, &base);
 	result = convert_to_number(str, base, sign, endptr);
 	if (errno == EINVAL)
-		*endptr = str_start;
+		*endptr = (char *)str_start;
     return (result);
 }
