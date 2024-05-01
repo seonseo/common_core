@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2024/05/01 19:43:34 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/01 19:57:23 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,53 +55,44 @@ static int	char_to_digit(char c, int base)
 
 static int	check_overflow(long *result, int base, int *sign, int digit)
 {
-	if (*result < 0 || (*result > LONG_MAX / base) || \
+	if (*result < 0)
+		return (0);
+	if ((*result > LONG_MAX / base) || \
 	((*result == LONG_MAX / base) && \
 	(digit > LONG_MAX % base)))
 	{
-		if (*result < 0)
-			errno = ERANGE;
-		else if (*sign == 1)
-		{
+		if (*sign == 1)
 			*result = LONG_MAX;
-			errno = ERANGE;
-		}
 		else
 		{
 			*result = -LONG_MAX - 1L;
 			*sign = 1;
-			if ((*result > LONG_MAX / base) || \
-			((*result == LONG_MAX / base) && \
-			(digit > LONG_MAX % base + 1)))
-				errno = ERANGE;
 		}
 		return (0);
 	}
 	return (1);
 }
 
-static long	ft_strtol_convert_to_number(const char *str, int base, int sign, \
-char **endptr)
+static long	ft_strtol_convert_to_number(const char **str, int base, \
+int sign, char **endptr)
 {
 	long		result;
 	int			digit;
 	const char	*str_start;
 
-	str_start = str;
+	str_start = *str;
 	result = 0;
-	while (*str)
+	while (**str)
 	{
-		digit = char_to_digit(*str, base);
+		digit = char_to_digit(**str, base);
 		if (digit == -1)
 			break ;
 		if (check_overflow(&result, base, &sign, digit))
 			result = result * base + digit;
-		str++;
+		(*str)++;
 	}
 	if (endptr)
-		*endptr = (char *)str;
-	if (str == str_start)
-		errno = EINVAL;
+		*endptr = (char *)*str;
 	return (result * sign);
 }
 
@@ -115,8 +106,8 @@ long	ft_strtol(const char *str, char **endptr, int base)
 	str = ft_strtol_skip_whitespace(str);
 	str = ft_strtol_handle_sign(str, &sign);
 	str = ft_strtol_determine_base(str, &base);
-	result = ft_strtol_convert_to_number(str, base, sign, endptr);
-	if (errno == EINVAL)
+	result = ft_strtol_convert_to_number(&str, base, sign, endptr);
+	if (str == str_start)
 		*endptr = (char *)str_start;
 	return (result);
 }

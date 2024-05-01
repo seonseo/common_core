@@ -14,6 +14,9 @@
 		"_errno_t.h": "c",
 		"cdefs.h": "c",
 		"wait.h": "c",
-		"pipex_bonus.h": "c"
+		"pipex_bonus.h": "c",
+		"locale": "c",
+		"sstream": "c",
+		"cstring": "c"
 	}
 }

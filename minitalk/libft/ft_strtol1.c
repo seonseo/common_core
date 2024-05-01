@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_num.h                                          :+:      :+:    :+:   */
+/*   ft_strtol1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 23:31:14 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/28 23:33:15 by seonseo          ###   ########.fr       */
+/*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
+/*   Updated: 2024/05/01 19:54:23 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NUM_H
-#define GET_NUM_H
+#include "libft.h"
 
-#define GN_NONNEG	01
-#define GN_GT_0		02
+static const char	*ft_strtol_skip_whitespace(const char *str)
+{
+	while (ft_isspace((int)*str))
+		str++;
+	return (str);
+}
 
-#define GN_ANY_BASE	0100
-#define GN_BASE_8	0200
-#define GN_BASE_16	0400
-
-long	getLong(const char *arg, int flags, const char *name);
-
-int		getInt(const char *arg, int flags, const char *name);
-
-#endif
+static const char	*ft_strtol_handle_sign(const char	*str, int *sign)
+{
+	*sign = 1;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			*sign = -1;
+		else
+			*sign = 1;
+		str++;
+	}
+	return (str);
+}

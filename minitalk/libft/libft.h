@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:23:52 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/27 18:22:35 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/01 19:26:59 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "error_functions.h"
+# include "get_num.h"
 
 # undef LONG_MAX
 # undef INT_MAX
@@ -57,6 +59,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
+long	ft_strtol(const char *str, char **endptr, int base);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
