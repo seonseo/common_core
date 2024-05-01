@@ -7,8 +7,12 @@
 
 int	main(void)
 {
-	printf("%ld\n", strtol("-9223372036854775808", NULL, 10));
+	char	*endptr;
+
+	printf("%ld\n", strtol("-9223372036854775808", &endptr, 10));
 	printf("%s\n", strerror(errno));
-	printf("%ld\n", ft_strtol("-9223372036854775808", NULL, 10));
+	printf("%s\n", endptr);
+	printf("%ld\n", ft_strtol("-9223372036854775808", &endptr, 10));
 	printf("%s\n", strerror(errno));
+	printf("%s\n", endptr);
 }

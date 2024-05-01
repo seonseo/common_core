@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seonseo <seonseo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:18:05 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/30 23:00:37 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/01 14:47:56 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,30 @@ static int	char_to_digit(char c, int base)
 	return (digit);
 }
 
-int	check_overflow(long result, int base, int sign, int digit)
+int	check_overflow(long *result, int base, int *sign, int digit)
 {
-	if (sign == 1)
+	if ((*result > LONG_MAX / base) || \
+	((*result == LONG_MAX / base) && \
+	(digit > LONG_MAX % base)))
 	{
-		if ((result > LONG_MAX / base) || \
-			((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
+		if (*sign == 1)
+		{
+			*result = LONG_MAX;
+			errno = ERANGE;
 			return (1);
-	}
-	else
-	{
-		if ((result > LONG_MAX / base) || \
-			((result == LONG_MAX / base) && (digit > LONG_MAX % base + 1)))
-			return (1);
+		}
+		else 
+		{
+			*result = -LONG_MAX - 1L;
+			*sign = 1;
+			if ((*result > LONG_MAX / base) || \
+			((*result == LONG_MAX / base) && \
+			(digit > LONG_MAX % base + 1)))
+			{
+				errno = ERANGE;
+				return (1);
+			}
+		}
 	}
 	return (0);
 }
@@ -101,13 +112,8 @@ static long	convert_to_number(const char *str, int base, int sign, char **endptr
 		digit = char_to_digit(*str, base);
 		if (digit == -1)
 			break;
-		if (check_overflow(result, base, sign, digit))
-		{
-			errno = ERANGE;
+		if (check_overflow(&result, base, &sign, digit))
 			break;
-		}
-		if ()
-
 		result = result * base + digit;
 		str++;
 	}
@@ -126,27 +132,3 @@ long ft_strtol(const char *str, char **endptr, int base)
     str = determine_base(str, &base);
     return (convert_to_number(str, base, sign, endptr));
 }
-
-		if (sign == 1)
-		{
-			if ((result > LONG_MAX / base) || \
-				((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
-			{
-				errno = ERANGE;
-				result = LONG_MAX;
-				break;
-			}
-		}
-		else
-		{
-			if ((result > LONG_MAX / base) || \
-				((result == LONG_MAX / base) && (digit > LONG_MAX % base + 1)))
-			{
-				errno = ERANGE;
-				result = -LONG_MAX - 1L;
-				break;
-			}
-			else if ((result > LONG_MAX / base) || \
-				((result == LONG_MAX / base) && (digit > LONG_MAX % base)))
-				result = -LONG_MAX - 1L;
-		}
