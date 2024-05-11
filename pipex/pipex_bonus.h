@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 22:10:09 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 22:59:08 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/08 17:36:00 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include <sys/wait.h>
 
+
+void		chk();
 //pipex_bonus.c
 t_bool		check_here_doc(char *argv[]);
 void		pipex_argc_check(int argc, t_bool here_doc);

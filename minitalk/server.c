@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:04:19 by seonseo           #+#    #+#             */
-/*   Updated: 2024/05/02 23:10:29 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:06:21 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,42 @@
 
 static void	server_sighandler(int sig, siginfo_t *info, void *context)
 {
-	static char		c;
-	static int		i;
 	static pid_t	pid;
+	static char		c;
+	static int		c_idx;
+	static char		buf[1024];
+	static int		buf_idx;
 
-	context = NULL;
+	(void)context;
 	if (pid && pid != info->si_pid)
-		i = 0;
-	pid = info->si_pid;
-	if (sig == SIGUSR1)
-		c = c | (1 << i);
-	else if (sig == SIGUSR2)
-		c = c & (~(1 << i));
-	i++;
-	if (i == 8)
 	{
-		i = 0;
-		if (write(STDOUT_FILENO, &c, 1) == -1)
-			fatal("write");
+		c_idx = 0;
+		write(STDOUT_FILENO, buf, buf_idx);
+		buf_idx = 0;
 	}
-	kill(info->si_pid, SIGUSR1);
-	return ;
+	if (pid == 0)
+		pid = info->si_pid;
+
+	if (sig == SIGUSR1)
+		c = c | (1 << c_idx);
+	else if (sig == SIGUSR2)
+		c = c & (~(1 << c_idx));
+
+	c_idx++;
+	if (c_idx == 8)
+	{
+		c_idx = 0;
+		buf[buf_idx] = c;
+		buf_idx++;
+		if (c == '\0' || buf_idx == 1024)
+		{
+			write(STDOUT_FILENO, buf, buf_idx);
+			buf_idx = 0;
+		}
+	}
+	kill(pid, SIGUSR1);
+	if (c == '\0')
+		pid = 0;
 }
 
 int	main(void)
@@ -54,5 +69,5 @@ int	main(void)
 		fatal("ft_printf");
 	while (1)
 		pause();
-	return (1);
+	return (0);
 }

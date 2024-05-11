@@ -6,13 +6,13 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:43:56 by seonseo           #+#    #+#             */
-/*   Updated: 2024/04/25 22:55:44 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/08 18:00:11 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// static void chk()
+// void chk()
 // {
 // 	system("leaks pipex");
 // 	system("lsof -nc pipex");

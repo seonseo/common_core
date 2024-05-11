@@ -1,23 +1,21 @@
+93722
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 21:31:34 by seonseo           #+#    #+#             */
-/*   Updated: 2024/05/11 22:49:51 by seonseo          ###   ########.fr       */
+/*   Created: 2024/04/28 22:03:58 by seonseo           #+#    #+#             */
+/*   Updated: 2024/05/03 18:10:57 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "minitalk.h"
 
-int	main(void)
+static volatile	sig_atomic_t	acknowledged = 0;
+
+static void	client_sighandler(int sig)
 {
-	t_tokenlist	*tokenlist;
-
-	tokenlist = tokenizer(" asd|sdf\"d<<<'s' f\" ><< f ");
-	print_tokenlist(tokenlist);
-	ft_printf("size:%d\n", tokenlist->size);
-	tokenlist_clear(tokenlist);
+	acknowledged = 1;
 }

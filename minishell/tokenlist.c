@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   tokenlist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 21:53:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/05/09 22:35:05 by seonseo          ###   ########.fr       */
+/*   Created: 2024/05/11 20:59:38 by seonseo           #+#    #+#             */
+/*   Updated: 2024/05/11 21:43:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "tokenizer.h"
 
-typedef enum e_tokentype
+t_tokenlist	*new_tokenlist(void)
 {
-	TOK_UNKNOWN,
-	TOK_WORD,
-	TOK_OPERATOR
-}	t_tokentype;
+	t_tokenlist	*tokenlist;
 
-typedef struct s_token
-{
-	t_tokentype		type;
-	char			*str;
-	struct s_token	*prev;
-	struct s_token	*next;
-}	t_token;
-
-typedef struct s_tokenlist
-{
-	size_t	size;
-	t_token	*head;
-	t_token	*back;
-}	t_tokenlist;
+	tokenlist = (t_tokenlist *)malloc(sizeof(t_tokenlist));
+	if (tokenlist == NULL)
+		return (NULL);
+	*tokenlist = (t_tokenlist){};
+	return (tokenlist);
+}
 
 t_token	*new_token(t_tokentype type, char *str)
 {
@@ -48,8 +36,10 @@ t_token	*new_token(t_tokentype type, char *str)
 	return (new_token);
 }
 
-void	tokenlist_add_back(t_tokenlist *tokenlist, t_token *token)
+int	tokenlist_add(t_tokenlist *tokenlist, t_token *token)
 {
+	if (token == NULL)
+		return (-1);
 	if (tokenlist->head == NULL)
 	{
 		tokenlist->head = token;
@@ -62,6 +52,7 @@ void	tokenlist_add_back(t_tokenlist *tokenlist, t_token *token)
 		tokenlist->back = token;
 	}
 	(tokenlist->size)++;
+	return (0);
 }
 
 void	tokenlist_clear(t_tokenlist *tokenlist)
@@ -69,6 +60,8 @@ void	tokenlist_clear(t_tokenlist *tokenlist)
 	t_token	*curr;
 	t_token	*prev;
 
+	if (tokenlist == NULL)
+		return ;
 	prev = NULL;
 	curr = tokenlist->head;
 	while (curr)
@@ -82,27 +75,4 @@ void	tokenlist_clear(t_tokenlist *tokenlist)
 	prev = NULL;
 	free(tokenlist);
 	tokenlist = NULL;
-}
-
-int	is_operator()
-{
-	
-}
-
-t_tokenlist	*recognize_token(const char *input)
-{
-	t_tokenlist	*tokenlist;
-	t_tokentype	tokentype;
-	size_t		tok_start;
-	size_t		i;
-
-	tokentype = TOK_UNKNOWN;
-	i = 0;
-	while (input[i])
-	{
-		
-		i++;
-	}
-
-	
 }
