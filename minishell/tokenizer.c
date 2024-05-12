@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:53:49 by seonseo           #+#    #+#             */
-/*   Updated: 2024/05/11 21:43:36 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/05/12 13:33:39 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,14 @@ int	print_tokenlist(t_tokenlist *tokenlist)
 		curr = curr->next;
 	}
 	return (0);
+}
+
+int	main(void)
+{
+	t_tokenlist	*tokenlist;
+
+	tokenlist = tokenizer(" asd|sdf\"d<<<'s' f\" ><< f ");
+	print_tokenlist(tokenlist);
+	ft_printf("size:%d\n", tokenlist->size);
+	tokenlist_clear(tokenlist);
 }
