@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:29:54 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/26 18:47:32 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:13:42 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	mouse_button_press_hook(int button, int x, int y, void *param)
 {
 	t_event	*event;
 
+	(void)x;
+	(void)y;
 	event = (t_event *)param;
 	if (1 == button)
 		event->left_click = 1;
-	x = 0;
-	y = 0;
 	return (0);
 }
 
@@ -56,10 +56,10 @@ int	mouse_button_release_hook(int button, int x, int y, void *param)
 {
 	t_event	*event;
 
+	(void)x;
+	(void)y;
 	event = (t_event *)param;
 	if (1 == button)
 		event->left_click = 0;
-	x = 0;
-	y = 0;
 	return (0);
 }

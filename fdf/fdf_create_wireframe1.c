@@ -6,7 +6,7 @@
 /*   By: seonseo <seonseo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:25:41 by seonseo           #+#    #+#             */
-/*   Updated: 2024/03/23 21:25:05 by seonseo          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:12:14 by seonseo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ float	slope_calc(t_line *line)
 	float	y1;
 	float	y2;
 
-	x1 = (float)line->p1.x;
-	x2 = (float)line->p2.x;
-	y1 = (float)line->p1.y;
-	y2 = (float)line->p2.y;
+	x1 = line->p1.x;
+	x2 = line->p2.x;
+	y1 = line->p1.y;
+	y2 = line->p2.y;
 	return ((y2 - y1) / (x2 - x1));
 }
 
@@ -45,10 +45,10 @@ float	y_intercept_calc(t_line *line)
 	float	y1;
 	float	y2;
 
-	x1 = (float)line->p1.x;
-	x2 = (float)line->p2.x;
-	y1 = (float)line->p1.y;
-	y2 = (float)line->p2.y;
+	x1 = line->p1.x;
+	x2 = line->p2.x;
+	y1 = line->p1.y;
+	y2 = line->p2.y;
 	return (y1 - (((y2 - y1) / (x2 - x1)) * x1));
 }
 
